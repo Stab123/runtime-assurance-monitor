@@ -1,0 +1,46 @@
+{
+  "commentaire": "Configuration figée de la campagne P2.1. Toute modification crée une nouvelle version de ce fichier, pas une édition.",
+  "version_config": "P2.1",
+  "graine_plante": 20260903,
+  "graine_bruit": 77100001,
+  "n_runs": 32,
+  "duree_s": 13500.0,
+  "dt_s": 5.0,
+  "cycle_temoin": 1000,
+  "k_sigma": 3.0,
+  "capacite_tampon": 4096,
+
+  "bornes_plante": {
+    "commentaire": "Tirages uniformes. Le modèle du moniteur reste le nominal P0 (C=10 Ah, I_SUN=1.2 A, I_BASE=0.5 A, H=1.5e-3, C_TH=5e-4) : le moniteur suppose donc la capacité haute et un bus modéré — optimisme délibéré, c'est l'écart que la campagne mesure.",
+    "C_BATT_AH": [5.0, 9.0],
+    "I_SUN": [1.0, 1.4],
+    "I_BASE": [0.45, 0.6],
+    "H": [0.0012, 0.0022],
+    "C_TH": [0.0003, 0.0007],
+    "soc0": [0.5, 0.65],
+    "temp0": [15.0, 25.0]
+  },
+
+  "bruit_std": [0.002, 0.1],
+  "facteur_degradation": 6.0,
+  "fenetre_degradation": [6300.0, 9000.0],
+
+  "u_payload": 3.0,
+  "fenetre_payload": [600.0, 1500.0],
+
+  "seuil_soc": 0.35,
+  "seuil_temp": 45.0,
+  "marge_securite_soc": 0.02,
+  "marge_securite_temp": 1.0,
+  "delai_armement_s": 120.0,
+  "seuil_incertitude_temp": 2.0,
+  "grille_seuil_incertitude_soc": [0.01, 0.02, 0.03, 0.05, 0.08],
+
+  "seuils_falsification": {
+    "statut": "NON ARBITRÉS — aucun opérateur satellite ne les a fixés, et les fixer après avoir vu les résultats serait une contamination. La conclusion sur H4 repose sur la comparaison entre bras, pas sur ces plafonds absolus.",
+    "plafond_violation_taux_cycles": 0.001,
+    "plafond_violation_runs_wilson_sup": 0.05,
+    "plafond_repli_taux_cycles_ic95_sup": 0.10,
+    "plancher_livraison_ic95_inf": 0.90
+  }
+}
