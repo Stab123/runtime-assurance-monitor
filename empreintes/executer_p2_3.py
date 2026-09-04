@@ -24,10 +24,8 @@ import time
 from collections import defaultdict
 from multiprocessing import Pool
 
-from chemins import MODULES_EMPREINTE_P2_3, RAM_P0, RAM_P2
-
-sys.path.insert(0, str(RAM_P0))
-sys.path.insert(0, str(RAM_P2))
+sys.path.insert(0, "/mnt/agents/output/ram_p0")
+sys.path.insert(0, "/mnt/agents/output/ram_p2")
 
 from campagne_p2 import (empreinte_fichiers, ic_moyenne, simuler,
                          tirer_parametres_plante, wilson)
@@ -101,8 +99,14 @@ def main(chemin_config: str, chemin_sortie: str, n_proc: int = 2):
 
     brut = {
         "config": cfg,
-        "empreintes_code": empreinte_fichiers(
-            [str(c) for c in MODULES_EMPREINTE_P2_3]),
+        "empreintes_code": empreinte_fichiers([
+            "/mnt/agents/output/ram_p0/moniteur.py",
+            "/mnt/agents/output/ram_p0/filtre.py",
+            "/mnt/agents/output/ram_p0/trace.py",
+            "/mnt/agents/output/ram_p0/contraintes.py",
+            "/mnt/agents/output/ram_p2/campagne_p2.py",
+            "/mnt/agents/output/ram_p2/executer_p2_3.py",
+        ]),
         "crn_runs_ok": crn_ok,
         "resultats_par_run": {
             f"{bras}:{seuil}": rs for (bras, seuil), rs in resultats.items()

@@ -1,6 +1,6 @@
 """Tests du moniteur P0 — chaque test est rattaché à une exigence RAM-SPEC-0001.
 
-Exécution : python3 -m pytest test_moniteur.py -q
+Exécution : python3 -m pytest test_moniteur.py -q   (ou python3 test_moniteur.py)
 """
 
 from __future__ import annotations
@@ -22,6 +22,10 @@ SIG = SIGMAS_NOMINALES
 CANDIDAT_SUR = 1.0
 CANDIDAT_AGRESSIF = 2.8
 
+
+# --------------------------------------------------------------------------
+# Formats de trace (RAM-NOTE-0001)
+# --------------------------------------------------------------------------
 
 def test_formats_16_48_160():
     e = Enregistrement(t_s=12.34, seq=7, version_jeu=3, verdict=1, cause=1,
@@ -54,17 +58,21 @@ def test_paquet_c_autodescriptif_et_integre():
         depaqueter_c(bytes(blob))  # corruption détectée par CRC
 
 
+# --------------------------------------------------------------------------
+# Comportement fonctionnel
+# --------------------------------------------------------------------------
+
 def test_ra_fun_001_un_verdict_par_cycle():
     m, _ = faire_moniteur(capacite_tampon=512)
     etat = list(ETAT_INITIAL)
     for k in range(200):
         r = m.cycle(k * DT, etat, SIG, True, CANDIDAT_SUR)
         assert r.verdict in set(Verdict)
-    assert m._tampon.occupation == 200  # RA-TRC-001
+    assert m._tampon.occupation == 200  # RA-TRC-001 : un enregistrement par cycle
 
 
 def test_autorise_zero_intervention():
-    """W&Z : une candidate sûre n'est jamais modifiée."""
+    """Wabersich & Zeilinger : une candidate sûre n'est jamais modifiée."""
     m, _ = faire_moniteur()
     r = m.cycle(0.0, [0.60, 20.0], SIG, True, CANDIDAT_SUR)
     assert r.verdict is Verdict.AUTORISE
@@ -84,11 +92,11 @@ def test_modifie_est_l_intervention_minimale():
     ok, _, _ = trajectoire_sure(etat, SIG, r.action_transmise, modele,
                                 jeu.contraintes, jeu.horizon_pas,
                                 jeu.pas_armement_max, politique_repli_eps, DT)
-    assert ok
+    assert ok  # l'action transmise est admissible...
     ok_plus, _, _ = trajectoire_sure(etat, SIG, r.action_transmise + 0.05, modele,
                                      jeu.contraintes, jeu.horizon_pas,
                                      jeu.pas_armement_max, politique_repli_eps, DT)
-    assert not ok_plus
+    assert not ok_plus  # ...et aucune action plus proche de la candidate ne l'est
 
 
 def test_repli_enveloppe_quand_rien_n_est_admissible():
@@ -130,8 +138,8 @@ def test_ra_ind_003_absence_d_action_vaut_repli():
 def test_ra_fun_002_indetermine_traite_comme_repli():
     m, _ = faire_moniteur()
     r = m.cycle(0.0, list(ETAT_INITIAL), SIG, False, CANDIDAT_SUR)
-    assert r.verdict is Verdict.INDETERMINE
-    assert r.action_transmise == politique_repli_eps(None)
+    assert r.verdict is Verdict.INDETERMINE          # distinct pour la trace
+    assert r.action_transmise == politique_repli_eps(None)  # mais repli côté exécution
     assert m.mode is Mode.REPLI
 
 
@@ -140,15 +148,21 @@ def test_ra_fun_006_repli_verrouille_puis_retour_explicite():
     modele.en_lumiere = False
     r0 = m.cycle(0.0, [0.395, 20.0], SIG, True, CANDIDAT_AGRESSIF)
     assert r0.verdict is Verdict.REPLI
+    # L'état redevient sûr : le repli ne se défait pas dans le même cycle.
     r1 = m.cycle(5.0, [0.60, 20.0], SIG, True, CANDIDAT_SUR)
     assert r1.verdict is Verdict.REPLI and r1.cause is Cause.REPLI_VERROUILLE
     r2 = m.cycle(10.0, [0.60, 20.0], SIG, True, CANDIDAT_SUR)
     assert r2.verdict is Verdict.REPLI
+    # Critère rempli (3 cycles sûrs consécutifs + dwell écoulé) -> nominal.
     r3 = m.cycle(15.0, [0.60, 20.0], SIG, True, CANDIDAT_SUR)
     assert r3.verdict is Verdict.AUTORISE
     assert m.mode is Mode.NOMINAL
     assert any("retour au nominal" in msg for _, msg in m.notifications)
 
+
+# --------------------------------------------------------------------------
+# Compilation du jeu de contraintes
+# --------------------------------------------------------------------------
 
 def test_ra_fun_005_jeu_invalide_rejete_a_la_compilation():
     """Sans marge de garde, le repli n'est plus atteignable depuis la frontière
@@ -163,9 +177,10 @@ def test_ra_fun_005_jeu_invalide_rejete_a_la_compilation():
 
 
 def test_ra_fun_005_armement_long_rejete():
-    """Même contrainte C0, mais délai d'armement de 300 s : l'action la plus
-    défavorable persistée 300 s depuis la frontière franchit le seuil brut.
-    Avec un pas_armement nul (ancien comportement), le jeu passait."""
+    """Même contrainte C0 que la démo, mais avec un délai d'armement de
+    300 s : l'action la plus défavorable persistée pendant 300 s depuis la
+    frontière franchit le seuil brut. Le jeu doit être refusé — avec un
+    pas_armement nul (ancien comportement), il passait."""
     modele = ModeleEPS()
     modele.en_lumiere = False
     c0_lente = Contrainte("C0_SOC_MIN", 0, Sens.MIN, 0.35, 1.0, 0.05,
@@ -197,8 +212,12 @@ def test_ra_ind_004_mise_a_jour_jeu_autorisee_et_tracee():
     enregistrements = m._tampon.extraire_plage(0.0, 1e9)
     assert enregistrements
     d = depaqueter_c(enregistrements[-1][1])
-    assert d["version_jeu"] == 2
+    assert d["version_jeu"] == 2  # la version est dans chaque enregistrement
 
+
+# --------------------------------------------------------------------------
+# Ressources, trace, surveillance
+# --------------------------------------------------------------------------
 
 def test_tampon_reboucle_sans_perte():
     """Rebouclage : 30 cycles nominaux dans un tampon de 8 — occupation 8, et
@@ -226,8 +245,8 @@ def test_ra_res_004_005_saturation_trace_jamais_verdict():
     for k in range(1, 12):
         r = m.cycle(k * DT, [0.60, 20.0], SIG, True, CANDIDAT_SUR)
         verdicts.append(r.verdict)
-    assert all(v in set(Verdict) for v in verdicts)
-    assert m._tampon.pertes > 0
+    assert all(v in set(Verdict) for v in verdicts)  # le verdict n'est jamais bloqué
+    assert m._tampon.pertes > 0                      # RA-RES-005 : pertes comptées
 
 
 def test_ra_trc_006_fenetre_figee_extractible():
@@ -237,7 +256,7 @@ def test_ra_trc_006_fenetre_figee_extractible():
     for k in range(1, 4):
         m.cycle(k * DT, [0.60, 20.0], SIG, True, CANDIDAT_SUR)
     gele = m._tampon.extraire_gele()
-    assert gele
+    assert gele  # la fenêtre de contexte est marquée et extractible
     assert all(isinstance(b, bytes) and len(b) == TAILLE_C for _, b in gele)
     assert m._tampon.extraire_gele() == []  # extraction consomme le gel
 
@@ -252,7 +271,8 @@ def test_ra_sur_002_chien_de_garde():
 
 
 def test_ra_ind_001_empreinte_sans_acces_interne():
-    """L'empreinte ne révèle rien de la couche de décision."""
+    """L'empreinte ne révèle rien de la couche de décision : candidate absente
+    -> empreinte nulle ; candidate présente -> empreinte tronquée de 3 octets."""
     m, _ = faire_moniteur()
     m.cycle(0.0, list(ETAT_INITIAL), SIG, True, None)
     m.cycle(5.0, list(ETAT_INITIAL), SIG, True, CANDIDAT_SUR)

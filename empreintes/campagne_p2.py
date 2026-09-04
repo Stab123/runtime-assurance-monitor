@@ -41,10 +41,7 @@ import sys
 import time
 from collections import defaultdict
 
-# Chemins résolus relativement au dépôt (ram_p2/chemins.py) — rejouable tel quel.
-from chemins import MODULES_EMPREINTE, RAM_P0, RAM_P2
-
-sys.path.insert(0, str(RAM_P0))
+sys.path.insert(0, "/mnt/agents/output/ram_p0")
 
 from contraintes import Contrainte, Sens
 from demo_eps import (DT, PERIODE_ORBITE, DUREE_LUMIERE, U_MIN, U_MAX,
@@ -276,8 +273,8 @@ def empreinte_fichiers(chemins) -> dict:
     return out
 
 
-def main(chemin_config=str(RAM_P2 / "config_p2_1.json"),
-         chemin_sortie=str(RAM_P2 / "resultats_p2_1.json")):
+def main(chemin_config="/mnt/agents/output/ram_p2/config_p2.json",
+         chemin_sortie="/mnt/agents/output/ram_p2/resultats_p2.json"):
     with open(chemin_config) as f:
         cfg = json.load(f)
 
@@ -338,7 +335,13 @@ def main(chemin_config=str(RAM_P2 / "config_p2_1.json"),
 
     brut = {
         "config": cfg,
-        "empreintes_code": empreinte_fichiers([str(c) for c in MODULES_EMPREINTE]),
+        "empreintes_code": empreinte_fichiers([
+            "/mnt/agents/output/ram_p0/moniteur.py",
+            "/mnt/agents/output/ram_p0/filtre.py",
+            "/mnt/agents/output/ram_p0/trace.py",
+            "/mnt/agents/output/ram_p0/contraintes.py",
+            "/mnt/agents/output/ram_p2/campagne_p2.py",
+        ]),
         "crn_runs_ok": n_runs - crn_echecs,
         "resultats_par_run": {
             f"{bras}:{seuil}": rs for (bras, seuil), rs in resultats.items()

@@ -76,11 +76,19 @@ ram_p0/
   test_moniteur.py     tests, chacun rattaché à une exigence
 ram_p2/
   chemins.py           résolution des chemins du dépôt
-  campagne_p2.py       campagne Monte Carlo, quatre bras
-  executer_p2_3.py     exécution parallèle par run
+  campagne_p2.py       campagne Monte Carlo, quatre bras (chemins relatifs)
+  executer_p2_3.py     exécution parallèle par run (chemins relatifs)
   config_p2_1.json     configuration figée P2.1     resultats_p2_1.json
   config_p2_2.json     configuration figée P2.2     resultats_p2_2.json
   config_p2_3.json     configuration figée P2.3     resultats_p2_3.json
+empreintes/            octets exacts ayant produit les résultats publiés —
+                       pour la vérification, jamais l'exécution
+                       (voir empreintes/README.md)
+verifier_empreintes.py compare module par module les empreintes SHA-256
+                       embarquées dans les résultats aux octets d'empreintes/
+.github/workflows/tests.yml
+                       à chaque push : pytest ram_p0/test_moniteur.py,
+                       puis verifier_empreintes.py
 ```
 
 Les trois campagnes sont conservées. P2.1 comportait un défaut de plan d'expérience — le bras C y faisait varier deux choses à la fois — corrigé en P2.2 par l'ajout du bras D et l'extension de la grille. P2.3 porte N de 32 à 300 sans autre changement. Les points communs se reproduisent à l'identique, vérifié comme non-régression.
@@ -92,10 +100,13 @@ Les trois campagnes sont conservées. P2.1 comportait un défaut de plan d'expé
 ```bash
 python3 -m pytest ram_p0/test_moniteur.py -q
 python3 ram_p0/demo_eps.py
-python3 ram_p2/executer_p2_3.py
+python3 verifier_empreintes.py
+python3 ram_p2/executer_p2_3.py ram_p2/config_p2_2.json resultats_rejeu.json 4
 ```
 
 Python 3.10+, bibliothèque standard uniquement.
+
+**Environnement d'exécution des campagnes publiées.** P2.1, P2.2 et P2.3 ont tourné en septembre 2026 dans le bac à sable Linux d'un agent logiciel (CPython 3.12.12, x86-64). Les chemins absolus `/mnt/agents/output/...` visibles dans les octets d'archive (`empreintes/`) sont ceux de cet environnement ; les copies exécutables de `ram_p0/` et `ram_p2/` résolvent leurs chemins relativement au dépôt (`ram_p2/chemins.py`) et se rejouent telles quelles après un clone. Un rejeu reproduit les résultats run par run ; ses `empreintes_code` sont identiques pour les quatre modules du moniteur et différentes pour les deux pilotes, dont seuls les chemins ont été relativisés — la vérification des empreintes pointe donc sur `empreintes/`.
 
 Les graines sont dans les fichiers de configuration, les empreintes SHA-256 des modules dans les fichiers de résultats. Toute modification de configuration crée une nouvelle version du fichier, jamais une édition.
 
@@ -109,7 +120,7 @@ Les graines sont dans les fichiers de configuration, les empreintes SHA-256 des 
 
 **Le bras de contrôle est décisif.** Sans B, l'apport de RA-FUN-003 ne serait pas attribuable. Sans D, son coût resterait confondu avec celui du pessimisme d'évaluation.
 
-**Provenance du code.** Quatre défauts d'interaction ont été trouvés par revue adversariale alors que la suite de tests était entièrement verte. Ils ont tous été corrigés **avant** la première campagne : les empreintes des modules du moniteur sont identiques dans les fichiers de résultats P2.1, P2.2 et P2.3 ; seul le pilote de campagne diffère. Aucun résultat rapporté n'a été produit par le code défectueux.
+**Provenance du code.** Quatre défauts d'interaction ont été trouvés par revue adversariale alors que la suite de tests était entièrement verte. Ils ont tous été corrigés **avant** la première campagne : les empreintes des modules du moniteur sont identiques dans les fichiers de résultats P2.1, P2.2 et P2.3 ; seul le pilote de campagne diffère. Aucun résultat rapporté n'a été produit par le code défectueux. Le pilote P2.1 (trois bras) a été édité en place pour devenir la version quatre bras, et l'environnement d'exécution n'en a conservé aucune copie : son empreinte reste vérifiable dans `resultats_p2_1.json`, et rejouer la configuration P2.1 avec la version quatre bras reproduit les bras A, B et C run par run — motif complet dans `empreintes/README.md`.
 
 ---
 
