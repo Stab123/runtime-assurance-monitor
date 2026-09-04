@@ -1,0 +1,3284 @@
+{
+ "config": {
+  "commentaire": "Configuration fig\u00e9e de la campagne P2.2. Toute modification cr\u00e9e une nouvelle version de ce fichier, pas une \u00e9dition.",
+  "version_config": "P2.2",
+  "motif_version": "Deux corrections du plan d'exp\u00e9rience, cons\u00e9cutives \u00e0 la falsification de H4 en P2.1 \u2014 ce ne sont pas des retouches de sc\u00e9nario : (1) quatri\u00e8me bras D (k_sigma=3, seuil d'incertitude infini) : en P2.1, C - B confondait le co\u00fbt du pessimisme d'\u00e9valuation et celui du seuil RA-FUN-003, D les d\u00e9compose (B -> D -> C) ; (2) grille \u00e9tendue vers le bas : \u03c3_soc d\u00e9passe rarement 0.05, donc 0.05 et 0.08 \u00e9taient d\u00e9j\u00e0 \u00ab H4 \u00e9teint \u00bb \u2014 la grille P2.1 \u00e9tait mal born\u00e9e. INCHANG\u00c9 : graines, bornes de plante, marges, seuils de contraintes, N=32, dur\u00e9e, fen\u00eatres, seuils de falsification. Les r\u00e9sultats P2.1 (config_p2.json / resultats_p2.json) sont conserv\u00e9s. Chaque bras re-graine son bruit ind\u00e9pendamment : les points communs avec P2.1 (A, B, C@0.01/0.02/0.03/0.05/0.08) doivent se reproduire \u00e0 l'identique \u2014 v\u00e9rifi\u00e9 comme non-r\u00e9gression.",
+  "graine_plante": 20260903,
+  "graine_bruit": 77100001,
+  "n_runs": 32,
+  "duree_s": 13500.0,
+  "dt_s": 5.0,
+  "cycle_temoin": 1000,
+  "k_sigma": 3.0,
+  "capacite_tampon": 4096,
+  "bornes_plante": {
+   "commentaire": "Tirages uniformes. Le mod\u00e8le du moniteur reste le nominal P0 (C=10 Ah, I_SUN=1.2 A, I_BASE=0.5 A, H=1.5e-3, C_TH=5e-4) : le moniteur suppose donc la capacit\u00e9 haute et un bus mod\u00e9r\u00e9 \u2014 optimisme d\u00e9lib\u00e9r\u00e9, c'est l'\u00e9cart que la campagne mesure.",
+   "C_BATT_AH": [
+    5.0,
+    9.0
+   ],
+   "I_SUN": [
+    1.0,
+    1.4
+   ],
+   "I_BASE": [
+    0.45,
+    0.6
+   ],
+   "H": [
+    0.0012,
+    0.0022
+   ],
+   "C_TH": [
+    0.0003,
+    0.0007
+   ],
+   "soc0": [
+    0.5,
+    0.65
+   ],
+   "temp0": [
+    15.0,
+    25.0
+   ]
+  },
+  "bruit_std": [
+   0.002,
+   0.1
+  ],
+  "facteur_degradation": 6.0,
+  "fenetre_degradation": [
+   6300.0,
+   9000.0
+  ],
+  "u_payload": 3.0,
+  "fenetre_payload": [
+   600.0,
+   1500.0
+  ],
+  "seuil_soc": 0.35,
+  "seuil_temp": 45.0,
+  "marge_securite_soc": 0.02,
+  "marge_securite_temp": 1.0,
+  "delai_armement_s": 120.0,
+  "seuil_incertitude_temp": 2.0,
+  "grille_seuil_incertitude_soc": [
+   0.005,
+   0.008,
+   0.01,
+   0.015,
+   0.02,
+   0.03,
+   0.05,
+   0.08
+  ],
+  "seuils_falsification": {
+   "statut": "PROPOS\u00c9S \u2014 le \u00a77 du plan d\u00e9monstrateur n'est pas dans les documents fournis ; ces trois valeurs sont \u00e0 arbitrer par le projet avant tout usage.",
+   "plafond_violation_taux_cycles": 0.001,
+   "plafond_violation_runs_wilson_sup": 0.05,
+   "plafond_repli_taux_cycles_ic95_sup": 0.1,
+   "plancher_livraison_ic95_inf": 0.9
+  }
+ },
+ "empreintes_code": {
+  "moniteur.py": "7f9937f834597201",
+  "filtre.py": "9bf5cb4253077fe0",
+  "trace.py": "bf93a1839e6eef13",
+  "contraintes.py": "11b9007f9827a02c",
+  "campagne_p2.py": "c5b0d30bdbeea612"
+ },
+ "crn_runs_ok": 32,
+ "resultats_par_run": {
+  "A:None": [
+   {
+    "cycles": 2700,
+    "violations": 174,
+    "replis": 0,
+    "taux_violation": 0.06444444444444444,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 301,
+    "replis": 0,
+    "taux_violation": 0.11148148148148149,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 316,
+    "replis": 0,
+    "taux_violation": 0.11703703703703704,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 343,
+    "replis": 0,
+    "taux_violation": 0.12703703703703703,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 873,
+    "replis": 0,
+    "taux_violation": 0.3233333333333333,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 424,
+    "replis": 0,
+    "taux_violation": 0.15703703703703703,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 1016,
+    "replis": 0,
+    "taux_violation": 0.3762962962962963,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 0,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 1183,
+    "replis": 0,
+    "taux_violation": 0.4381481481481482,
+    "taux_repli": 0.0,
+    "livraison": 1.0,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "B:None": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 207,
+    "taux_violation": 0.0,
+    "taux_repli": 0.07666666666666666,
+    "livraison": 0.85374688826441,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 86,
+    "taux_violation": 0.0,
+    "taux_repli": 0.03185185185185185,
+    "livraison": 0.840718885141649,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 168,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06222222222222222,
+    "livraison": 0.8028330924010973,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 48,
+    "taux_violation": 0.0,
+    "taux_repli": 0.017777777777777778,
+    "livraison": 0.937037037037037,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 160,
+    "taux_violation": 0.0,
+    "taux_repli": 0.05925925925925926,
+    "livraison": 0.8944444444444445,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 249,
+    "taux_violation": 0.0,
+    "taux_repli": 0.09222222222222222,
+    "livraison": 0.7652818701484378,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 295,
+    "taux_violation": 0.0,
+    "taux_repli": 0.10925925925925926,
+    "livraison": 0.6421656076986066,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 103,
+    "taux_violation": 0.0,
+    "taux_repli": 0.038148148148148146,
+    "livraison": 0.9333333333333333,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 48,
+    "taux_violation": 0.0,
+    "taux_repli": 0.017777777777777778,
+    "livraison": 1.0,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 216,
+    "taux_violation": 0.0,
+    "taux_repli": 0.08,
+    "livraison": 0.9055555555555556,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 97,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035925925925925924,
+    "livraison": 0.9,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 177,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06555555555555556,
+    "livraison": 0.8814814814814815,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 75,
+    "taux_violation": 0.0,
+    "taux_repli": 0.027777777777777776,
+    "livraison": 0.9495442481353638,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 361,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1337037037037037,
+    "livraison": 0.9777777777777777,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 172,
+    "taux_violation": 0.0,
+    "taux_repli": 0.0637037037037037,
+    "livraison": 0.9555555555555556,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 185,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06851851851851852,
+    "livraison": 0.8314814814814815,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 127,
+    "taux_violation": 0.0,
+    "taux_repli": 0.04703703703703704,
+    "livraison": 0.8537037037037037,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 108,
+    "taux_violation": 0.0,
+    "taux_repli": 0.04,
+    "livraison": 0.9555555555555556,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 72,
+    "taux_violation": 0.0,
+    "taux_repli": 0.02666666666666667,
+    "livraison": 0.9648148148148148,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 780,
+    "taux_violation": 0.0,
+    "taux_repli": 0.28888888888888886,
+    "livraison": 0.9166666666666666,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 246,
+    "taux_violation": 0.0,
+    "taux_repli": 0.09111111111111111,
+    "livraison": 0.7097290656400017,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 96,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035555555555555556,
+    "livraison": 1.0,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 181,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06703703703703703,
+    "livraison": 0.8425925925925926,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 269,
+    "taux_violation": 0.0,
+    "taux_repli": 0.09962962962962962,
+    "livraison": 0.6507165104801835,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 29,
+    "taux_violation": 0.0,
+    "taux_repli": 0.01074074074074074,
+    "livraison": 1.0,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 668,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2474074074074074,
+    "livraison": 0.937037037037037,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 48,
+    "taux_violation": 0.0,
+    "taux_repli": 0.017777777777777778,
+    "livraison": 1.0,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 96,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035555555555555556,
+    "livraison": 0.9629629629629629,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 125,
+    "taux_violation": 0.0,
+    "taux_repli": 0.046296296296296294,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 120,
+    "taux_violation": 0.0,
+    "taux_repli": 0.044444444444444446,
+    "livraison": 0.9444444444444444,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 121,
+    "taux_violation": 0.0,
+    "taux_repli": 0.044814814814814814,
+    "livraison": 0.8666666666666667,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 343,
+    "taux_violation": 0.0,
+    "taux_repli": 0.12703703703703703,
+    "livraison": 0.6069313054662888,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.005": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2443,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9048148148148148,
+    "livraison": 0.09259259259259259,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2656,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9837037037037037,
+    "livraison": 0.001851851851851852,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2367,
+    "taux_violation": 0.0,
+    "taux_repli": 0.8766666666666667,
+    "livraison": 0.13148148148148148,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2351,
+    "taux_violation": 0.0,
+    "taux_repli": 0.8707407407407407,
+    "livraison": 0.15555555555555556,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2548,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9437037037037037,
+    "livraison": 0.0,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2649,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9811111111111112,
+    "livraison": 0.007407407407407408,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2555,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9462962962962963,
+    "livraison": 0.08888888888888889,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2165,
+    "taux_violation": 0.0,
+    "taux_repli": 0.8018518518518518,
+    "livraison": 0.15,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2218,
+    "taux_violation": 0.0,
+    "taux_repli": 0.8214814814814815,
+    "livraison": 0.1537037037037037,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2672,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9896296296296296,
+    "livraison": 0.0,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2684,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9940740740740741,
+    "livraison": 0.0,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2644,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9792592592592593,
+    "livraison": 0.0,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2554,
+    "taux_violation": 0.0,
+    "taux_repli": 0.945925925925926,
+    "livraison": 0.08148148148148149,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2611,
+    "taux_violation": 0.0,
+    "taux_repli": 0.967037037037037,
+    "livraison": 0.06851851851851852,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2611,
+    "taux_violation": 0.0,
+    "taux_repli": 0.967037037037037,
+    "livraison": 0.011111111111111112,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2594,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9607407407407408,
+    "livraison": 0.022222222222222223,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2622,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9711111111111111,
+    "livraison": 0.0,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2597,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9618518518518518,
+    "livraison": 0.0,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2251,
+    "taux_violation": 0.0,
+    "taux_repli": 0.8337037037037037,
+    "livraison": 0.09444444444444444,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2564,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9496296296296296,
+    "livraison": 0.012962962962962963,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2563,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9492592592592592,
+    "livraison": 0.1111111111111111,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2686,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9948148148148148,
+    "livraison": 0.0,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2464,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9125925925925926,
+    "livraison": 0.1259259259259259,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2666,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9874074074074074,
+    "livraison": 0.003703703703703704,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2485,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9203703703703704,
+    "livraison": 0.1037037037037037,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2627,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9729629629629629,
+    "livraison": 0.0,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2661,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9855555555555555,
+    "livraison": 0.0,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2659,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9848148148148148,
+    "livraison": 0.0,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2676,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9911111111111112,
+    "livraison": 0.0,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2662,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9859259259259259,
+    "livraison": 0.0,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2671,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9892592592592593,
+    "livraison": 0.0,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2550,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9444444444444444,
+    "livraison": 0.09814814814814815,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.008": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1177,
+    "taux_violation": 0.0,
+    "taux_repli": 0.43592592592592594,
+    "livraison": 0.37777777777777777,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1850,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6851851851851852,
+    "livraison": 0.2740740740740741,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1193,
+    "taux_violation": 0.0,
+    "taux_repli": 0.44185185185185183,
+    "livraison": 0.32592592592592595,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 974,
+    "taux_violation": 0.0,
+    "taux_repli": 0.36074074074074075,
+    "livraison": 0.43333333333333335,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1137,
+    "taux_violation": 0.0,
+    "taux_repli": 0.4211111111111111,
+    "livraison": 0.6166666666666667,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1606,
+    "taux_violation": 0.0,
+    "taux_repli": 0.5948148148148148,
+    "livraison": 0.29259259259259257,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1672,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6192592592592593,
+    "livraison": 0.21296296296296297,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 813,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3011111111111111,
+    "livraison": 0.5407407407407407,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1013,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3751851851851852,
+    "livraison": 0.4759259259259259,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2402,
+    "taux_violation": 0.0,
+    "taux_repli": 0.8896296296296297,
+    "livraison": 0.0,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2457,
+    "taux_violation": 0.0,
+    "taux_repli": 0.91,
+    "livraison": 0.0,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1643,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6085185185185186,
+    "livraison": 0.3851851851851852,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1331,
+    "taux_violation": 0.0,
+    "taux_repli": 0.49296296296296294,
+    "livraison": 0.46111111111111114,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1341,
+    "taux_violation": 0.0,
+    "taux_repli": 0.49666666666666665,
+    "livraison": 0.45185185185185184,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1196,
+    "taux_violation": 0.0,
+    "taux_repli": 0.44296296296296295,
+    "livraison": 0.4722222222222222,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1051,
+    "taux_violation": 0.0,
+    "taux_repli": 0.38925925925925925,
+    "livraison": 0.6666666666666666,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1380,
+    "taux_violation": 0.0,
+    "taux_repli": 0.5111111111111111,
+    "livraison": 0.5333333333333333,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1460,
+    "taux_violation": 0.0,
+    "taux_repli": 0.5407407407407407,
+    "livraison": 0.42592592592592593,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1005,
+    "taux_violation": 0.0,
+    "taux_repli": 0.37222222222222223,
+    "livraison": 0.4351851851851852,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1330,
+    "taux_violation": 0.0,
+    "taux_repli": 0.4925925925925926,
+    "livraison": 0.6518518518518519,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1457,
+    "taux_violation": 0.0,
+    "taux_repli": 0.5396296296296297,
+    "livraison": 0.3111111111111111,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2555,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9462962962962963,
+    "livraison": 0.0,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1498,
+    "taux_violation": 0.0,
+    "taux_repli": 0.5548148148148148,
+    "livraison": 0.31296296296296294,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1710,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6333333333333333,
+    "livraison": 0.25,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1035,
+    "taux_violation": 0.0,
+    "taux_repli": 0.38333333333333336,
+    "livraison": 0.5592592592592592,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1648,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6103703703703703,
+    "livraison": 0.5481481481481482,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1860,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6888888888888889,
+    "livraison": 0.387037037037037,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1638,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6066666666666667,
+    "livraison": 0.3333333333333333,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2440,
+    "taux_violation": 0.0,
+    "taux_repli": 0.9037037037037037,
+    "livraison": 0.0,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1743,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6455555555555555,
+    "livraison": 0.32037037037037036,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2146,
+    "taux_violation": 0.0,
+    "taux_repli": 0.7948148148148149,
+    "livraison": 0.20185185185185187,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1667,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6174074074074074,
+    "livraison": 0.22592592592592592,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.01": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 812,
+    "taux_violation": 0.0,
+    "taux_repli": 0.30074074074074075,
+    "livraison": 0.5222222222222223,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1300,
+    "taux_violation": 0.0,
+    "taux_repli": 0.48148148148148145,
+    "livraison": 0.3537037037037037,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 849,
+    "taux_violation": 0.0,
+    "taux_repli": 0.31444444444444447,
+    "livraison": 0.46296296296296297,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 743,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2751851851851852,
+    "livraison": 0.6444444444444445,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 616,
+    "taux_violation": 0.0,
+    "taux_repli": 0.22814814814814816,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 998,
+    "taux_violation": 0.0,
+    "taux_repli": 0.36962962962962964,
+    "livraison": 0.3537037037037037,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1432,
+    "taux_violation": 0.0,
+    "taux_repli": 0.5303703703703704,
+    "livraison": 0.2759259259259259,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 651,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2411111111111111,
+    "livraison": 0.7333333333333333,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 746,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2762962962962963,
+    "livraison": 0.6759259259259259,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1458,
+    "taux_violation": 0.0,
+    "taux_repli": 0.54,
+    "livraison": 0.3685185185185185,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2088,
+    "taux_violation": 0.0,
+    "taux_repli": 0.7733333333333333,
+    "livraison": 0.0,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 979,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3625925925925926,
+    "livraison": 0.48333333333333334,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 791,
+    "taux_violation": 0.0,
+    "taux_repli": 0.292962962962963,
+    "livraison": 0.5925925925925926,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 937,
+    "taux_violation": 0.0,
+    "taux_repli": 0.34703703703703703,
+    "livraison": 0.6074074074074074,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 823,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3048148148148148,
+    "livraison": 0.5740740740740741,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 654,
+    "taux_violation": 0.0,
+    "taux_repli": 0.24222222222222223,
+    "livraison": 0.7814814814814814,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 751,
+    "taux_violation": 0.0,
+    "taux_repli": 0.27814814814814814,
+    "livraison": 0.7092592592592593,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 767,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2840740740740741,
+    "livraison": 0.6259259259259259,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 703,
+    "taux_violation": 0.0,
+    "taux_repli": 0.26037037037037036,
+    "livraison": 0.6574074074074074,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1138,
+    "taux_violation": 0.0,
+    "taux_repli": 0.42148148148148146,
+    "livraison": 0.7944444444444444,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1020,
+    "taux_violation": 0.0,
+    "taux_repli": 0.37777777777777777,
+    "livraison": 0.3888888888888889,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 2349,
+    "taux_violation": 0.0,
+    "taux_repli": 0.87,
+    "livraison": 0.0,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 981,
+    "taux_violation": 0.0,
+    "taux_repli": 0.36333333333333334,
+    "livraison": 0.36666666666666664,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1069,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3959259259259259,
+    "livraison": 0.29444444444444445,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 702,
+    "taux_violation": 0.0,
+    "taux_repli": 0.26,
+    "livraison": 0.7333333333333333,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1262,
+    "taux_violation": 0.0,
+    "taux_repli": 0.4674074074074074,
+    "livraison": 0.6388888888888888,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1041,
+    "taux_violation": 0.0,
+    "taux_repli": 0.38555555555555554,
+    "livraison": 0.5407407407407407,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 916,
+    "taux_violation": 0.0,
+    "taux_repli": 0.33925925925925926,
+    "livraison": 0.5537037037037037,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1740,
+    "taux_violation": 0.0,
+    "taux_repli": 0.6444444444444445,
+    "livraison": 0.3925925925925926,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 949,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3514814814814815,
+    "livraison": 0.4166666666666667,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1304,
+    "taux_violation": 0.0,
+    "taux_repli": 0.482962962962963,
+    "livraison": 0.34629629629629627,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1304,
+    "taux_violation": 0.0,
+    "taux_repli": 0.482962962962963,
+    "livraison": 0.2851851851851852,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.015": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 622,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23037037037037036,
+    "livraison": 0.7341713919252572,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 702,
+    "taux_violation": 0.0,
+    "taux_repli": 0.26,
+    "livraison": 0.5037037037037037,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 628,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2325925925925926,
+    "livraison": 0.6991164198214257,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 561,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20777777777777778,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 554,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2051851851851852,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 730,
+    "taux_violation": 0.0,
+    "taux_repli": 0.27037037037037037,
+    "livraison": 0.5407407407407407,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 861,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3188888888888889,
+    "livraison": 0.4074074074074074,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 569,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21074074074074073,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 567,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21,
+    "livraison": 0.7833333333333333,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 732,
+    "taux_violation": 0.0,
+    "taux_repli": 0.27111111111111114,
+    "livraison": 0.4777777777777778,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 746,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2762962962962963,
+    "livraison": 0.6018518518518519,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 618,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2288888888888889,
+    "livraison": 0.6907407407407408,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 563,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20851851851851852,
+    "livraison": 0.7777777777777778,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 763,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2825925925925926,
+    "livraison": 0.7870370370370371,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 553,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2048148148148148,
+    "livraison": 0.7777777777777778,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 565,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20925925925925926,
+    "livraison": 0.7814814814814814,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 568,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21037037037037037,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 553,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2048148148148148,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 578,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21407407407407408,
+    "livraison": 0.7833333333333333,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1107,
+    "taux_violation": 0.0,
+    "taux_repli": 0.41,
+    "livraison": 0.8018518518518518,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 653,
+    "taux_violation": 0.0,
+    "taux_repli": 0.24185185185185185,
+    "livraison": 0.6021588582726609,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 767,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2840740740740741,
+    "livraison": 0.5351851851851852,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 697,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2581481481481481,
+    "livraison": 0.5851851851851851,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 801,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2966666666666667,
+    "livraison": 0.44074074074074077,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 551,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20407407407407407,
+    "livraison": 0.7777777777777778,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1071,
+    "taux_violation": 0.0,
+    "taux_repli": 0.39666666666666667,
+    "livraison": 0.7814814814814814,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 615,
+    "taux_violation": 0.0,
+    "taux_repli": 0.22777777777777777,
+    "livraison": 0.6981481481481482,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 617,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2285185185185185,
+    "livraison": 0.7777777777777778,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 663,
+    "taux_violation": 0.0,
+    "taux_repli": 0.24555555555555555,
+    "livraison": 0.6,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 686,
+    "taux_violation": 0.0,
+    "taux_repli": 0.25407407407407406,
+    "livraison": 0.6037037037037037,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 751,
+    "taux_violation": 0.0,
+    "taux_repli": 0.27814814814814814,
+    "livraison": 0.4722222222222222,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 782,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2896296296296296,
+    "livraison": 0.42777777777777776,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.02": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 576,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21333333333333335,
+    "livraison": 0.7583970378441909,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 641,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2374074074074074,
+    "livraison": 0.6,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 588,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21777777777777776,
+    "livraison": 0.7047168539298043,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 549,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20333333333333334,
+    "livraison": 0.7833333333333333,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 547,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2025925925925926,
+    "livraison": 0.7851851851851852,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 639,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23666666666666666,
+    "livraison": 0.6738472467271128,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 707,
+    "taux_violation": 0.0,
+    "taux_repli": 0.26185185185185184,
+    "livraison": 0.5348023756303721,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 554,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2051851851851852,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 533,
+    "taux_violation": 0.0,
+    "taux_repli": 0.19740740740740742,
+    "livraison": 0.8092592592592592,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 642,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23777777777777778,
+    "livraison": 0.6277777777777778,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 625,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23148148148148148,
+    "livraison": 0.6944444444444444,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 551,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20407407407407407,
+    "livraison": 0.7796296296296297,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 548,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20296296296296296,
+    "livraison": 0.7888888888888889,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 751,
+    "taux_violation": 0.0,
+    "taux_repli": 0.27814814814814814,
+    "livraison": 0.7870370370370371,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 549,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20333333333333334,
+    "livraison": 0.7777777777777778,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 544,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20148148148148148,
+    "livraison": 0.7870370370370371,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 551,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20407407407407407,
+    "livraison": 0.7777777777777778,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 545,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20185185185185187,
+    "livraison": 0.7888888888888889,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 540,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2,
+    "livraison": 0.7981481481481482,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1102,
+    "taux_violation": 0.0,
+    "taux_repli": 0.40814814814814815,
+    "livraison": 0.8037037037037037,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 636,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23555555555555555,
+    "livraison": 0.626260062164834,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 653,
+    "taux_violation": 0.0,
+    "taux_repli": 0.24185185185185185,
+    "livraison": 0.6351851851851852,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 585,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21666666666666667,
+    "livraison": 0.7203703703703703,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 698,
+    "taux_violation": 0.0,
+    "taux_repli": 0.25851851851851854,
+    "livraison": 0.5466499612106148,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 547,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2025925925925926,
+    "livraison": 0.7777777777777778,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 1041,
+    "taux_violation": 0.0,
+    "taux_repli": 0.38555555555555554,
+    "livraison": 0.7944444444444444,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 559,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20703703703703705,
+    "livraison": 0.8037037037037037,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 536,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1985185185185185,
+    "livraison": 0.7981481481481482,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 596,
+    "taux_violation": 0.0,
+    "taux_repli": 0.22074074074074074,
+    "livraison": 0.6907407407407408,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 570,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2111111111111111,
+    "livraison": 0.7574074074074074,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 649,
+    "taux_violation": 0.0,
+    "taux_repli": 0.24037037037037037,
+    "livraison": 0.6055555555555555,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 708,
+    "taux_violation": 0.0,
+    "taux_repli": 0.26222222222222225,
+    "livraison": 0.5113302292785159,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.03": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 499,
+    "taux_violation": 0.0,
+    "taux_repli": 0.18481481481481482,
+    "livraison": 0.7637251859707586,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 434,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16074074074074074,
+    "livraison": 0.7298040021482545,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 545,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20185185185185187,
+    "livraison": 0.711258112552524,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 389,
+    "taux_violation": 0.0,
+    "taux_repli": 0.14407407407407408,
+    "livraison": 0.837037037037037,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 429,
+    "taux_violation": 0.0,
+    "taux_repli": 0.15888888888888889,
+    "livraison": 0.8388888888888889,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 552,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20444444444444446,
+    "livraison": 0.6736512580580354,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 626,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23185185185185186,
+    "livraison": 0.558028714146672,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 393,
+    "taux_violation": 0.0,
+    "taux_repli": 0.14555555555555555,
+    "livraison": 0.85,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 439,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1625925925925926,
+    "livraison": 0.8611111111111112,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 446,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16518518518518518,
+    "livraison": 0.85,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 449,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1662962962962963,
+    "livraison": 0.8740740740740741,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 449,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1662962962962963,
+    "livraison": 0.8611111111111112,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 450,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16666666666666666,
+    "livraison": 0.7975380912242044,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 658,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2437037037037037,
+    "livraison": 0.8648148148148148,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 451,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16703703703703704,
+    "livraison": 0.8222222222222222,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 481,
+    "taux_violation": 0.0,
+    "taux_repli": 0.17814814814814814,
+    "livraison": 0.8,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 455,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1685185185185185,
+    "livraison": 0.8444444444444444,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 422,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1562962962962963,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 361,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1337037037037037,
+    "livraison": 0.8444444444444444,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 972,
+    "taux_violation": 0.0,
+    "taux_repli": 0.36,
+    "livraison": 0.8812882172965651,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 599,
+    "taux_violation": 0.0,
+    "taux_repli": 0.22185185185185186,
+    "livraison": 0.626260062164834,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 548,
+    "taux_violation": 0.0,
+    "taux_repli": 0.20296296296296296,
+    "livraison": 0.8092592592592592,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 419,
+    "taux_violation": 0.0,
+    "taux_repli": 0.15518518518518518,
+    "livraison": 0.8203703703703704,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 622,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23037037037037036,
+    "livraison": 0.5624996505686324,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 394,
+    "taux_violation": 0.0,
+    "taux_repli": 0.14592592592592593,
+    "livraison": 0.8666666666666667,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 900,
+    "taux_violation": 0.0,
+    "taux_repli": 0.3333333333333333,
+    "livraison": 0.9074074074074074,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 355,
+    "taux_violation": 0.0,
+    "taux_repli": 0.13148148148148148,
+    "livraison": 0.8611111111111112,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 391,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1448148148148148,
+    "livraison": 0.8740740740740741,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 445,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1648148148148148,
+    "livraison": 0.8277777777777777,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 470,
+    "taux_violation": 0.0,
+    "taux_repli": 0.17407407407407408,
+    "livraison": 0.812962962962963,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 479,
+    "taux_violation": 0.0,
+    "taux_repli": 0.1774074074074074,
+    "livraison": 0.7703703703703704,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 625,
+    "taux_violation": 0.0,
+    "taux_repli": 0.23148148148148148,
+    "livraison": 0.5273930984113745,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.05": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 450,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16666666666666666,
+    "livraison": 0.7637251859707586,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 193,
+    "taux_violation": 0.0,
+    "taux_repli": 0.07148148148148148,
+    "livraison": 0.7298040021482545,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 497,
+    "taux_violation": 0.0,
+    "taux_repli": 0.18407407407407408,
+    "livraison": 0.711258112552524,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 72,
+    "taux_violation": 0.0,
+    "taux_repli": 0.02666666666666667,
+    "livraison": 0.937037037037037,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 171,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06333333333333334,
+    "livraison": 0.8944444444444445,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 402,
+    "taux_violation": 0.0,
+    "taux_repli": 0.14888888888888888,
+    "livraison": 0.6736512580580354,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 579,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21444444444444444,
+    "livraison": 0.558028714146672,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 151,
+    "taux_violation": 0.0,
+    "taux_repli": 0.05592592592592593,
+    "livraison": 0.8888888888888888,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 155,
+    "taux_violation": 0.0,
+    "taux_repli": 0.05740740740740741,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 228,
+    "taux_violation": 0.0,
+    "taux_repli": 0.08444444444444445,
+    "livraison": 0.9277777777777778,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 145,
+    "taux_violation": 0.0,
+    "taux_repli": 0.053703703703703705,
+    "livraison": 0.9,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 177,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06555555555555556,
+    "livraison": 0.8814814814814815,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 254,
+    "taux_violation": 0.0,
+    "taux_repli": 0.09407407407407407,
+    "livraison": 0.7975380912242044,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 457,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16925925925925925,
+    "livraison": 0.9773332725003085,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 283,
+    "taux_violation": 0.0,
+    "taux_repli": 0.10481481481481482,
+    "livraison": 0.8788335528668809,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 185,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06851851851851852,
+    "livraison": 0.8314814814814815,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 127,
+    "taux_violation": 0.0,
+    "taux_repli": 0.04703703703703704,
+    "livraison": 0.8537037037037037,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 169,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06259259259259259,
+    "livraison": 0.9314814814814815,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 224,
+    "taux_violation": 0.0,
+    "taux_repli": 0.08296296296296296,
+    "livraison": 0.8994833837776376,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 821,
+    "taux_violation": 0.0,
+    "taux_repli": 0.30407407407407405,
+    "livraison": 0.8981481481481481,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 539,
+    "taux_violation": 0.0,
+    "taux_repli": 0.19962962962962963,
+    "livraison": 0.626260062164834,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 142,
+    "taux_violation": 0.0,
+    "taux_repli": 0.052592592592592594,
+    "livraison": 0.869008392078319,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 205,
+    "taux_violation": 0.0,
+    "taux_repli": 0.07592592592592592,
+    "livraison": 0.8425925925925926,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 487,
+    "taux_violation": 0.0,
+    "taux_repli": 0.18037037037037038,
+    "livraison": 0.5624996505686324,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 29,
+    "taux_violation": 0.0,
+    "taux_repli": 0.01074074074074074,
+    "livraison": 1.0,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 668,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2474074074074074,
+    "livraison": 0.937037037037037,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 100,
+    "taux_violation": 0.0,
+    "taux_repli": 0.037037037037037035,
+    "livraison": 0.9031098087076788,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 96,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035555555555555556,
+    "livraison": 0.9629629629629629,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 125,
+    "taux_violation": 0.0,
+    "taux_repli": 0.046296296296296294,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 120,
+    "taux_violation": 0.0,
+    "taux_repli": 0.044444444444444446,
+    "livraison": 0.9444444444444444,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 170,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06296296296296296,
+    "livraison": 0.7938833665378667,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 531,
+    "taux_violation": 0.0,
+    "taux_repli": 0.19666666666666666,
+    "livraison": 0.5273930984113745,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "C:0.08": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 450,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16666666666666666,
+    "livraison": 0.7637251859707586,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 193,
+    "taux_violation": 0.0,
+    "taux_repli": 0.07148148148148148,
+    "livraison": 0.7298040021482545,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 497,
+    "taux_violation": 0.0,
+    "taux_repli": 0.18407407407407408,
+    "livraison": 0.711258112552524,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 72,
+    "taux_violation": 0.0,
+    "taux_repli": 0.02666666666666667,
+    "livraison": 0.937037037037037,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 171,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06333333333333334,
+    "livraison": 0.8944444444444445,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 402,
+    "taux_violation": 0.0,
+    "taux_repli": 0.14888888888888888,
+    "livraison": 0.6736512580580354,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 579,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21444444444444444,
+    "livraison": 0.558028714146672,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 151,
+    "taux_violation": 0.0,
+    "taux_repli": 0.05592592592592593,
+    "livraison": 0.8888888888888888,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 155,
+    "taux_violation": 0.0,
+    "taux_repli": 0.05740740740740741,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 204,
+    "taux_violation": 0.0,
+    "taux_repli": 0.07555555555555556,
+    "livraison": 0.9277777777777778,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 97,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035925925925925924,
+    "livraison": 0.9,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 177,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06555555555555556,
+    "livraison": 0.8814814814814815,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 254,
+    "taux_violation": 0.0,
+    "taux_repli": 0.09407407407407407,
+    "livraison": 0.7975380912242044,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 457,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16925925925925925,
+    "livraison": 0.9773332725003085,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 283,
+    "taux_violation": 0.0,
+    "taux_repli": 0.10481481481481482,
+    "livraison": 0.8788335528668809,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 185,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06851851851851852,
+    "livraison": 0.8314814814814815,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 127,
+    "taux_violation": 0.0,
+    "taux_repli": 0.04703703703703704,
+    "livraison": 0.8537037037037037,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 169,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06259259259259259,
+    "livraison": 0.9314814814814815,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 224,
+    "taux_violation": 0.0,
+    "taux_repli": 0.08296296296296296,
+    "livraison": 0.8994833837776376,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 821,
+    "taux_violation": 0.0,
+    "taux_repli": 0.30407407407407405,
+    "livraison": 0.8981481481481481,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 539,
+    "taux_violation": 0.0,
+    "taux_repli": 0.19962962962962963,
+    "livraison": 0.626260062164834,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 142,
+    "taux_violation": 0.0,
+    "taux_repli": 0.052592592592592594,
+    "livraison": 0.869008392078319,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 181,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06703703703703703,
+    "livraison": 0.8425925925925926,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 487,
+    "taux_violation": 0.0,
+    "taux_repli": 0.18037037037037038,
+    "livraison": 0.5624996505686324,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 29,
+    "taux_violation": 0.0,
+    "taux_repli": 0.01074074074074074,
+    "livraison": 1.0,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 668,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2474074074074074,
+    "livraison": 0.937037037037037,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 100,
+    "taux_violation": 0.0,
+    "taux_repli": 0.037037037037037035,
+    "livraison": 0.9031098087076788,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 96,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035555555555555556,
+    "livraison": 0.9629629629629629,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 125,
+    "taux_violation": 0.0,
+    "taux_repli": 0.046296296296296294,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 120,
+    "taux_violation": 0.0,
+    "taux_repli": 0.044444444444444446,
+    "livraison": 0.9444444444444444,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 170,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06296296296296296,
+    "livraison": 0.7938833665378667,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 531,
+    "taux_violation": 0.0,
+    "taux_repli": 0.19666666666666666,
+    "livraison": 0.5273930984113745,
+    "temoin": 0.0010836266205949748
+   }
+  ],
+  "D:None": [
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 450,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16666666666666666,
+    "livraison": 0.7637251859707586,
+    "temoin": 0.00048658265959383983
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 193,
+    "taux_violation": 0.0,
+    "taux_repli": 0.07148148148148148,
+    "livraison": 0.7298040021482545,
+    "temoin": -0.0011234917419670554
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 497,
+    "taux_violation": 0.0,
+    "taux_repli": 0.18407407407407408,
+    "livraison": 0.711258112552524,
+    "temoin": -0.0015126561189740748
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 72,
+    "taux_violation": 0.0,
+    "taux_repli": 0.02666666666666667,
+    "livraison": 0.937037037037037,
+    "temoin": 0.003073394066018323
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 171,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06333333333333334,
+    "livraison": 0.8944444444444445,
+    "temoin": 0.002463252137563494
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 402,
+    "taux_violation": 0.0,
+    "taux_repli": 0.14888888888888888,
+    "livraison": 0.6736512580580354,
+    "temoin": 0.0011368182123033836
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 579,
+    "taux_violation": 0.0,
+    "taux_repli": 0.21444444444444444,
+    "livraison": 0.558028714146672,
+    "temoin": -0.0012706114224623683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 151,
+    "taux_violation": 0.0,
+    "taux_repli": 0.05592592592592593,
+    "livraison": 0.8888888888888888,
+    "temoin": 0.0018003466133022239
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 155,
+    "taux_violation": 0.0,
+    "taux_repli": 0.05740740740740741,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.003840002667086732
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 204,
+    "taux_violation": 0.0,
+    "taux_repli": 0.07555555555555556,
+    "livraison": 0.9277777777777778,
+    "temoin": -0.0012898001979541002
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 97,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035925925925925924,
+    "livraison": 0.9,
+    "temoin": -0.0001379243154430923
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 177,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06555555555555556,
+    "livraison": 0.8814814814814815,
+    "temoin": 0.00010124290861488973
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 254,
+    "taux_violation": 0.0,
+    "taux_repli": 0.09407407407407407,
+    "livraison": 0.7975380912242044,
+    "temoin": -0.0002056209467642279
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 457,
+    "taux_violation": 0.0,
+    "taux_repli": 0.16925925925925925,
+    "livraison": 0.9773332725003085,
+    "temoin": 0.00014511648248863036
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 283,
+    "taux_violation": 0.0,
+    "taux_repli": 0.10481481481481482,
+    "livraison": 0.8788335528668809,
+    "temoin": -0.000538210075097626
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 185,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06851851851851852,
+    "livraison": 0.8314814814814815,
+    "temoin": -0.0013483735565695061
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 127,
+    "taux_violation": 0.0,
+    "taux_repli": 0.04703703703703704,
+    "livraison": 0.8537037037037037,
+    "temoin": 0.002448940442269963
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 169,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06259259259259259,
+    "livraison": 0.9314814814814815,
+    "temoin": 0.0013910216108993288
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 224,
+    "taux_violation": 0.0,
+    "taux_repli": 0.08296296296296296,
+    "livraison": 0.8994833837776376,
+    "temoin": 0.0004781109897584984
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 821,
+    "taux_violation": 0.0,
+    "taux_repli": 0.30407407407407405,
+    "livraison": 0.8981481481481481,
+    "temoin": 0.001547595937339617
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 539,
+    "taux_violation": 0.0,
+    "taux_repli": 0.19962962962962963,
+    "livraison": 0.626260062164834,
+    "temoin": 0.0012489013672102426
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 142,
+    "taux_violation": 0.0,
+    "taux_repli": 0.052592592592592594,
+    "livraison": 0.869008392078319,
+    "temoin": 0.00010262252502776773
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 181,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06703703703703703,
+    "livraison": 0.8425925925925926,
+    "temoin": -0.0007488570986723683
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 487,
+    "taux_violation": 0.0,
+    "taux_repli": 0.18037037037037038,
+    "livraison": 0.5624996505686324,
+    "temoin": -0.0005144098568664285
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 29,
+    "taux_violation": 0.0,
+    "taux_repli": 0.01074074074074074,
+    "livraison": 1.0,
+    "temoin": -7.776629284894862e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 668,
+    "taux_violation": 0.0,
+    "taux_repli": 0.2474074074074074,
+    "livraison": 0.937037037037037,
+    "temoin": -0.0019173941945803106
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 100,
+    "taux_violation": 0.0,
+    "taux_repli": 0.037037037037037035,
+    "livraison": 0.9031098087076788,
+    "temoin": 0.000776537113092692
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 96,
+    "taux_violation": 0.0,
+    "taux_repli": 0.035555555555555556,
+    "livraison": 0.9629629629629629,
+    "temoin": -0.0009318718552438215
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 125,
+    "taux_violation": 0.0,
+    "taux_repli": 0.046296296296296294,
+    "livraison": 0.9111111111111111,
+    "temoin": 0.0009741065955147605
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 120,
+    "taux_violation": 0.0,
+    "taux_repli": 0.044444444444444446,
+    "livraison": 0.9444444444444444,
+    "temoin": 0.006232152770039665
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 170,
+    "taux_violation": 0.0,
+    "taux_repli": 0.06296296296296296,
+    "livraison": 0.7938833665378667,
+    "temoin": 7.432060295013876e-05
+   },
+   {
+    "cycles": 2700,
+    "violations": 0,
+    "replis": 531,
+    "taux_violation": 0.0,
+    "taux_repli": 0.19666666666666666,
+    "livraison": 0.5273930984113745,
+    "temoin": 0.0010836266205949748
+   }
+  ]
+ },
+ "tableau": "Campagne P2.2 \u2014 32 runs par point\nCRN : 32/32 runs avec t\u00e9moin identique sur les quatre bras (OK)\nDur\u00e9e de calcul : 356 s\nbras seuil_\u03c3_soc   N       taux_viol (IC95)     runs_viol [Wilson]      taux_repli (IC95)       livraison (IC95)\nA              -  32  5.3588% [1.1757%,9.5419%]   8/32 [0.133,0.421]   0.0000% [0.0000%,0.0000%] 100.0000% [100.0000%,100.0000%]\nB              -  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]   7.0324% [4.8357%,9.2291%]  88.1059% [84.2575%,91.9543%]\nD              -  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.2500% [7.5786%,12.9214%]  83.5172% [78.9155%,88.1190%]\nC          0.005  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  94.5903% [92.6889%,96.4917%]   4.7338% [2.6649%,6.8027%]\nC          0.008  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  57.2083% [50.9833%,63.4334%]  35.8854% [29.2195%,42.5514%]\nC          0.010  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  39.2049% [33.7529%,44.6569%]  49.8495% [42.4362%,57.2629%]\nC          0.015  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  25.2245% [23.3732%,27.0758%]  66.6848% [61.9415%,71.4282%]\nC          0.020  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  23.2176% [21.4661%,24.9691%]  72.2063% [68.9694%,75.4431%]\nC          0.030  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  18.6887% [16.8262%,20.5511%]  79.5022% [75.8123%,83.1921%]\nC          0.050  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.3611% [7.7137%,13.0085%]  83.5172% [78.9155%,88.1190%]\nC          0.080  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.2500% [7.5786%,12.9214%]  83.5172% [78.9155%,88.1190%]"
+   }
