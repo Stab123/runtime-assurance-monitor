@@ -60,6 +60,8 @@ Le mur est indexé sur le domaine d'action (u_max = 3 A, déclaré dans `ram_p0/
 
 P3.1 documente le mur avec puissance statistique : r ∈ {0,35 ; 0,425 ; 0,475} — le dernier collé au mur —, N = 300, quatre bras, grille σ inchangée. Configuration figée et committée avant exécution (`ram_p3/config_p3_1.json`, critère en deux clauses inclus), exécution par `.github/workflows/p3.yml`.
 
+**Résultat P3.1** (N = 300 par point, CRN 300/300 — `ram_p3/resultats_p3_1.json`) : à chaque point de la bande compilable, B reste à **0/300** runs avec violation (Wilson [0 ; 1,3 %]) — y compris à r = 0,475, le dernier point déployable. Le mur n'est pas un artefact de N = 30. Le critère de puissance figé tranche : P3 est **non concluante pour H4** — il n'existe aucun régime déployable où B rate, donc aucun où le durcissement pourrait payer. Les coûts montent avec r pour tous les bras monitorés (repli de B : 10,2 % → 15,6 % → 18,8 % ; livraison : 89,0 % → 84,9 %) sans que l'ordre B &lt; D &lt; C ne s'inverse jamais. Non-régression : le bras A reproduit P2.3 bit à bit à chaque point (6300/6300 champs identiques).
+
 ### Portée du résultat
 
 L'énoncé exact est : **dans un régime où l'enveloppe de sécurité suffit déjà, le durcissement sur incertitude ne se justifie pas.** Ce n'est pas un énoncé général.

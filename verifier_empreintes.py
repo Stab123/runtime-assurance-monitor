@@ -40,6 +40,7 @@ MODULES = [
     "campagne_p2.py",
     "executer_p2_3.py",
     "pilote_p3.py",
+    "executer_p3_1.py",
     "campagne_p2_rejeu.py",
 ]
 
@@ -54,6 +55,7 @@ RESULTATS = [
     "ram_p2/resultats_p2_2.json",
     "ram_p2/resultats_p2_3.json",
     "ram_p3/resultats_pilote_p3.json",
+    "ram_p3/resultats_p3_1.json",
 ]
 
 # Empreinte du pilote P2.1 (3 bras), perdu — voir empreintes/README.md.
