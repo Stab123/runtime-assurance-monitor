@@ -1,0 +1,1066 @@
+{
+ "config": {
+  "commentaire": "Pilote de puissance, bras B seul, ex\u00e9cut\u00e9 avant figeage du crit\u00e8re. But unique : trouver le r o\u00f9 le taux de violation de B passe de z\u00e9ro \u00e0 non-z\u00e9ro. Un seul levier : delai_armement_s = r x tau_violation_s. TOUT LE RESTE EST FIG\u00c9, repris tel quel de config_p2_3.json : graines, bornes de plante, marges de garde, seuils de s\u00e9curit\u00e9, nombre de cycles. La validation \u00e0 la compilation continue d'utiliser le mod\u00e8le nominal (10 Ah) alors que la plante tire 5-9 Ah \u2014 non corrig\u00e9, c'est l'\u00e9cart qui rend le r\u00e9gime difficile.",
+  "version_config": "P3-pilote",
+  "tau_violation_s": 400.0,
+  "note_tau_violation": "En P2, delai_armement_s = 120 s et r ~ 0,3, donc tau_violation = 120 / 0,3 = 400 s. Constante de r\u00e9f\u00e9rence du protocole, pas une mesure nouvelle.",
+  "grille_r_prescrite": [
+   0.3,
+   0.6,
+   0.8,
+   0.95,
+   1.1
+  ],
+  "grille_r_densifiee": [
+   0.35,
+   0.4,
+   0.425,
+   0.45,
+   0.475,
+   0.4875
+  ],
+  "note_densification": "La compilation (RA-FUN-005, mod\u00e8le nominal, action persist\u00e9e 3 A) refuse le jeu pour delai_armement_s >= 196 s, soit r >= 0,49 : 4 des 5 points prescrits ne peuvent pas voler. La densification balaie la bande compilable (0,3 ; 0,4875] avec le M\u00caME levier, pour localiser la transition si elle existe en de\u00e7\u00e0 du mur de compilation. Aucun autre param\u00e8tre n'est touch\u00e9.",
+  "graine_plante": 20260903,
+  "graine_bruit": 77100001,
+  "n_runs": 30,
+  "duree_s": 13500.0,
+  "dt_s": 5.0,
+  "cycle_temoin": 1000,
+  "k_sigma": 3.0,
+  "capacite_tampon": 4096,
+  "bornes_plante": {
+   "C_BATT_AH": [
+    5.0,
+    9.0
+   ],
+   "I_SUN": [
+    1.0,
+    1.4
+   ],
+   "I_BASE": [
+    0.45,
+    0.6
+   ],
+   "H": [
+    0.0012,
+    0.0022
+   ],
+   "C_TH": [
+    0.0003,
+    0.0007
+   ],
+   "soc0": [
+    0.5,
+    0.65
+   ],
+   "temp0": [
+    15.0,
+    25.0
+   ]
+  },
+  "bruit_std": [
+   0.002,
+   0.1
+  ],
+  "facteur_degradation": 6.0,
+  "fenetre_degradation": [
+   6300.0,
+   9000.0
+  ],
+  "u_payload": 3.0,
+  "fenetre_payload": [
+   600.0,
+   1500.0
+  ],
+  "seuil_soc": 0.35,
+  "seuil_temp": 45.0,
+  "marge_securite_soc": 0.02,
+  "marge_securite_temp": 1.0,
+  "delai_armement_s": 120.0,
+  "seuil_incertitude_temp": 2.0,
+  "grille_seuil_incertitude_soc": [
+   0.005,
+   0.008,
+   0.01,
+   0.015,
+   0.02,
+   0.03,
+   0.05,
+   0.08
+  ]
+ },
+ "empreintes_code": {
+  "moniteur.py": "7f9937f834597201",
+  "filtre.py": "9bf5cb4253077fe0",
+  "trace.py": "bf93a1839e6eef13",
+  "contraintes.py": "11b9007f9827a02c",
+  "campagne_p2.py": "6eb48963d9281c1b",
+  "pilote_p3.py": "afac68f7713af8ed"
+ },
+ "resultats": {
+  "0.3": {
+   "statut": "execute",
+   "n_runs": 30,
+   "runs_avec_violation": 0,
+   "taux_violation_moyen": 0.0,
+   "par_run": [
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    }
+   ]
+  },
+  "0.35": {
+   "statut": "execute",
+   "n_runs": 30,
+   "runs_avec_violation": 0,
+   "taux_violation_moyen": 0.0,
+   "par_run": [
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    }
+   ]
+  },
+  "0.4": {
+   "statut": "execute",
+   "n_runs": 30,
+   "runs_avec_violation": 0,
+   "taux_violation_moyen": 0.0,
+   "par_run": [
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    }
+   ]
+  },
+  "0.425": {
+   "statut": "execute",
+   "n_runs": 30,
+   "runs_avec_violation": 0,
+   "taux_violation_moyen": 0.0,
+   "par_run": [
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    }
+   ]
+  },
+  "0.45": {
+   "statut": "execute",
+   "n_runs": 30,
+   "runs_avec_violation": 0,
+   "taux_violation_moyen": 0.0,
+   "par_run": [
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    }
+   ]
+  },
+  "0.475": {
+   "statut": "execute",
+   "n_runs": 30,
+   "runs_avec_violation": 0,
+   "taux_violation_moyen": 0.0,
+   "par_run": [
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    }
+   ]
+  },
+  "0.4875": {
+   "statut": "refuse_compilation"
+  },
+  "0.6": {
+   "statut": "refuse_compilation"
+  },
+  "0.8": {
+   "statut": "refuse_compilation"
+  },
+  "0.95": {
+   "statut": "refuse_compilation"
+  },
+  "1.1": {
+   "statut": "refuse_compilation"
+  }
+ },
+ "tableau": "Pilote de puissance P3-pilote \u2014 bras B seul, N=30 \u2014 ex\u00e9cut\u00e9 avant figeage du crit\u00e8re\ntau_violation de r\u00e9f\u00e9rence : 400 s (r = 0,3 en P2 avec delai_armement 120 s)\n     r tau_arm (s)  statut / taux de violation de B\n 0.300         120  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.350         140  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.400         160  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.425         170  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.450         180  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.475         190  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.487         195  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.600         240  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.800         320  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.950         380  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 1.100         440  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\nDur\u00e9e de calcul : 252 s"
+}

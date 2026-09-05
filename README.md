@@ -46,6 +46,20 @@ Balayage du seuil d'incertitude (bras C) :
 
 **Résultat secondaire.** Le bras D montre que l'évaluation pessimiste à 3σ est elle aussi du poids mort dans ce scénario : +2,8 points de repli et −5,0 points de livraison pour zéro violation évitée. La meilleure configuration du tableau est l'enveloppe seule.
 
+Là où le durcissement pourrait payer, la validation à la compilation refuse le jeu de contraintes. Là où le jeu est acceptable, l'enveloppe suffit et le durcissement ne peut que coûter.
+
+---
+
+## P3 — la condition de §7 et le mur de compilation
+
+§7 conditionnait l'utilité du durcissement à un régime où l'autorité du repli est marginale devant le temps-avant-violation (r = τ_armement / τ_violation → 1 ; P2 est à r ≈ 0,3). P3 pousse ce seul levier — le délai d'armement — tout le reste figé (graines, bornes de plante, marges, seuils, grille σ, cycles, et la validation à la compilation sur le modèle nominal 10 Ah).
+
+Le pilote (bras B seul, N = 30, exécuté **avant** figeage du critère — `ram_p3/resultats_pilote_p3.json`) a trouvé deux choses. D'une part B reste à **zéro violation** sur toute la bande compilable. D'autre part, au-delà de τ_armement = 195 s (r ≈ 0,49), la validation RA-FUN-005 **refuse le jeu à la compilation** : depuis la frontière de garde, l'action la plus défavorable persistée pendant l'armement franchirait le seuil brut. Le régime où le durcissement pourrait payer n'est pas un régime difficile à survivre — il est **non déployable par construction**.
+
+Le mur est indexé sur le domaine d'action (u_max = 3 A, déclaré dans `ram_p0/demo_eps.py`, vérifié des deux côtés à la compilation) : le résultat s'énonce *pour ce jeu de bornes*. Ici u_payload = u_max — le pire cas vérifié à la compilation est exactement la charge réelle commandée en fenêtre payload.
+
+P3.1 documente le mur avec puissance statistique : r ∈ {0,35 ; 0,425 ; 0,475} — le dernier collé au mur —, N = 300, quatre bras, grille σ inchangée. Configuration figée et committée avant exécution (`ram_p3/config_p3_1.json`, critère en deux clauses inclus), exécution par `.github/workflows/p3.yml`.
+
 ### Portée du résultat
 
 L'énoncé exact est : **dans un régime où l'enveloppe de sécurité suffit déjà, le durcissement sur incertitude ne se justifie pas.** Ce n'est pas un énoncé général.
@@ -81,6 +95,11 @@ ram_p2/
   config_p2_1.json     configuration figée P2.1     resultats_p2_1.json
   config_p2_2.json     configuration figée P2.2     resultats_p2_2.json
   config_p2_3.json     configuration figée P2.3     resultats_p2_3.json
+ram_p3/
+  pilote_p3.py         pilote de puissance, bras B seul, avant figeage
+  executer_p3_1.py     exécution parallèle P3.1 et fusion des partiels
+  config_pilote_p3.json, config_p3_1.json (figée avant exécution)
+  resultats_pilote_p3.json, partiel_r*.json, resultats_p3_1.json
 empreintes/            octets exacts ayant produit les résultats publiés —
                        pour la vérification, jamais l'exécution
                        (voir empreintes/README.md)
@@ -89,6 +108,8 @@ verifier_empreintes.py compare module par module les empreintes SHA-256
 .github/workflows/tests.yml
                        à chaque push : pytest ram_p0/test_moniteur.py,
                        puis verifier_empreintes.py
+.github/workflows/p3.yml
+                       déclenchement manuel : exécute P3.1, un job par point r
 ```
 
 Les trois campagnes sont conservées. P2.1 comportait un défaut de plan d'expérience — le bras C y faisait varier deux choses à la fois — corrigé en P2.2 par l'ajout du bras D et l'extension de la grille. P2.3 porte N de 32 à 300 sans autre changement. Les points communs se reproduisent à l'identique, vérifié comme non-régression.

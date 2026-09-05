@@ -3,7 +3,8 @@
 Recalcule les empreintes SHA-256 (16 premiers caractères hexadécimaux) des
 octets d'archive présents dans empreintes/ — les fichiers exacts ayant produit
 les résultats — et les compare, module par module, aux empreintes embarquées
-dans chaque fichier de résultats (ram_p2/resultats_p2_*.json).
+dans chaque fichier de résultats (ram_p2/resultats_p2_*.json,
+ram_p3/resultats_pilote_p3.json, puis ram_p3/resultats_p3_1.json).
 
 Usage :  python3 verifier_empreintes.py
          (à lancer depuis la racine du dépôt cloné, n'importe quel répertoire
@@ -38,12 +39,21 @@ MODULES = [
     "contraintes.py",
     "campagne_p2.py",
     "executer_p2_3.py",
+    "pilote_p3.py",
+    "campagne_p2_rejeu.py",
 ]
+
+# ram_p3 exécute la copie REJOUABLE (chemins relativisés) de campagne_p2.py :
+# octets différents de l'archive d'origine, sémantique inchangée (prouvé par
+# non-régression bit à bit : pilote P3 à r = 0,3 == bras B de P2.3, 90/90
+# champs identiques sur les 30 runs communs — voir ram_p3/README.md).
+ALIAS_REJEU = {"campagne_p2.py": "campagne_p2_rejeu.py"}
 
 RESULTATS = [
     "ram_p2/resultats_p2_1.json",
     "ram_p2/resultats_p2_2.json",
     "ram_p2/resultats_p2_3.json",
+    "ram_p3/resultats_pilote_p3.json",
 ]
 
 # Empreinte du pilote P2.1 (3 bras), perdu — voir empreintes/README.md.
@@ -70,7 +80,8 @@ def main() -> int:
         embarquees = json.loads(p.read_text())["empreintes_code"]
         print(f"== {res} ==")
         for nom, ref in embarquees.items():
-            loc = locales.get(nom)
+            nom_archive = ALIAS_REJEU.get(nom, nom) if res.startswith("ram_p3/") else nom
+            loc = locales.get(nom_archive)
             ok = loc == ref
             if not ok and nom == "campagne_p2.py" and "p2_1" in res \
                     and ref == EMPREINTE_PILOTE_P2_1:
@@ -81,8 +92,9 @@ def main() -> int:
                       f"4 bras — attendu (empreintes/README.md)")
                 continue
             tout_ok &= ok
+            note = " (copie rejouable)" if nom_archive != nom else ""
             print(f"  {nom:20s} attendue={ref}  archive={loc}  "
-                  f"{'IDENTIQUE' if ok else 'DIFFÈRE'}")
+                  f"{'IDENTIQUE' if ok else 'DIFFÈRE'}{note}")
 
     modules_moniteur = ["moniteur.py", "filtre.py", "trace.py", "contraintes.py"]
     series = {m: set() for m in modules_moniteur}
@@ -94,7 +106,7 @@ def main() -> int:
                 series[m].add(emb.get(m))
     stables = all(len(s) == 1 for s in series.values())
     print("----")
-    print("Empreintes des modules du moniteur stables entre P2.1, P2.2 et P2.3 :",
+    print("Empreintes des modules du moniteur stables entre P2.1, P2.2, P2.3 et P3 :",
           "OUI" if stables else "NON")
     print("VERDICT GLOBAL :", "CONFORME" if (tout_ok and stables) else "ÉCART DÉTECTÉ")
     return 0 if (tout_ok and stables) else 1

@@ -14,3 +14,11 @@ Le fichier `campagne_p2.py` de P2.1 a été **édité en place** pour devenir la
 - la version quatre bras présente dans ce répertoire (empreinte `c5b0d30bdbeea612`), qui la **remplace** (*superseded*) et est conservée ici pour vérification uniquement.
 
 La différence P2.1 → P2.2 est l'ajout du bras D. Chaque bras tire son aléa de graines propres (`graine_plante + i`, `graine_bruit + i`, un générateur neuf par bras) : rejouer la configuration P2.1 avec la version quatre bras reproduit les bras A, B et C de `resultats_p2_1.json` run par run, le bras D étant purement additif. `verifier_empreintes.py` affiche la ligne P2.1 comme attendue, avec ce motif.
+
+## P3 (pilote et campagne P3.1)
+
+P3 exécute la **copie rejouable** de `campagne_p2.py` (chemins relativisés, `ram_p2/`), dont les octets diffèrent donc de l'archive d'origine — la sémantique de simulation est inchangée, prouvée par non-régression bit à bit (pilote P3 à r = 0,3 == bras B de P2.3, 90/90 champs identiques sur les 30 runs communs). Les octets exacts de cette copie sont archivés ici :
+
+- `campagne_p2_rejeu.py` — empreinte `6eb48963d9281c1b`, celle qu'embarquent les résultats P3 sous la clé `campagne_p2.py` (le vérificateur fait correspondre, avec la mention « copie rejouable ») ;
+- `pilote_p3.py` — le pilote de puissance (écrit d'emblée à chemins relatifs : octets d'exécution = octets d'archive) ;
+- `executer_p3_1.py` — l'exécuteur de P3.1 (ajouté après exécution, octets inchangés depuis le figeage de la config).
