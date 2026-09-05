@@ -1,0 +1,45 @@
+name: p3
+
+# Exécution de la campagne P3.1 — un job par point de la grille r.
+# Déclenchement manuel uniquement (la config P3.1 est figée et committée
+# avant tout lancement). Chaque job pousse son résultat partiel sur main ;
+# la fusion en resultats_p3_1.json est faite ensuite, en local, par
+# executer_p3_1.py --fusionne.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  executer:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        r: ["0.35", "0.425", "0.475"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dépendances
+        run: pip install numpy scipy
+
+      - name: Exécution du point r
+        run: python3 ram_p3/executer_p3_1.py ram_p3/config_p3_1.json ram_p3/partiel_r${{ matrix.r }}.json ${{ matrix.r }} 4
+
+      - name: Pousse le résultat partiel
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ram_p3/partiel_r${{ matrix.r }}.json
+          git commit -m "P3.1 : résultats partiels r=${{ matrix.r }} (exécution CI, config figée au commit parent)"
+          for tentative in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 10
+          done
+          exit 1
