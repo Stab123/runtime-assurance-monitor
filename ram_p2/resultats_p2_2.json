@@ -2,7 +2,7 @@
  "config": {
   "commentaire": "Configuration fig\u00e9e de la campagne P2.2. Toute modification cr\u00e9e une nouvelle version de ce fichier, pas une \u00e9dition.",
   "version_config": "P2.2",
-  "motif_version": "Deux corrections du plan d'exp\u00e9rience, cons\u00e9cutives \u00e0 la falsification de H4 en P2.1 \u2014 ce ne sont pas des retouches de sc\u00e9nario : (1) quatri\u00e8me bras D (k_sigma=3, seuil d'incertitude infini) : en P2.1, C - B confondait le co\u00fbt du pessimisme d'\u00e9valuation et celui du seuil RA-FUN-003, D les d\u00e9compose (B -> D -> C) ; (2) grille \u00e9tendue vers le bas : \u03c3_soc d\u00e9passe rarement 0.05, donc 0.05 et 0.08 \u00e9taient d\u00e9j\u00e0 \u00ab H4 \u00e9teint \u00bb \u2014 la grille P2.1 \u00e9tait mal born\u00e9e. INCHANG\u00c9 : graines, bornes de plante, marges, seuils de contraintes, N=32, dur\u00e9e, fen\u00eatres, seuils de falsification. Les r\u00e9sultats P2.1 (config_p2.json / resultats_p2.json) sont conserv\u00e9s. Chaque bras re-graine son bruit ind\u00e9pendamment : les points communs avec P2.1 (A, B, C@0.01/0.02/0.03/0.05/0.08) doivent se reproduire \u00e0 l'identique \u2014 v\u00e9rifi\u00e9 comme non-r\u00e9gression.",
+  "motif_version": "Deux corrections du plan d'exp\u00e9rience, cons\u00e9cutives \u00e0 la falsification de H4 en P2.1 \u2014 ce ne sont pas des retouches de sc\u00e9nario : (1) quatri\u00e8me bras D (k_sigma=3, seuil d'incertitude infini) : en P2.1, C - B confondait le co\u00fbt du pessimisme d'\u00e9valuation et celui du seuil RA-FUN-003, D les d\u00e9compose (B -> D -> C) ; (2) grille \u00e9tendue vers le bas : sigma_soc d\u00e9passe rarement 0.05, donc 0.05 et 0.08 \u00e9taient d\u00e9j\u00e0 \u00ab H4 \u00e9teint \u00bb \u2014 la grille P2.1 \u00e9tait mal born\u00e9e. INCHANG\u00c9 : graines, bornes de plante, marges, seuils de contraintes, N=32, dur\u00e9e, fen\u00eatres, seuils de falsification. Les r\u00e9sultats P2.1 sont conserv\u00e9s. Chaque bras re-graine son bruit ind\u00e9pendamment : les points communs avec P2.1 doivent se reproduire \u00e0 l'identique \u2014 v\u00e9rifi\u00e9 comme non-r\u00e9gression.",
   "graine_plante": 20260903,
   "graine_bruit": 77100001,
   "n_runs": 32,
@@ -73,7 +73,7 @@
    0.08
   ],
   "seuils_falsification": {
-   "statut": "PROPOS\u00c9S \u2014 le \u00a77 du plan d\u00e9monstrateur n'est pas dans les documents fournis ; ces trois valeurs sont \u00e0 arbitrer par le projet avant tout usage.",
+   "statut": "NON ARBITR\u00c9S \u2014 aucun op\u00e9rateur satellite ne les a fix\u00e9s, et les fixer apr\u00e8s avoir vu les r\u00e9sultats serait une contamination. La conclusion sur H4 repose sur la comparaison entre bras, pas sur ces plafonds absolus.",
    "plafond_violation_taux_cycles": 0.001,
    "plafond_violation_runs_wilson_sup": 0.05,
    "plafond_repli_taux_cycles_ic95_sup": 0.1,
@@ -81,11 +81,12 @@
   }
  },
  "empreintes_code": {
-  "moniteur.py": "7f9937f834597201",
-  "filtre.py": "9bf5cb4253077fe0",
+  "moniteur.py": "aba3b8d9c79486f3",
+  "filtre.py": "6bb583bed56b22e0",
   "trace.py": "bf93a1839e6eef13",
   "contraintes.py": "11b9007f9827a02c",
-  "campagne_p2.py": "c5b0d30bdbeea612"
+  "campagne_p2.py": "6eb48963d9281c1b",
+  "executer_p2_3.py": "f2d35118c7bc15b1"
  },
  "crn_runs_ok": 32,
  "resultats_par_run": {
@@ -383,19 +384,19 @@
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 207,
+    "replis": 206,
     "taux_violation": 0.0,
-    "taux_repli": 0.07666666666666666,
-    "livraison": 0.85374688826441,
+    "taux_repli": 0.07629629629629629,
+    "livraison": 0.8540302359102363,
     "temoin": 0.00048658265959383983
    },
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 86,
+    "replis": 85,
     "taux_violation": 0.0,
-    "taux_repli": 0.03185185185185185,
-    "livraison": 0.840718885141649,
+    "taux_repli": 0.03148148148148148,
+    "livraison": 0.8408896731799124,
     "temoin": -0.0011234917419670554
    },
    {
@@ -404,7 +405,7 @@
     "replis": 168,
     "taux_violation": 0.0,
     "taux_repli": 0.06222222222222222,
-    "livraison": 0.8028330924010973,
+    "livraison": 0.8031715482835554,
     "temoin": -0.0015126561189740748
    },
    {
@@ -428,10 +429,10 @@
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 249,
+    "replis": 240,
     "taux_violation": 0.0,
-    "taux_repli": 0.09222222222222222,
-    "livraison": 0.7652818701484378,
+    "taux_repli": 0.08888888888888889,
+    "livraison": 0.7710900407400914,
     "temoin": 0.0011368182123033836
    },
    {
@@ -440,7 +441,7 @@
     "replis": 295,
     "taux_violation": 0.0,
     "taux_repli": 0.10925925925925926,
-    "livraison": 0.6421656076986066,
+    "livraison": 0.6424667308482135,
     "temoin": -0.0012706114224623683
    },
    {
@@ -494,7 +495,7 @@
     "replis": 75,
     "taux_violation": 0.0,
     "taux_repli": 0.027777777777777776,
-    "livraison": 0.9495442481353638,
+    "livraison": 0.9497270167887176,
     "temoin": -0.0002056209467642279
    },
    {
@@ -566,7 +567,7 @@
     "replis": 246,
     "taux_violation": 0.0,
     "taux_repli": 0.09111111111111111,
-    "livraison": 0.7097290656400017,
+    "livraison": 0.7101563769931629,
     "temoin": 0.0012489013672102426
    },
    {
@@ -590,10 +591,10 @@
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 269,
+    "replis": 270,
     "taux_violation": 0.0,
-    "taux_repli": 0.09962962962962962,
-    "livraison": 0.6507165104801835,
+    "taux_repli": 0.1,
+    "livraison": 0.6509871724768783,
     "temoin": -0.0005144098568664285
    },
    {
@@ -665,7 +666,7 @@
     "replis": 343,
     "taux_violation": 0.0,
     "taux_repli": 0.12703703703703703,
-    "livraison": 0.6069313054662888,
+    "livraison": 0.6072621166671591,
     "temoin": 0.0010836266205949748
    }
   ],
@@ -1546,7 +1547,7 @@
     "replis": 622,
     "taux_violation": 0.0,
     "taux_repli": 0.23037037037037036,
-    "livraison": 0.7341713919252572,
+    "livraison": 0.7342451081089503,
     "temoin": 0.00048658265959383983
    },
    {
@@ -1564,7 +1565,7 @@
     "replis": 628,
     "taux_violation": 0.0,
     "taux_repli": 0.2325925925925926,
-    "livraison": 0.6991164198214257,
+    "livraison": 0.6992446378153679,
     "temoin": -0.0015126561189740748
    },
    {
@@ -1726,7 +1727,7 @@
     "replis": 653,
     "taux_violation": 0.0,
     "taux_repli": 0.24185185185185185,
-    "livraison": 0.6021588582726609,
+    "livraison": 0.6022917416132124,
     "temoin": 0.0012489013672102426
    },
    {
@@ -1836,7 +1837,7 @@
     "replis": 576,
     "taux_violation": 0.0,
     "taux_repli": 0.21333333333333335,
-    "livraison": 0.7583970378441909,
+    "livraison": 0.7586216162653053,
     "temoin": 0.00048658265959383983
    },
    {
@@ -1854,7 +1855,7 @@
     "replis": 588,
     "taux_violation": 0.0,
     "taux_repli": 0.21777777777777776,
-    "livraison": 0.7047168539298043,
+    "livraison": 0.7050025317891225,
     "temoin": -0.0015126561189740748
    },
    {
@@ -1881,16 +1882,16 @@
     "replis": 639,
     "taux_violation": 0.0,
     "taux_repli": 0.23666666666666666,
-    "livraison": 0.6738472467271128,
+    "livraison": 0.6739793400267242,
     "temoin": 0.0011368182123033836
    },
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 707,
+    "replis": 722,
     "taux_violation": 0.0,
-    "taux_repli": 0.26185185185185184,
-    "livraison": 0.5348023756303721,
+    "taux_repli": 0.2674074074074074,
+    "livraison": 0.5337173975189217,
     "temoin": -0.0012706114224623683
    },
    {
@@ -2013,10 +2014,10 @@
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 636,
+    "replis": 656,
     "taux_violation": 0.0,
-    "taux_repli": 0.23555555555555555,
-    "livraison": 0.626260062164834,
+    "taux_repli": 0.24296296296296296,
+    "livraison": 0.6187852872156159,
     "temoin": 0.0012489013672102426
    },
    {
@@ -2043,7 +2044,7 @@
     "replis": 698,
     "taux_violation": 0.0,
     "taux_repli": 0.25851851851851854,
-    "livraison": 0.5466499612106148,
+    "livraison": 0.5468221401041201,
     "temoin": -0.0005144098568664285
    },
    {
@@ -2115,7 +2116,7 @@
     "replis": 708,
     "taux_violation": 0.0,
     "taux_repli": 0.26222222222222225,
-    "livraison": 0.5113302292785159,
+    "livraison": 0.5114965143967075,
     "temoin": 0.0010836266205949748
    }
   ],
@@ -2126,7 +2127,7 @@
     "replis": 499,
     "taux_violation": 0.0,
     "taux_repli": 0.18481481481481482,
-    "livraison": 0.7637251859707586,
+    "livraison": 0.7639233643982422,
     "temoin": 0.00048658265959383983
    },
    {
@@ -2135,7 +2136,7 @@
     "replis": 434,
     "taux_violation": 0.0,
     "taux_repli": 0.16074074074074074,
-    "livraison": 0.7298040021482545,
+    "livraison": 0.7299492790398222,
     "temoin": -0.0011234917419670554
    },
    {
@@ -2144,7 +2145,7 @@
     "replis": 545,
     "taux_violation": 0.0,
     "taux_repli": 0.20185185185185187,
-    "livraison": 0.711258112552524,
+    "livraison": 0.7116204499495561,
     "temoin": -0.0015126561189740748
    },
    {
@@ -2171,7 +2172,7 @@
     "replis": 552,
     "taux_violation": 0.0,
     "taux_repli": 0.20444444444444446,
-    "livraison": 0.6736512580580354,
+    "livraison": 0.6738452351281281,
     "temoin": 0.0011368182123033836
    },
    {
@@ -2180,7 +2181,7 @@
     "replis": 626,
     "taux_violation": 0.0,
     "taux_repli": 0.23185185185185186,
-    "livraison": 0.558028714146672,
+    "livraison": 0.5583970829193411,
     "temoin": -0.0012706114224623683
    },
    {
@@ -2234,7 +2235,7 @@
     "replis": 450,
     "taux_violation": 0.0,
     "taux_repli": 0.16666666666666666,
-    "livraison": 0.7975380912242044,
+    "livraison": 0.7975718285642668,
     "temoin": -0.0002056209467642279
    },
    {
@@ -2297,16 +2298,16 @@
     "replis": 972,
     "taux_violation": 0.0,
     "taux_repli": 0.36,
-    "livraison": 0.8812882172965651,
+    "livraison": 0.8813393210009154,
     "temoin": 0.001547595937339617
    },
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 599,
+    "replis": 619,
     "taux_violation": 0.0,
-    "taux_repli": 0.22185185185185186,
-    "livraison": 0.626260062164834,
+    "taux_repli": 0.22925925925925925,
+    "livraison": 0.6187852872156159,
     "temoin": 0.0012489013672102426
    },
    {
@@ -2333,7 +2334,7 @@
     "replis": 622,
     "taux_violation": 0.0,
     "taux_repli": 0.23037037037037036,
-    "livraison": 0.5624996505686324,
+    "livraison": 0.5627437728030297,
     "temoin": -0.0005144098568664285
    },
    {
@@ -2405,7 +2406,7 @@
     "replis": 625,
     "taux_violation": 0.0,
     "taux_repli": 0.23148148148148148,
-    "livraison": 0.5273930984113745,
+    "livraison": 0.527709981643043,
     "temoin": 0.0010836266205949748
    }
   ],
@@ -2416,7 +2417,7 @@
     "replis": 450,
     "taux_violation": 0.0,
     "taux_repli": 0.16666666666666666,
-    "livraison": 0.7637251859707586,
+    "livraison": 0.7639233643982422,
     "temoin": 0.00048658265959383983
    },
    {
@@ -2425,7 +2426,7 @@
     "replis": 193,
     "taux_violation": 0.0,
     "taux_repli": 0.07148148148148148,
-    "livraison": 0.7298040021482545,
+    "livraison": 0.7299492790398222,
     "temoin": -0.0011234917419670554
    },
    {
@@ -2434,7 +2435,7 @@
     "replis": 497,
     "taux_violation": 0.0,
     "taux_repli": 0.18407407407407408,
-    "livraison": 0.711258112552524,
+    "livraison": 0.7116204499495561,
     "temoin": -0.0015126561189740748
    },
    {
@@ -2461,7 +2462,7 @@
     "replis": 402,
     "taux_violation": 0.0,
     "taux_repli": 0.14888888888888888,
-    "livraison": 0.6736512580580354,
+    "livraison": 0.6738452351281281,
     "temoin": 0.0011368182123033836
    },
    {
@@ -2470,7 +2471,7 @@
     "replis": 579,
     "taux_violation": 0.0,
     "taux_repli": 0.21444444444444444,
-    "livraison": 0.558028714146672,
+    "livraison": 0.5583970829193411,
     "temoin": -0.0012706114224623683
    },
    {
@@ -2524,7 +2525,7 @@
     "replis": 254,
     "taux_violation": 0.0,
     "taux_repli": 0.09407407407407407,
-    "livraison": 0.7975380912242044,
+    "livraison": 0.7975718285642668,
     "temoin": -0.0002056209467642279
    },
    {
@@ -2533,7 +2534,7 @@
     "replis": 457,
     "taux_violation": 0.0,
     "taux_repli": 0.16925925925925925,
-    "livraison": 0.9773332725003085,
+    "livraison": 0.9773739078258923,
     "temoin": 0.00014511648248863036
    },
    {
@@ -2542,7 +2543,7 @@
     "replis": 283,
     "taux_violation": 0.0,
     "taux_repli": 0.10481481481481482,
-    "livraison": 0.8788335528668809,
+    "livraison": 0.8790245479744583,
     "temoin": -0.000538210075097626
    },
    {
@@ -2578,7 +2579,7 @@
     "replis": 224,
     "taux_violation": 0.0,
     "taux_repli": 0.08296296296296296,
-    "livraison": 0.8994833837776376,
+    "livraison": 0.8995210144802479,
     "temoin": 0.0004781109897584984
    },
    {
@@ -2593,10 +2594,10 @@
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 539,
+    "replis": 559,
     "taux_violation": 0.0,
-    "taux_repli": 0.19962962962962963,
-    "livraison": 0.626260062164834,
+    "taux_repli": 0.20703703703703705,
+    "livraison": 0.6187852872156159,
     "temoin": 0.0012489013672102426
    },
    {
@@ -2605,7 +2606,7 @@
     "replis": 142,
     "taux_violation": 0.0,
     "taux_repli": 0.052592592592592594,
-    "livraison": 0.869008392078319,
+    "livraison": 0.8690615060243376,
     "temoin": 0.00010262252502776773
    },
    {
@@ -2623,7 +2624,7 @@
     "replis": 487,
     "taux_violation": 0.0,
     "taux_repli": 0.18037037037037038,
-    "livraison": 0.5624996505686324,
+    "livraison": 0.5627437728030297,
     "temoin": -0.0005144098568664285
    },
    {
@@ -2650,7 +2651,7 @@
     "replis": 100,
     "taux_violation": 0.0,
     "taux_repli": 0.037037037037037035,
-    "livraison": 0.9031098087076788,
+    "livraison": 0.903144219461656,
     "temoin": 0.000776537113092692
    },
    {
@@ -2686,7 +2687,7 @@
     "replis": 170,
     "taux_violation": 0.0,
     "taux_repli": 0.06296296296296296,
-    "livraison": 0.7938833665378667,
+    "livraison": 0.7939739643337412,
     "temoin": 7.432060295013876e-05
    },
    {
@@ -2695,7 +2696,7 @@
     "replis": 531,
     "taux_violation": 0.0,
     "taux_repli": 0.19666666666666666,
-    "livraison": 0.5273930984113745,
+    "livraison": 0.527709981643043,
     "temoin": 0.0010836266205949748
    }
   ],
@@ -2706,7 +2707,7 @@
     "replis": 450,
     "taux_violation": 0.0,
     "taux_repli": 0.16666666666666666,
-    "livraison": 0.7637251859707586,
+    "livraison": 0.7639233643982422,
     "temoin": 0.00048658265959383983
    },
    {
@@ -2715,7 +2716,7 @@
     "replis": 193,
     "taux_violation": 0.0,
     "taux_repli": 0.07148148148148148,
-    "livraison": 0.7298040021482545,
+    "livraison": 0.7299492790398222,
     "temoin": -0.0011234917419670554
    },
    {
@@ -2724,7 +2725,7 @@
     "replis": 497,
     "taux_violation": 0.0,
     "taux_repli": 0.18407407407407408,
-    "livraison": 0.711258112552524,
+    "livraison": 0.7116204499495561,
     "temoin": -0.0015126561189740748
    },
    {
@@ -2751,7 +2752,7 @@
     "replis": 402,
     "taux_violation": 0.0,
     "taux_repli": 0.14888888888888888,
-    "livraison": 0.6736512580580354,
+    "livraison": 0.6738452351281281,
     "temoin": 0.0011368182123033836
    },
    {
@@ -2760,7 +2761,7 @@
     "replis": 579,
     "taux_violation": 0.0,
     "taux_repli": 0.21444444444444444,
-    "livraison": 0.558028714146672,
+    "livraison": 0.5583970829193411,
     "temoin": -0.0012706114224623683
    },
    {
@@ -2814,7 +2815,7 @@
     "replis": 254,
     "taux_violation": 0.0,
     "taux_repli": 0.09407407407407407,
-    "livraison": 0.7975380912242044,
+    "livraison": 0.7975718285642668,
     "temoin": -0.0002056209467642279
    },
    {
@@ -2823,7 +2824,7 @@
     "replis": 457,
     "taux_violation": 0.0,
     "taux_repli": 0.16925925925925925,
-    "livraison": 0.9773332725003085,
+    "livraison": 0.9773739078258923,
     "temoin": 0.00014511648248863036
    },
    {
@@ -2832,7 +2833,7 @@
     "replis": 283,
     "taux_violation": 0.0,
     "taux_repli": 0.10481481481481482,
-    "livraison": 0.8788335528668809,
+    "livraison": 0.8790245479744583,
     "temoin": -0.000538210075097626
    },
    {
@@ -2868,7 +2869,7 @@
     "replis": 224,
     "taux_violation": 0.0,
     "taux_repli": 0.08296296296296296,
-    "livraison": 0.8994833837776376,
+    "livraison": 0.8995210144802479,
     "temoin": 0.0004781109897584984
    },
    {
@@ -2883,10 +2884,10 @@
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 539,
+    "replis": 559,
     "taux_violation": 0.0,
-    "taux_repli": 0.19962962962962963,
-    "livraison": 0.626260062164834,
+    "taux_repli": 0.20703703703703705,
+    "livraison": 0.6187852872156159,
     "temoin": 0.0012489013672102426
    },
    {
@@ -2895,7 +2896,7 @@
     "replis": 142,
     "taux_violation": 0.0,
     "taux_repli": 0.052592592592592594,
-    "livraison": 0.869008392078319,
+    "livraison": 0.8690615060243376,
     "temoin": 0.00010262252502776773
    },
    {
@@ -2913,7 +2914,7 @@
     "replis": 487,
     "taux_violation": 0.0,
     "taux_repli": 0.18037037037037038,
-    "livraison": 0.5624996505686324,
+    "livraison": 0.5627437728030297,
     "temoin": -0.0005144098568664285
    },
    {
@@ -2940,7 +2941,7 @@
     "replis": 100,
     "taux_violation": 0.0,
     "taux_repli": 0.037037037037037035,
-    "livraison": 0.9031098087076788,
+    "livraison": 0.903144219461656,
     "temoin": 0.000776537113092692
    },
    {
@@ -2976,7 +2977,7 @@
     "replis": 170,
     "taux_violation": 0.0,
     "taux_repli": 0.06296296296296296,
-    "livraison": 0.7938833665378667,
+    "livraison": 0.7939739643337412,
     "temoin": 7.432060295013876e-05
    },
    {
@@ -2985,7 +2986,7 @@
     "replis": 531,
     "taux_violation": 0.0,
     "taux_repli": 0.19666666666666666,
-    "livraison": 0.5273930984113745,
+    "livraison": 0.527709981643043,
     "temoin": 0.0010836266205949748
    }
   ],
@@ -2996,7 +2997,7 @@
     "replis": 450,
     "taux_violation": 0.0,
     "taux_repli": 0.16666666666666666,
-    "livraison": 0.7637251859707586,
+    "livraison": 0.7639233643982422,
     "temoin": 0.00048658265959383983
    },
    {
@@ -3005,7 +3006,7 @@
     "replis": 193,
     "taux_violation": 0.0,
     "taux_repli": 0.07148148148148148,
-    "livraison": 0.7298040021482545,
+    "livraison": 0.7299492790398222,
     "temoin": -0.0011234917419670554
    },
    {
@@ -3014,7 +3015,7 @@
     "replis": 497,
     "taux_violation": 0.0,
     "taux_repli": 0.18407407407407408,
-    "livraison": 0.711258112552524,
+    "livraison": 0.7116204499495561,
     "temoin": -0.0015126561189740748
    },
    {
@@ -3041,7 +3042,7 @@
     "replis": 402,
     "taux_violation": 0.0,
     "taux_repli": 0.14888888888888888,
-    "livraison": 0.6736512580580354,
+    "livraison": 0.6738452351281281,
     "temoin": 0.0011368182123033836
    },
    {
@@ -3050,7 +3051,7 @@
     "replis": 579,
     "taux_violation": 0.0,
     "taux_repli": 0.21444444444444444,
-    "livraison": 0.558028714146672,
+    "livraison": 0.5583970829193411,
     "temoin": -0.0012706114224623683
    },
    {
@@ -3104,7 +3105,7 @@
     "replis": 254,
     "taux_violation": 0.0,
     "taux_repli": 0.09407407407407407,
-    "livraison": 0.7975380912242044,
+    "livraison": 0.7975718285642668,
     "temoin": -0.0002056209467642279
    },
    {
@@ -3113,7 +3114,7 @@
     "replis": 457,
     "taux_violation": 0.0,
     "taux_repli": 0.16925925925925925,
-    "livraison": 0.9773332725003085,
+    "livraison": 0.9773739078258923,
     "temoin": 0.00014511648248863036
    },
    {
@@ -3122,7 +3123,7 @@
     "replis": 283,
     "taux_violation": 0.0,
     "taux_repli": 0.10481481481481482,
-    "livraison": 0.8788335528668809,
+    "livraison": 0.8790245479744583,
     "temoin": -0.000538210075097626
    },
    {
@@ -3158,7 +3159,7 @@
     "replis": 224,
     "taux_violation": 0.0,
     "taux_repli": 0.08296296296296296,
-    "livraison": 0.8994833837776376,
+    "livraison": 0.8995210144802479,
     "temoin": 0.0004781109897584984
    },
    {
@@ -3173,10 +3174,10 @@
    {
     "cycles": 2700,
     "violations": 0,
-    "replis": 539,
+    "replis": 559,
     "taux_violation": 0.0,
-    "taux_repli": 0.19962962962962963,
-    "livraison": 0.626260062164834,
+    "taux_repli": 0.20703703703703705,
+    "livraison": 0.6187852872156159,
     "temoin": 0.0012489013672102426
    },
    {
@@ -3185,7 +3186,7 @@
     "replis": 142,
     "taux_violation": 0.0,
     "taux_repli": 0.052592592592592594,
-    "livraison": 0.869008392078319,
+    "livraison": 0.8690615060243376,
     "temoin": 0.00010262252502776773
    },
    {
@@ -3203,7 +3204,7 @@
     "replis": 487,
     "taux_violation": 0.0,
     "taux_repli": 0.18037037037037038,
-    "livraison": 0.5624996505686324,
+    "livraison": 0.5627437728030297,
     "temoin": -0.0005144098568664285
    },
    {
@@ -3230,7 +3231,7 @@
     "replis": 100,
     "taux_violation": 0.0,
     "taux_repli": 0.037037037037037035,
-    "livraison": 0.9031098087076788,
+    "livraison": 0.903144219461656,
     "temoin": 0.000776537113092692
    },
    {
@@ -3266,7 +3267,7 @@
     "replis": 170,
     "taux_violation": 0.0,
     "taux_repli": 0.06296296296296296,
-    "livraison": 0.7938833665378667,
+    "livraison": 0.7939739643337412,
     "temoin": 7.432060295013876e-05
    },
    {
@@ -3275,10 +3276,10 @@
     "replis": 531,
     "taux_violation": 0.0,
     "taux_repli": 0.19666666666666666,
-    "livraison": 0.5273930984113745,
+    "livraison": 0.527709981643043,
     "temoin": 0.0010836266205949748
    }
   ]
  },
- "tableau": "Campagne P2.2 \u2014 32 runs par point\nCRN : 32/32 runs avec t\u00e9moin identique sur les quatre bras (OK)\nDur\u00e9e de calcul : 356 s\nbras seuil_\u03c3_soc   N       taux_viol (IC95)     runs_viol [Wilson]      taux_repli (IC95)       livraison (IC95)\nA              -  32  5.3588% [1.1757%,9.5419%]   8/32 [0.133,0.421]   0.0000% [0.0000%,0.0000%] 100.0000% [100.0000%,100.0000%]\nB              -  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]   7.0324% [4.8357%,9.2291%]  88.1059% [84.2575%,91.9543%]\nD              -  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.2500% [7.5786%,12.9214%]  83.5172% [78.9155%,88.1190%]\nC          0.005  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  94.5903% [92.6889%,96.4917%]   4.7338% [2.6649%,6.8027%]\nC          0.008  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  57.2083% [50.9833%,63.4334%]  35.8854% [29.2195%,42.5514%]\nC          0.010  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  39.2049% [33.7529%,44.6569%]  49.8495% [42.4362%,57.2629%]\nC          0.015  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  25.2245% [23.3732%,27.0758%]  66.6848% [61.9415%,71.4282%]\nC          0.020  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  23.2176% [21.4661%,24.9691%]  72.2063% [68.9694%,75.4431%]\nC          0.030  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  18.6887% [16.8262%,20.5511%]  79.5022% [75.8123%,83.1921%]\nC          0.050  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.3611% [7.7137%,13.0085%]  83.5172% [78.9155%,88.1190%]\nC          0.080  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.2500% [7.5786%,12.9214%]  83.5172% [78.9155%,88.1190%]"
-   }
+ "tableau": "Campagne P2.2 \u2014 32 runs par point (ex\u00e9cution parall\u00e8le, 4 processus)\nCRN : 32/32 runs avec t\u00e9moin identique sur les quatre bras (OK)\nDur\u00e9e de calcul : 87 s\nbras seuil_\u03c3_soc   N       taux_viol (IC95)     runs_viol [Wilson]      taux_repli (IC95)       livraison (IC95)\nA              -  32  5.3588% [1.1757%,9.5419%]   8/32 [0.133,0.421]   0.0000% [0.0000%,0.0000%] 100.0000% [100.0000%,100.0000%]\nB              -  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]   7.0208% [4.8250%,9.2167%]  88.1313% [84.2936%,91.9689%]\nD              -  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.2731% [7.5901%,12.9562%]  83.5011% [78.8881%,88.1141%]\nC          0.005  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  94.5903% [92.6889%,96.4917%]   4.7338% [2.6649%,6.8027%]\nC          0.008  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  57.2083% [50.9833%,63.4334%]  35.8854% [29.2195%,42.5514%]\nC          0.010  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  39.2049% [33.7529%,44.6569%]  49.8495% [42.4362%,57.2629%]\nC          0.015  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  25.2245% [23.3732%,27.0758%]  66.6859% [61.9426%,71.4292%]\nC          0.020  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  23.2581% [21.5011%,25.0151%]  72.1826% [68.9343%,75.4308%]\nC          0.030  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  18.7118% [16.8429%,20.5807%]  79.4848% [75.7836%,83.1861%]\nC          0.050  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.3843% [7.7252%,13.0433%]  83.5011% [78.8881%,88.1141%]\nC          0.080  32  0.0000% [0.0000%,0.0000%]   0/32 [0.000,0.107]  10.2731% [7.5901%,12.9562%]  83.5011% [78.8881%,88.1141%]"
+}

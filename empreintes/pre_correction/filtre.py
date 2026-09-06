@@ -80,16 +80,11 @@ def trajectoire_sure(
     """Déroule la trajectoire « action u0 puis repli » et vérifie l'enveloppe.
 
     Séquence évaluée (RA-FUN-004) :
-      - pas 0 .. pas_armement - 1 : action candidate u0 — le repli est en cours
-                                    d'armement, l'action courante continue de
-                                    s'appliquer (hypothèse conservatrice) ;
-      - pas >= pas_armement       : politique de repli B4 effective.
-
-    Convention temporelle : u0 persiste exactement pas_armement × dt secondes,
-    c.-à-d. delai_armement_s (arrondi au pas supérieur). La condition
-    « k < pas_armement » est load-bearing : avant la correction de
-    septembre 2026, « k <= pas_armement » appliquait u0 un pas de trop
-    (persistance effective delai_armement_s + dt).
+      - pas 0                    : action candidate u0 ;
+      - pas 1 .. pas_armement    : u0 persiste — le repli est en cours
+                                   d'armement, l'action courante continue de
+                                   s'appliquer (hypothèse conservatrice) ;
+      - pas > pas_armement       : politique de repli B4 effective.
 
     Renvoie (sur, indice_premiere_contrainte_violee, marge_min_normalisee).
     La marge est calculée sur les valeurs pessimistes et tronquée à [-1, 1].
@@ -97,7 +92,7 @@ def trajectoire_sure(
     x = list(x0)
     marge_min = math.inf
     for k in range(horizon):
-        if k < pas_armement:
+        if k <= pas_armement:
             u = u0
         else:
             u = politique_repli(x)

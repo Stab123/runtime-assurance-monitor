@@ -90,8 +90,8 @@
   ]
  },
  "empreintes_code": {
-  "moniteur.py": "7f9937f834597201",
-  "filtre.py": "9bf5cb4253077fe0",
+  "moniteur.py": "aba3b8d9c79486f3",
+  "filtre.py": "6bb583bed56b22e0",
   "trace.py": "bf93a1839e6eef13",
   "contraintes.py": "11b9007f9827a02c",
   "campagne_p2.py": "6eb48963d9281c1b",
@@ -1047,7 +1047,162 @@
    ]
   },
   "0.4875": {
-   "statut": "refuse_compilation"
+   "statut": "execute",
+   "n_runs": 30,
+   "runs_avec_violation": 0,
+   "taux_violation_moyen": 0.0,
+   "par_run": [
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    },
+    {
+     "cycles": 2700,
+     "violations": 0,
+     "taux_violation": 0.0
+    }
+   ]
   },
   "0.6": {
    "statut": "refuse_compilation"
@@ -1062,5 +1217,5 @@
    "statut": "refuse_compilation"
   }
  },
- "tableau": "Pilote de puissance P3-pilote \u2014 bras B seul, N=30 \u2014 ex\u00e9cut\u00e9 avant figeage du crit\u00e8re\ntau_violation de r\u00e9f\u00e9rence : 400 s (r = 0,3 en P2 avec delai_armement 120 s)\n     r tau_arm (s)  statut / taux de violation de B\n 0.300         120  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.350         140  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.400         160  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.425         170  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.450         180  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.475         190  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.487         195  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.600         240  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.800         320  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.950         380  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 1.100         440  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\nDur\u00e9e de calcul : 252 s"
+ "tableau": "Pilote de puissance P3-pilote \u2014 bras B seul, N=30 \u2014 ex\u00e9cut\u00e9 avant figeage du crit\u00e8re\ntau_violation de r\u00e9f\u00e9rence : 400 s (r = 0,3 en P2 avec delai_armement 120 s)\n     r tau_arm (s)  statut / taux de violation de B\n 0.300         120  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.350         140  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.400         160  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.425         170  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.450         180  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.475         190  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.487         195  taux_viol B = 0.0000% (0/30 runs avec violation)\n 0.600         240  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.800         320  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 0.950         380  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\n 1.100         440  jeu REFUS\u00c9 \u00e0 la compilation (RA-FUN-005) \u2014 pas de donn\u00e9e en vol\nDur\u00e9e de calcul : 95 s"
 }

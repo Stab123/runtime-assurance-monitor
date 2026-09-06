@@ -274,13 +274,6 @@ class Moniteur:
                 if ok and dans_les_bornes:
                     verdict, cause, marge = Verdict.AUTORISE, Cause.AUCUNE, marge_c
                     action = action_candidate
-                elif ok:
-                    # Candidate hors [u_min, u_max] mais projection sûre : la
-                    # projection EST la modification minimale, des deux côtés.
-                    # (Bug latent corrigé : sous u_min, le filtre renvoyait la
-                    # borne SUPÉRIEURE de l'intervalle admissible.)
-                    verdict, cause, marge = Verdict.MODIFIE, Cause.VIOLATION_ENVELOPPE, marge_c
-                    action = u_eval
                 else:
                     adm = intervalle_admissible(
                         etat, sigmas, self._modele, self._jeu.contraintes,
