@@ -99,6 +99,48 @@ def test_modifie_est_l_intervention_minimale():
     assert not ok_plus  # ...et aucune action plus proche de la candidate ne l'est
 
 
+def test_modifie_projection_sous_u_min():
+    """Candidate < u_min, u_min sûr : l'action transmise est u_min — la
+    modification minimale vaut des deux côtés (régression du bug latent
+    corrigé en septembre 2026 : le filtre renvoyait la borne SUPÉRIEURE
+    de l'intervalle admissible)."""
+    m, _ = faire_moniteur()
+    r = m.cycle(0.0, [0.60, 20.0], SIG, True, -1.0)
+    assert r.verdict is Verdict.MODIFIE
+    assert r.action_transmise == 0.0  # U_MIN
+
+
+def test_modifie_projection_au_dessus_u_max():
+    """Symétrique : candidate > u_max, u_max sûr -> transmission de u_max."""
+    m, _ = faire_moniteur()
+    r = m.cycle(0.0, [0.60, 20.0], SIG, True, 4.0)
+    assert r.verdict is Verdict.MODIFIE
+    assert r.action_transmise == 3.0  # U_MAX
+
+
+class _ModeleEspion:
+    """Modèle minimal qui enregistre la suite des actions reçues."""
+
+    def __init__(self):
+        self.actions = []
+
+    def pas(self, x, u, dt):
+        self.actions.append(u)
+        return x
+
+
+def test_ra_fun_004_persistance_exactement_pas_armement():
+    """u0 persiste exactement pas_armement pas, pas un de plus — régression
+    de l'off-by-one temporel (« k <= pas_armement » persistait dt de trop,
+    corrigé en septembre 2026)."""
+    espion = _ModeleEspion()
+    c = Contrainte("C_ESPION", 0, Sens.MIN, -1e9, 1.0, 1e9,
+                   delai_armement_s=15.0, marge_securite=0.0)
+    trajectoire_sure([0.0], [0.0], 7.0, espion, [c], horizon=5,
+                     pas_armement=3, politique_repli=lambda x: -1.0, dt=DT)
+    assert espion.actions == [7.0, 7.0, 7.0, -1.0, -1.0]
+
+
 def test_repli_enveloppe_quand_rien_n_est_admissible():
     m, modele = faire_moniteur()
     modele.en_lumiere = False

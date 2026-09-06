@@ -1,0 +1,61 @@
+name: rejeu-correction
+
+# Rejeu des campagnes P2.2, P2.3 et du pilote P3 après les corrections de
+# code de septembre 2026 (off-by-one temporel RA-FUN-004 + projection sous
+# u_min — voir README, « Note de correction »). Configurations STRICTEMENT
+# inchangées : seul le code change.
+#
+# Les sorties portent des noms temporaires rejeu_*.json : la bascule vers
+# les noms finaux est atomique, dans le commit de fusion local. (La CI
+# vérifie les empreintes à chaque push : un résultat poussé sous son nom
+# final avant la mise à jour des archives d'empreintes la ferait échouer.)
+#
+# Déclenchement manuel uniquement. P3.1 est rejouée séparément par p3.yml
+# (partiels par point r, puis fusion locale).
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  executer:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - nom: p2_2
+            commande: python3 ram_p2/executer_p2_3.py ram_p2/config_p2_2.json ram_p2/rejeu_p2_2.json 4
+            sortie: ram_p2/rejeu_p2_2.json
+          - nom: p2_3
+            commande: python3 ram_p2/executer_p2_3.py ram_p2/config_p2_3.json ram_p2/rejeu_p2_3.json 4
+            sortie: ram_p2/rejeu_p2_3.json
+          - nom: pilote_p3
+            commande: python3 ram_p3/pilote_p3.py ram_p3/config_pilote_p3.json ram_p3/rejeu_pilote_p3.json
+            sortie: ram_p3/rejeu_pilote_p3.json
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dépendances
+        run: pip install numpy scipy
+
+      - name: Exécution (${{ matrix.nom }})
+        run: ${{ matrix.commande }}
+
+      - name: Pousse le résultat
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${{ matrix.sortie }}"
+          git commit -m "Rejeu post-correction : ${{ matrix.nom }} (config inchangée, code corrigé)"
+          for tentative in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 10
+          done
+          exit 1
