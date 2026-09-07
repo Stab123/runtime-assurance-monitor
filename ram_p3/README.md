@@ -4,18 +4,23 @@
 
 §7 du papier conditionne l'utilité du durcissement (H4) à un régime où
 l'autorité du repli est marginale devant le temps-avant-violation :
-r = τ_armement / τ_violation proche de 1. En P2, r ≈ 0,3. P3 pousse le
-seul levier autorisé — le délai d'armement du repli — vers r = 1, tout le
-reste figé (graines, bornes de plante, marges, seuils, grille σ, cycles,
-et la validation à la compilation sur le modèle nominal 10 Ah).
+r = τ_armement / τ_violation proche de 1. Avec le τ_violation formel
+mesuré sur le modèle nominal (205,8 s), r = 0,58 en P2 (τ = 120 s). P3
+pousse le seul levier autorisé — le délai d'armement du repli — vers
+r = 1, tout le reste figé (graines, bornes de plante, marges, seuils,
+grille σ, cycles, et la validation à la compilation sur le modèle
+nominal 10 Ah). Note : les configurations figées indexent la grille sur
+la constante de référence τ_violation = 400 s (estimation d'alors) ; les
+r physiques rapportés dans le papier v3 utilisent 205,8 s.
 
 ## Ce que le pilote a trouvé (resultats_pilote_p3.json)
 
 Pilote de puissance, bras B seul, N = 30, exécuté **avant** figeage du
 critère : B reste à **zéro violation** sur toute la bande compilable, et
-au-delà de τ_armement = 195 s (r = 0,4875) **le jeu de contraintes est
-refusé à la compilation** (RA-FUN-005 : depuis la frontière de garde,
-l'action la plus défavorable persistée pendant l'armement ne doit
+au-delà de τ_armement = 195 s (r ≈ 0,95 en unités physiques ; 0,4875 sur
+la constante de référence 400 s de la config) **le jeu de contraintes
+est refusé à la compilation** (RA-FUN-005 : depuis la frontière de
+garde, l'action la plus défavorable persistée pendant l'armement ne doit
 franchir aucun seuil brut — vérifié sur le modèle nominal).
 
 Le régime où l'autorité du repli serait marginale n'est pas un régime
@@ -23,11 +28,13 @@ difficile à survivre : c'est un régime **non déployable par construction**.
 
 ## P3.1 (config_p3_1.json — figée, committée avant exécution)
 
-Trois r couvrant la bande compilable — 0,35 / 0,425 / 0,475 (collé au mur) —
-N = 300, quatre bras A, B, C, D, grille σ inchangée. Critère en deux
-clauses (puissance, succès) : texte dans la config. But documentaire :
-si B reste à zéro à r = 0,475 avec N = 300, le mur n'est pas un artefact
-statistique de N = 30 (borne de Wilson ≈ 1,3 %).
+Trois points couvrant la bande compilable — τ_armement = 140 / 170 /
+190 s, soit r = 0,68 / 0,83 / 0,92 en unités physiques (0,35 / 0,425 /
+0,475 — collé au mur — sur la constante de référence 400 s de la config
+figée) — N = 300, quatre bras A, B, C, D, grille σ inchangée. Critère en
+deux clauses (puissance, succès) : texte dans la config. But
+documentaire : si B reste à zéro à r = 0,92 avec N = 300, le mur n'est
+pas un artefact statistique de N = 30 (borne de Wilson ≈ 1,3 %).
 
 Exécution : `.github/workflows/p3.yml` (déclenchement manuel, un job par
 point r), puis fusion :

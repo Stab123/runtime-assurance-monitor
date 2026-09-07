@@ -17,6 +17,11 @@ Documentation and archival release — no change to code, data or results.
 - Added `paper/`: the v2 preprint (FR/EN), marked *superseded* pending v3.
 - Added French translation of the README under `docs/README_fr.md`.
 - Repository topics and description set.
+- **Known issue:** the Zenodo archive of v1.0.1
+  ([10.5281/zenodo.22553128](https://doi.org/10.5281/zenodo.22553128)) was cut
+  before the SUPERSEDED banner was applied to the v2 PDFs (commit `8f5e07b7`);
+  the `paper/` PDFs in that archived zip therefore lack the banner. Corrected
+  from v1.1 onwards (bannered PDFs, or replacement by v3).
 
 ## [v1.0-p3.1] — 2026-09-07
 
@@ -40,6 +45,11 @@ Post-correction re-run release. Archived on Zenodo:
    README had quoted stale draft values since the first commit, inconsistent with
    `resultats_p2_3.json` (old and new alike). It now quotes the campaign file.
    The published data were never affected.
+
+**Defect accounting.** The count used across the README, this changelog and the
+paper (§6) is: four interaction defects found and fixed before the first
+campaign, plus the three defects above (two code, one documentation) — seven in
+total.
 
 ### Re-run protocol
 
