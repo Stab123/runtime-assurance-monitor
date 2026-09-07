@@ -2,6 +2,15 @@
 
 All notable changes to this repository are documented here.
 
+## [v1.4.1] — 2026-09-10
+
+Patch release — documentation metadata only. Includes the post-v1.4
+CITATION.cff clarification (« docs: clarify CITATION.cff safety claim »):
+the citation abstract now states « zero observed violations in the tested
+campaigns » and no longer cites an aggregate run/configuration count, which
+was unnecessary in a citation and risked an ambiguous total. No other
+change relative to v1.4 — code, configurations, data and results identical.
+
 ## [v1.4] — 2026-09-10
 
 Documentation cleanup release — no change to code, configurations, data or
