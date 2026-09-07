@@ -20,7 +20,7 @@ La différence P2.1 → P2.2 est l'ajout du bras D. Chaque bras tire son aléa d
 P3, puis les rejeux P2.2/P2.3 de septembre 2026, exécutent les **copies rejouables** de `campagne_p2.py` et `executer_p2_3.py` (chemins relativisés, `ram_p2/`), dont les octets diffèrent donc des archives d'origine à chemins absolus — la sémantique de simulation est inchangée, prouvée par non-régression bit à bit (bras A de P3.1 == bras A de P2.3, 6300/6300 champs identiques ; pilote P3 à r = 0,3 == bras B de P2.3, 90/90 champs identiques). Les octets exacts de ces copies sont archivés ici :
 
 - `campagne_p2_rejeu.py` — empreinte `6eb48963d9281c1b`, celle qu'embarquent les résultats rejoués (P2.2, P2.3, P3) sous la clé `campagne_p2.py` ;
-- `executer_p2_3_rejeu.py` — empreinte des octets rejouables d'`executer_p2_3.py`, embarquée par les résultats P2.2/P2.3 rejoués.
+- `executer_p2_3_rejeu.py` — empreinte `f2d35118c7bc15b1`, celle qu'embarquent les résultats P2.2/P2.3 rejoués sous la clé `executer_p2_3.py`.
 
 Le vérificateur fait correspondre ces empreintes avec la mention « copie rejouable ». Les archives `campagne_p2.py` et `executer_p2_3.py` de ce répertoire restent les **octets d'origine à chemins absolus**, ceux qui ont produit les résultats P2.2/P2.3 d'avant la correction — conservés pour la provenance, ils ne correspondent plus à aucun fichier de résultats publié.
 

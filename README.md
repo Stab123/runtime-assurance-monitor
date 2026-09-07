@@ -1,5 +1,9 @@
 # Embedded runtime assurance monitor — prototype and falsification campaign
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22552147.svg)](https://doi.org/10.5281/zenodo.22552147)
+[![tests](https://github.com/Stab123/runtime-assurance-monitor/actions/workflows/tests.yml/badge.svg)](https://github.com/Stab123/runtime-assurance-monitor/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Executable prototype of an assurance monitor for an autonomous embedded decision layer, with an auditable decision-trace artefact, and a Monte Carlo campaign that **falsifies** the project's differentiating hypothesis.
 
 **Main result: negative.** Hardening on estimation uncertainty (requirement RA-FUN-003) brings nothing in the tested scenario. The safety envelope alone reaches zero violations over 300 draws; every hardening variant costs availability without preventing anything more.
@@ -8,18 +12,7 @@ Executable prototype of an assurance monitor for an autonomous embedded decision
 
 ## Correction note — September 2026
 
-**Status: re-run complete.** A code review found two defects. All campaigns (P2.2, P2.3, P3 pilot, P3.1) were re-run with **strictly unchanged** configurations — only the code was fixed. Every figure below is the post-correction one; the pre-correction versions remain in the git history. Outcome: violation counts unchanged everywhere (arm A: 68/300; arms B, C, D: 0/300 at every point), fallback and delivery shifted by at most 0.04 point, and the wall moved by exactly one pilot grid point as the fix predicted (195 s now compiles, with zero violations; first refusal at the next grid point). Both non-regressions re-verified on the new data (6300/6300 and 90/90 identical fields). All qualitative conclusions are unchanged.
-
-1. **Temporal off-by-one (RA-FUN-004).** `trajectoire_sure` applied the action for `pas_armement + 1` steps (`k <= pas_armement`): actual persistence was τ_arming + 5 s. Compile time and runtime shared the same convention — no safety hole, arm comparisons unbiased (uniform shift) — but the temporal label was off by one step. Fixed (`k < pas_armement`): persistence is now exactly τ_arming. Regression test added.
-2. **Projection below u_min.** For a candidate below u_min whose projection is safe, the filter returned the **upper** bound of the admissible interval instead of u_min — contrary to minimal modification. Latent bug: never reached in the campaigns (candidates ∈ {0; 3} A ⊂ [u_min, u_max]). Fixed (the safe projection is transmitted), tests added on both sides.
-3. **Documentation defect found during the re-run.** The σ-sweep table below had quoted stale draft values since the first commit, inconsistent with `resultats_p2_3.json` (old and new alike). It now quotes the campaign file. The published data were never affected.
-
-Consequences established before the re-run (deterministic, checkable without re-run), all confirmed by it:
-
-- **Formal τ_violation = 205.8 s** on the nominal model (eclipse, u = 3 A, from the SoC guard boundary 0.37 to the raw threshold 0.35; closed form 205.7 s — the thermal constraint is not determining). The τ = 400 s used to define P3's r grid was back-computed from r ≈ 0.3, not derived from the plant dynamics: P3.1's physical r values are **0.68 / 0.83 / 0.92** (P2 at 120 s: 0.58). The P3 result is stated in seconds; the ratio is only given with this formal value.
-- **Wall position after correction: compilable up to and including 195 s (residual margin +0.0002), refused from 196 s** — i.e. physical r ≈ 0.95. The wall's physics is unchanged (the correction removes 5 s of persistence and the label now matches reality); the last P3.1 point (190 s, r = 0.92) remains compilable.
-
-All campaigns were re-run with **strictly unchanged** configurations via `.github/workflows/rejeu.yml`. P2.1 was not re-run (historical pilot lost, plan already superseded by P2.2): its pre-correction code bytes are archived under `empreintes/pre_correction/` and the verifier's documented exception is extended accordingly.
+**Status: re-run complete.** A code review found two code defects (a temporal off-by-one in the fallback persistence, and a latent projection bug never reached by the campaigns) plus one stale documentation table. All campaigns (P2.2, P2.3, P3 pilot, P3.1) were re-run on GitHub Actions with **strictly unchanged** configurations: violation counts are unchanged, fallback and delivery shifted by at most 0.04 point, the wall moved by exactly one pilot grid point as the fix predicted, and every figure below is the post-correction one. **All qualitative conclusions are unchanged.** Full protocol, numbers and consequences: [CHANGELOG.md](CHANGELOG.md) (entry v1.0-p3.1).
 
 ---
 
@@ -132,6 +125,16 @@ verifier_empreintes.py compares module by module the SHA-256 fingerprints
 .github/workflows/rejeu.yml
                        manual trigger: the September 2026 re-runs
                        (P2.2, P2.3, P3 pilot), unchanged configurations
+figures/
+  faire_figures.py     regenerates Figures 2 and 3 of the paper from
+                       the published result files (figures_2_3.png)
+docs/
+  exigences.md         requirements traceability (RA-* → mechanism → test)
+  README_fr.md         French translation of this README (English is
+                       authoritative)
+paper/                 the v2 preprint (FR/EN), superseded — v3 in preparation
+CITATION.cff           citation metadata (Zenodo concept DOI)
+CHANGELOG.md           correction protocol and release history
 ```
 
 All three campaigns are preserved. P2.1 had an experimental-design flaw — arm C varied two things at once — fixed in P2.2 by adding arm D and extending the grid. P2.3 raises N from 32 to 300 with no other change. Shared points reproduce identically, checked as a non-regression.

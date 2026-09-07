@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software or its data, please cite it as
+  below.
+title: >-
+  Runtime assurance monitor — prototype and falsification
+  campaign
+abstract: >-
+  Executable prototype of an assurance monitor for an autonomous
+  embedded decision layer, with an auditable decision-trace
+  artefact, and a Monte Carlo campaign (600 runs, 15
+  configurations) that falsifies the hypothesis that hardening on
+  estimation uncertainty brings a safety benefit in the tested
+  scenario. Negative result: the safety envelope alone reaches
+  zero violations; every hardening variant costs availability.
+authors:
+  - family-names: Bey
+    given-names: Sami
+    affiliation: HES-SO
+    email: sami.bey@pedt-technologies.com
+version: v1.0.1
+date-released: "2026-09-07"
+license: MIT
+repository-code: https://github.com/Stab123/runtime-assurance-monitor
+doi: 10.5281/zenodo.22552147
+keywords:
+  - runtime assurance
+  - CubeSat
+  - formal methods
+  - reproducibility
+  - Monte Carlo
+  - negative result
