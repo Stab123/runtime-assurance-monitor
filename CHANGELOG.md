@@ -2,6 +2,40 @@
 
 All notable changes to this repository are documented here.
 
+## [v1.4] — 2026-09-10
+
+Documentation cleanup release — no change to code, configurations, data or
+results. P2/P2.3 remains strictly frozen (bit-for-bit identical; fingerprint
+chain CONFORME, 23/23 tests green).
+
+Final P3.1 terminology and interpretation cleanup (README EN/FR,
+`ram_p3/README.md`, `paper/README.md`, and paper v5 FR/EN — PDFs
+regenerated):
+
+- canonical « P3.1 — corrected interpretation » section in the root README;
+- operational-cost ordering stated as **B < D ≤ C** — C and D coincide at
+  some uncertainty-threshold settings (notably σ = 0.08), so the strict
+  ordering B < D < C was too strong;
+- dominance claims replaced by the equal-observed-safety formulation: B, C
+  and D all show zero observed violations in the tested configurations;
+  under this equal observed safety outcome, B achieves the lowest fallback
+  rate and the highest mission delivery;
+- 0.68 / 0.83 / 0.92 named **corrected nominal ratios r_nominal** everywhere
+  in the current documentation (« physical r values » removed); the per-run
+  Monte Carlo ratios remain named r_plant;
+- the 190 s point described as the **last tested P3.1 grid point**, not the
+  compile-time limit: 195 s is the last compilable arming delay under the
+  declared nominal model and constraint set; 196 s is rejected;
+- safety claims uniformly stated as « zero observed violations in 300
+  runs », with the 95 % Wilson upper bound ≈ 1.3 % where needed;
+- `ram_p3/analyse_sensibilite_r.py`: comment-only change (« choisie a
+  priori » → « choisie pour l'analyse rétrospective »); the regenerated
+  results JSON is byte-identical — no threshold, calculation or result
+  modified.
+
+Historical entries (v1.0–v1.3) and pre-registered configurations keep their
+original wording intentionally.
+
 ## [v1.3] — 2026-09-09
 
 P3/P3.1 interpretation release — no change to code, configurations, data or
