@@ -2,6 +2,44 @@
 
 All notable changes to this repository are documented here.
 
+## [v1.2] — 2026-09-09
+
+Scope-correction release — no change to code, configurations, data or results.
+
+- **Eighth defect documented (dt_s).** The September 2026 review also found
+  that the campaign layer (`ram_p2/campagne_p2.py`) read the `DT` constant
+  from `demo_eps.py` instead of the configuration's declared `dt_s` — a
+  configuration value ignored. Both equal 5.0 s in every frozen configuration,
+  so the numerical impact is **zero** (verified by bit-for-bit non-regression
+  against the published results). By decision, the P2 code is kept intact as a
+  frozen scientific artefact: the defect is **documented, not fixed**. The
+  unified accounting becomes: four interaction + three code + one
+  documentation defect — eight in total (README EN/FR, paper §6 and Table 5).
+- **Paper v4** (`paper/`, FR/EN). Changes from v3:
+  - the 205.8 s τ_violation is explicitly tied to the monitor's **nominal
+    model** (C_BATT = 10 Ah, I_BASE = 0.5 A, u = 3 A, margin 0.02) — not
+    presented as the physical time-to-violation of the Monte Carlo plants
+    (C_BATT ∈ [5; 9] Ah, I_BASE ∈ [0.45; 0.60] A);
+  - new retrospective sensitivity analysis (`ram_p3/analyse_sensibilite_r.py`,
+    `ram_p3/resultats_sensibilite_r.json`): per-run τ_violation,plant computed
+    from the frozen deterministic draws — 100.9 to 185.6 s; r_plant exceeds 1
+    for 50/300 runs in P2 and 292/300 at τ_arming = 190 s (up to 1.88); arm B
+    remains at zero observed violation in every subpopulation, including the
+    top r_plant decile (where arm A violates in 14/30 runs); the B < D < C
+    cost ordering is unchanged. No campaign re-run, no data modified;
+  - the compile-time wall is now stated conditionally: under the declared
+    nominal monitor model and action bounds (u_max = 3 A), validation rejects
+    constraint sets beyond the identified arming-delay boundary — not a
+    general physical impossibility;
+  - the historical r labels (400 s reference: 0.35 / 0.425 / 0.475) are
+    distinguished from the **corrected r_nominal** (0.68 / 0.83 / 0.92);
+  - P3.1 stated as **inconclusive for H4** per its frozen criterion; Wilson
+    wording made uniform (« no violations observed in 300 runs; 95 % Wilson
+    upper bound ≈ 1.3 % »);
+  - defect count updated to eight (abstract, contributions, §6, Table 5).
+- No new campaign was run and no scenario was retuned: this release only
+  narrows the scope of statements and adds retrospective analysis.
+
 ## [v1.1] — 2026-09-09
 
 Paper v3 release — no change to code, data or results.

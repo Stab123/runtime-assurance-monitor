@@ -1,18 +1,27 @@
 # paper/ — preprints
 
-## Status: v3 current
+## Status: v4 current
 
-The current version of the paper is **version 3** (September 2026), with the
-post-correction figures, the P3.1 campaign (Section 5.4) and the measured
-ratio r (formal τ_violation = 205.8 s; physical r = 0.58 in P2, 0.68 / 0.83 /
-0.92 in P3.1, wall at r ≈ 0.95):
+The current version of the paper is **version 4** (September 2026). Changes
+from v3: the 205.8 s τ_violation is explicitly tied to the monitor's **nominal
+model** (C_BATT = 10 Ah, I_BASE = 0.5 A, u = 3 A, margin 0.02); a new
+retrospective sensitivity analysis covers the Monte Carlo plants' physical
+τ_violation (100.9–185.6 s; r_plant exceeds 1 for part of the runs — result
+unchanged); the compile-time wall's scope is conditioned on the declared
+nominal model and action bounds (not a general physical impossibility); the
+historical r labels (400 s reference) are distinguished from the **corrected
+r_nominal**; and an eighth defect (configuration `dt_s` ignored by the
+campaign layer, zero numerical impact, P2 code kept intact) is documented in
+Section 6:
 
-- `QUAND_L_ENVELOPE_SUFFIT_v3_FR.pdf` — version 3, français (originale)
-- `WHEN_THE_ENVELOPE_SUFFICES_v3_EN.pdf` — version 3, English (translation)
+- `QUAND_L_ENVELOPE_SUFFIT_v4_FR.pdf` — version 4, français (originale)
+- `WHEN_THE_ENVELOPE_SUFFICES_v4_EN.pdf` — version 4, English (translation)
 
-The two **v2** PDFs (`*_v2_*_superseded.pdf`) are kept for the record, with a
-SUPERSEDED banner on page 1. They predate the September 2026 code correction
-and the post-correction re-run. All qualitative conclusions are unchanged;
+Version 3 (`*_v3_*.pdf`) is kept for the record; version 2
+(`*_v2_*_superseded.pdf`) carries a SUPERSEDED banner on page 1.
+
+The **v2** PDFs predate the September 2026 code correction and the
+post-correction re-run. All qualitative conclusions are unchanged;
 four points of the v2 text are stale:
 
 1. **The ratio r (§7).** v2 states the §7 condition qualitatively — hardening
