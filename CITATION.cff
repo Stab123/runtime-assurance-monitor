@@ -19,8 +19,8 @@ authors:
     orcid: https://orcid.org/0009-0008-4475-1582
     affiliation: HES-SO
     email: sami.bey@pedt-technologies.com
-version: v1.0.1
-date-released: "2026-09-07"
+version: v1.1
+date-released: "2026-09-09"
 license: MIT
 repository-code: https://github.com/Stab123/runtime-assurance-monitor
 doi: 10.5281/zenodo.22552147

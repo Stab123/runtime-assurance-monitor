@@ -2,6 +2,31 @@
 
 All notable changes to this repository are documented here.
 
+## [v1.1] — 2026-09-09
+
+Paper v3 release — no change to code, data or results.
+
+- `paper/`: added version 3 of the preprint (FR/EN). Changes from v2:
+  post-correction figures throughout (Table 4, Table 5, §5.2); the ratio r is
+  now measured — formal τ_violation = 205.8 s, physical r = 0.58 in P2,
+  0.68 / 0.83 / 0.92 in P3.1, compile-time wall at 195 s (refused from 196 s,
+  r ≈ 0.95); new Section 5.4 (campaign P3.1, Table 6, Figure 4) with the arm-B
+  costs per point (fallback 10.18 → 15.60 → 18.77 %; delivery 89.05 → 86.47 →
+  84.91 %); §3.3 worst case recomputed (0.3583 at 120 s); §6 and Table 5
+  extended with the three September 2026 defects (unified accounting: four
+  interaction + two code + one documentation defect, seven in total); §4.5
+  notes the missed 90 % delivery floor (89.95 % CI lower bound); §4.6 now
+  points to Zenodo and Software Heritage (annotated, unsigned tags included)
+  instead of the author's word; version banner on page 1.
+- Figure renumbering: demonstration scenario = Figure 2 (unchanged), P2.3 bar
+  charts = Figure 3, P3.1 curves = Figure 4.
+- `figures/faire_figures.py`: now bilingual (EN/FR); regenerates Figures 3
+  and 4 of the paper in both languages.
+- The v2 PDFs remain in `paper/`, marked *superseded* (banner on page 1);
+  they are replaced by v3 as the version of record.
+- Closes the known issue of v1.0.1: the archived zip of this release contains
+  the bannered v2 PDFs alongside v3.
+
 ## [v1.0.1] — 2026-09-07
 
 Documentation and archival release — no change to code, data or results.
