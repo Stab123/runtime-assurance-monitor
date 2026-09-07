@@ -8,11 +8,12 @@ title: >-
 abstract: >-
   Executable prototype of an assurance monitor for an autonomous
   embedded decision layer, with an auditable decision-trace
-  artefact, and a Monte Carlo campaign (600 runs, 15
-  configurations) that falsifies the hypothesis that hardening on
-  estimation uncertainty brings a safety benefit in the tested
-  scenario. Negative result: the safety envelope alone reaches
-  zero violations; every hardening variant costs availability.
+  artefact, and Monte Carlo campaigns evaluating whether hardening
+  on estimation uncertainty provides an additional safety benefit
+  in the tested scenario. Negative result: the safety envelope
+  alone reaches zero observed violations in the tested campaigns;
+  every hardening variant costs availability without preventing
+  any additional observed violation.
 authors:
   - family-names: Bey
     given-names: Sami
