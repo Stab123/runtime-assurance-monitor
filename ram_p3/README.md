@@ -23,8 +23,8 @@ s'appellent le **r_nominal corrigé**, à ne pas confondre avec les
 ## Ce que le pilote a trouvé (resultats_pilote_p3.json)
 
 Pilote de puissance, bras B seul, N = 30, exécuté **avant** figeage du
-critère : B reste à **zéro violation** sur toute la bande compilable, et
-au-delà de τ_armement = 195 s (r ≈ 0,95 en unités physiques ; 0,4875 sur
+critère : B reste à **zéro violation observée** sur toute la bande compilable, et
+au-delà de τ_armement = 195 s (r_nominal ≈ 0,95 ; 0,4875 sur
 la constante de référence 400 s de la config) **le jeu de contraintes
 est refusé à la compilation** (RA-FUN-005 : depuis la frontière de
 garde, l'action la plus défavorable persistée pendant l'armement ne doit
@@ -39,9 +39,12 @@ contraintes ; ce n'est pas une impossibilité physique générale.
 ## P3.1 (config_p3_1.json — figée, committée avant exécution)
 
 Trois points couvrant la bande compilable — τ_armement = 140 / 170 /
-190 s, soit r = 0,68 / 0,83 / 0,92 en unités physiques (0,35 / 0,425 /
-0,475 — collé au mur — sur la constante de référence 400 s de la config
-figée) — N = 300, quatre bras A, B, C, D, grille σ inchangée. Critère en
+190 s, soit r_nominal corrigé = 0,68 / 0,83 / 0,92 (0,35 / 0,425 /
+0,475 sur la constante de référence 400 s de la config figée) — N = 300, quatre bras A, B, C, D, grille σ inchangée. Le
+point 190 s est le dernier point de la grille P3.1 testée — non la
+limite de compilation : 195 s est le dernier délai d'armement
+compilable sous le modèle nominal et le jeu de contraintes déclarés ;
+196 s est refusé. Critère en
 deux clauses (puissance, succès) : texte dans la config. But
 documentaire : si B reste à zéro à r = 0,92 avec N = 300, le mur n'est
 pas un artefact statistique de N = 30 (borne de Wilson ≈ 1,3 %).
@@ -70,13 +73,16 @@ Résultats dans `resultats_sensibilite_r.json` :
 - le bras B reste à **zéro violation observée** dans toutes les
   sous-populations (r < 1, r ≈ 1, r > 1), y compris le décile des
   r_plant les plus élevés (où le bras A viole dans 14 runs/30) ;
-- dans ce décile le plus contraignant (τ = 190 s, r_plant 1,73–1,88),
-  B domine sur les **trois métriques** : 0 violation observée, 21,6 %
-  de repli, 81,9 % de livraison — contre 24,3 % / 73,3 % pour D et
-  pire pour chaque seuil de C (jusqu'à 99,6 % / 0,4 % au seuil le
-  plus strict ; A : 0 % de repli, 100 % de livraison, mais 14/30 runs
-  avec violation) ;
-- l'ordre des coûts B < D < C est inchangé partout.
+- B, C et D sont tous à **zéro violation observée** dans les
+  configurations P3.1 testées ; à résultat de sécurité observé égal,
+  B a le taux de repli le plus bas et la livraison la plus haute —
+  y compris dans le décile le plus contraignant (τ = 190 s, r_plant
+  1,73–1,88) : 21,6 % de repli et 81,9 % de livraison pour B, contre
+  24,3 % / 73,3 % pour D et pire pour chaque seuil de C (jusqu'à
+  99,6 % / 0,4 % au seuil le plus strict ; A : 0 % de repli, 100 %
+  de livraison, mais 14/30 runs avec violation) ;
+- l'ordre des coûts B < D ≤ C est inchangé partout (C et D
+  coïncident à certains seuils, notamment σ = 0,08).
 
 Conséquence : B restant à zéro violation observée là où le
 durcissement avait sa meilleure chance physique, **aucune campagne

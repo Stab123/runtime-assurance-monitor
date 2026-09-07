@@ -6,7 +6,7 @@
 
 Executable prototype of an assurance monitor for an autonomous embedded decision layer, with an auditable decision-trace artefact, and a Monte Carlo campaign that **falsifies** the project's differentiating hypothesis.
 
-**Main result: negative.** Hardening on estimation uncertainty (requirement RA-FUN-003) brings nothing in the tested scenario. The safety envelope alone reaches zero violations over 300 draws; every hardening variant costs availability without preventing anything more.
+**Main result: negative.** Hardening on estimation uncertainty (requirement RA-FUN-003) brings nothing in the tested scenario. The safety envelope alone reaches zero observed violations over 300 draws; every hardening variant costs availability without preventing anything more.
 
 ---
 
@@ -54,7 +54,7 @@ At σ = 0.08, C is identical to D run by run: the threshold never fires. The cos
 
 **Conclusion.** The pre-registered success criterion required a grid point with a violation rate strictly below control arm B. B is zero; nothing can do better. On both cost metrics, every point is worse than B. RA-FUN-003 is falsified.
 
-**Secondary result.** Arm D shows that pessimistic 3σ evaluation is also dead weight in this scenario: +2.9 points of fallback and −5.0 points of delivery for zero violations avoided. The best configuration in the table is the envelope alone.
+**Secondary result.** Arm D shows that pessimistic 3σ evaluation is also dead weight in this scenario: +2.9 points of fallback and −5.0 points of delivery for zero observed violations avoided. The best configuration in the table is the envelope alone.
 
 Where hardening could pay, compile-time validation refuses the constraint set. Where the set is acceptable, the envelope suffices and hardening can only cost.
 
@@ -62,21 +62,73 @@ Where hardening could pay, compile-time validation refuses the constraint set. W
 
 ## P3 — the §7 condition and the compilation wall
 
-§7 made hardening useful only in a regime where fallback authority is marginal relative to time-to-violation (r = τ_arming / τ_violation → 1; with the formal τ_violation = 205.8 s of the correction note, P2 at 120 s sits at r = 0.58). P3 pushes this single lever — the arming delay — with everything else frozen (seeds, plant bounds, margins, thresholds, σ grid, cycles, and compile-time validation on the nominal 10 Ah model).
+§7 made hardening useful only in a regime where fallback authority is marginal relative to time-to-violation (r = τ_arming / τ_violation → 1; with the formal τ_violation = 205.8 s of the correction note, P2 at 120 s sits at r_nominal = 0.58). P3 pushes this single lever — the arming delay — with everything else frozen (seeds, plant bounds, margins, thresholds, σ grid, cycles, and compile-time validation on the nominal 10 Ah model).
 
-The pilot (arm B only, N = 30, run **before** freezing the criterion — `ram_p3/resultats_pilote_p3.json`) found two things. First, B stays at **zero violations** across the whole compilable band — including at 195 s, which the pre-correction code still refused (the off-by-one made it apply 200 s; the fix moved the wall by exactly one grid point, as predicted). Second, beyond τ_arming = 195 s (physical r ≈ 0.95), RA-FUN-005 validation **rejects the constraint set at compile time**: from the guard boundary, the most adverse action persisted through arming would cross the raw threshold (compilable at 195 s with a residual margin of +0.0002, refused from 196 s; the pilot's next grid point, 240 s, is refused). The regime where hardening could pay is not a hard-to-survive regime — it is **non-deployable within the declared framework**: under the declared nominal monitor model, action bounds and constraint set, compile-time validation rejects configurations beyond the identified arming-delay boundary — the wall depends on the nominal model (C_BATT = 10 Ah), the declared action bounds (u_max = 3 A), the safety margins and the constraint set; it is not a general physical impossibility. The τ_violation = 205.8 s is measured on the monitor's **nominal model**: the 205.8 s value is derived from the nominal monitor model and should not be interpreted as the physical time-to-violation of every Monte Carlo plant realization. The plants' physical τ_violation spans 100.9–185.6 s, so the plant-level ratio r_plant exceeds 1 for part of the runs (50/300 in P2, 292/300 at τ_arming = 190 s, up to 1.88) — arm B still shows **zero observed violations** in every subpopulation, and in the most constraining decile (r_plant 1.73–1.88, where arm A violates 14/30 runs) B dominates on all three metrics: 21.6 % fallback and 81.9 % delivery, against 24.3 % / 73.3 % for D and worse for every C threshold (up to 99.6 % / 0.4 %). The B < D < C cost ordering never flips (retrospective sensitivity analysis: `ram_p3/analyse_sensibilite_r.py`, paper v5 §5.4). Since B stays at zero observed violation exactly where hardening had its best physical chance, **no retuned P3.2 campaign is scientifically justified** — picking margins, bounds or a scenario after the fact to force a B transition would fabricate the desired outcome; any new campaign would need a new pre-registered protocol.
+The pilot (arm B only, N = 30, run **before** freezing the criterion — `ram_p3/resultats_pilote_p3.json`) found two things. First, B stays at **zero observed violations** across the whole compilable band — including at 195 s, which the pre-correction code still refused (the off-by-one made it apply 200 s; the fix moved the wall by exactly one grid point, as predicted). Second, beyond τ_arming = 195 s (r_nominal ≈ 0.95), RA-FUN-005 validation **rejects the constraint set at compile time**: from the guard boundary, the most adverse action persisted through arming would cross the raw threshold (compilable at 195 s with a residual margin of +0.0002, refused from 196 s; the pilot's next grid point, 240 s, is refused). The regime where hardening could pay is not a hard-to-survive regime — it is **non-deployable within the declared framework**: under the declared nominal monitor model, action bounds and constraint set, compile-time validation rejects configurations beyond the identified arming-delay boundary — the wall depends on the nominal model (C_BATT = 10 Ah), the declared action bounds (u_max = 3 A), the safety margins and the constraint set; it is not a general physical impossibility.
 
 The wall is indexed on the action domain (u_max = 3 A, declared in `ram_p0/demo_eps.py`, checked on both bounds at compile time): the result is stated *for this set of bounds*. Here u_payload = u_max — the worst case verified at compile time is exactly the actual load commanded in the payload window.
 
-P3.1 documents the wall with statistical power: τ_arming ∈ {140; 170; 190} s — physical r ∈ {0.68; 0.83; 0.92}, the last one flush against the wall —, N = 300, four arms, unchanged σ grid. (The frozen configuration files keep the original r labels, defined against a τ_violation = 400 s that was back-computed rather than derived — see the correction note; results are stated here in seconds.) Configuration frozen and committed before execution (`ram_p3/config_p3_1.json`, two-clause criterion included), executed by `.github/workflows/p3.yml`.
+### P3.1 — corrected interpretation
 
-**P3.1 result** (N = 300 per point, CRN 300/300 — `ram_p3/resultats_p3_1.json`): at every point of the compilable band, B stays at **0/300** runs with violation (Wilson [0; 1.3 %]) — including at 190 s (r = 0.92), the last deployable point. The wall is not an N = 30 artefact. The frozen power criterion decides: P3 is **inconclusive for H4** — there is no deployable regime where B fails, hence none where hardening could pay. Costs rise with r for all monitored arms (B fallback: 10.18 % → 15.60 % → 18.77 %; delivery: 89.05 % → 86.47 % → 84.91 %) without the B < D < C ordering ever flipping. Non-regression: arm A reproduces P2.3 bit for bit at every point (6300/6300 identical fields).
+The arming delays of 140, 170 and 190 s correspond to the corrected nominal ratios:
+
+- r_nominal = 0.68 at 140 s
+- r_nominal = 0.83 at 170 s
+- r_nominal = 0.92 at 190 s
+
+These values use a nominal time-to-violation of approximately 205.8 s.
+
+The value 205.8 s is derived from the nominal monitor model (C_BATT = 10 Ah, I_BASE = 0.5 A, u = 3 A, SoC margin = 0.02). It must not be interpreted as the physical time-to-violation of every Monte Carlo plant realization.
+
+Across the sampled plant population, the retrospectively calculated plant-specific time-to-violation ranges from approximately 100.92 s to 185.58 s. Therefore, r_plant can exceed 1.
+
+The 190 s point is the last tested P3.1 grid point. It is not the compile-time limit. Under the declared nominal model, action bounds, margins and constraint set, 195 s is still accepted by compile-time validation, while 196 s is rejected.
+
+B, C and D all have zero observed violations in the tested P3.1 configurations. With the same observed safety result, B has the lowest fallback rate and the highest mission delivery.
+
+The operational-cost ordering is:
+
+B < D ≤ C
+
+At some uncertainty thresholds, C and D are identical.
+
+Results for B:
+
+- 140 s: 0/300 runs with an observed violation; fallback = 10.18%; mission delivery = 89.05%.
+- 170 s: 0/300 runs with an observed violation; fallback = 15.60%; mission delivery = 86.47%.
+- 190 s: 0/300 runs with an observed violation; fallback = 18.77%; mission delivery = 84.91%.
+
+Zero observed violations does not mean that the true probability of violation is zero. With 0 observed violations in 300 runs, the upper bound of the 95% Wilson confidence interval is approximately 1.3%.
+
+At the 190 s point, 292 of the 300 sampled plants have r_plant > 1.05.
+
+In the 30 runs with the highest r_plant values, approximately 1.73 to 1.88:
+
+- A: 14/30 runs with an observed violation
+- B: 0/30 runs with an observed violation
+- B fallback = 21.63%
+- B mission delivery = 81.85%
+- D: 0/30 runs with an observed violation
+- D fallback = 24.34%
+- D mission delivery = 73.33%
+
+The r_plant sensitivity analysis is retrospective. It does not modify or rerun the frozen P3.1 campaign.
+
+Because B never exhibited a strictly positive observed violation rate at any tested P3.1 point, the pre-registered informativeness criterion for testing H4 was not met.
+
+P3.1 therefore remains formally inconclusive for H4.
+
+Within the tested regime, however, C and D prevented no additional observed violation relative to B while producing higher operational costs.
+
+No post-hoc P3.2 campaign was introduced to force a transition. Any future campaign testing different assumptions must be defined under a new pre-registered protocol before execution.
+
+(N = 300 per point, CRN 300/300, four arms, unchanged σ grid — `ram_p3/config_p3_1.json` frozen and committed before execution, `ram_p3/resultats_p3_1.json`; the frozen configuration keeps the historical r labels indexed on a 400 s reference constant — 0.35 / 0.425 / 0.475 — the executed delays are 140 / 170 / 190 s. Retrospective sensitivity analysis: `ram_p3/analyse_sensibilite_r.py`. Non-regression: arm A reproduces P2.3 bit for bit at every point, 6300/6300 identical fields.)
 
 ### Scope of the result
 
 The exact statement is: **in a regime where the safety envelope already suffices, hardening on uncertainty is not justified.** This is not a general statement.
 
-The control arm is at the ceiling — zero violations. In an experiment where the control fails at nothing, an additional mechanism can only cost. A scenario where the guard margin no longer covers the estimation error might give a different result; building such a scenario *after* seeing these figures would be result fabrication, and was therefore not done.
+The control arm is at the ceiling — zero observed violations. In an experiment where the control fails at nothing, an additional mechanism can only cost. A scenario where the guard margin no longer covers the estimation error might give a different result; building such a scenario *after* seeing these figures would be result fabrication, and was therefore not done.
 
 ---
 

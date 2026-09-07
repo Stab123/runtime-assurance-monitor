@@ -33,6 +33,15 @@ results. P2 remains strictly frozen (bit-for-bit identical).
     P3 executions identically; `dt_s` = 5.0 s = `DT` in `config_p3_1.json`
     as in every frozen configuration — zero numerical impact, documented,
     not fixed.
+- **Terminology clarification** (documentation only): the operational-cost
+  ordering is B < D ≤ C, since C and D coincide for some
+  uncertainty-threshold settings (notably σ = 0.08). The values
+  0.68 / 0.83 / 0.92 are corrected nominal ratios r_nominal (nominal
+  monitor-model τ_violation = 205.8 s), not plant-physical ratios — the
+  per-run Monte Carlo ratios remain named r_plant. The 190 s point is the
+  last tested P3.1 grid point, not the compile-time limit: 195 s is the
+  last compilable arming delay under the declared nominal model and
+  constraint set; 196 s is rejected.
 - **READMEs** (EN/FR, `ram_p3/README.md`, `paper/README.md`) carry the same
   corrections, definitions and numbers as the paper.
 - No campaign re-run, no scenario retuned, no data modified. The sensitivity

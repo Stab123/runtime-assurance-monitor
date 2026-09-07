@@ -9,9 +9,11 @@ be interpreted as the physical time-to-violation of every Monte Carlo plant
 realization »); the compile-time wall formulation is tightened onto the
 declared nominal model, action bounds and constraint set; the sensitivity
 analysis now reports all three metrics (violations, fallback, delivery) per
-r_plant subpopulation — B dominates even in the most constraining decile
-(r_plant up to 1.88: 21.6 % fallback / 81.9 % delivery for B, against
-24.3 % / 73.3 % for D and worse for every C threshold) — and the decision
+r_plant subpopulation — B, C and D all show zero observed violations in
+the tested P3.1 configurations; under this equal observed safety outcome,
+B achieves the lowest fallback rate and the highest mission delivery, even
+in the most constraining decile (r_plant up to 1.88: 21.6 % / 81.9 % for B,
+against 24.3 % / 73.3 % for D and worse for every C threshold) — and the decision
 **not** to launch a retuned P3.2 campaign is substantiated (choosing margins,
 bounds or a scenario after the fact to force a B transition would fabricate
 the desired outcome; any new campaign requires a new pre-registered
@@ -35,7 +37,8 @@ four points of the v2 text are stale:
 1. **The ratio r (§7).** v2 states the §7 condition qualitatively — hardening
    can only pay where fallback authority is marginal relative to
    time-to-violation. That regime has since been measured (P3/P3.1): with the
-   formal τ_violation = 205.8 s, the physical r values are 0.68 / 0.83 / 0.92,
+   nominal monitor-model τ_violation = 205.8 s, the corrected nominal ratios
+   r_nominal are 0.68 / 0.83 / 0.92,
    and the marginal regime turns out to be **non-deployable** (next point).
 2. **The wall.** v2 §3.3 quotes the pre-correction compile-time check
    (« 120 s passes with a worst-case SoC of 0.3575; 300 s is rejected »). After

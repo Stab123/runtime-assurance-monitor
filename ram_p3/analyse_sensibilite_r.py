@@ -23,7 +23,7 @@ dSoC/dt = −(I_BASE + u) / (C_BATT × 3600), d'où :
     τ_violation,plant = 0,02 × C_BATT / (I_BASE + 3) × 3600   [s]
 
 Sous-populations : r_plant < 0,95 ; 0,95 ≤ r_plant ≤ 1,05 ; r_plant > 1,05
-(bande de ±5 % autour de 1, choisie a priori). Comparaison B/D/C dans le
+(bande de ±5 % autour de 1, choisie pour l'analyse rétrospective). Comparaison B/D/C dans le
 décile des r_plant les plus élevés (30 runs).
 
 Usage :
