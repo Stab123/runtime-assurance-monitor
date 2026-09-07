@@ -168,6 +168,8 @@ The seeds are in the configuration files, the SHA-256 module fingerprints in the
 
 **Code provenance.** Four interaction defects were found by adversarial review while the test suite was entirely green. They were all fixed **before** the first campaign: the monitor-module fingerprints are identical in the P2.1, P2.2 and P2.3 results files; only the campaign pilot differs. No reported result was produced by that defective code. Two further defects were found later (September 2026 correction note at the top): the published results had been produced by the affected code, so all campaigns were re-run with unchanged configurations — every qualitative conclusion held. The P2.1 pilot (three arms) was edited in place to become the four-arm version, and the execution environment kept no copy of it: its fingerprint remains verifiable in `resultats_p2_1.json`, and replaying the P2.1 configuration with the four-arm version reproduces arms A, B and C run by run — full rationale in `empreintes/README.md`.
 
+**Pre-registration and archiving.** Every campaign configuration was committed before its execution — the git history carries the config-before-results order for P2.1, P2.2, P2.3 and P3.1. That history is now timestamped in two independent, non-rewritable archives: Zenodo (concept DOI [10.5281/zenodo.22552147](https://doi.org/10.5281/zenodo.22552147), one version DOI per release) and [Software Heritage](https://archive.softwareheritage.org/), which preserves the full git graph. The release tags are annotated but not GPG-signed; timestamping and integrity are covered by these two archives.
+
 ---
 
 ## References
