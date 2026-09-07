@@ -2,6 +2,43 @@
 
 All notable changes to this repository are documented here.
 
+## [v1.3] — 2026-09-09
+
+P3/P3.1 interpretation release — no change to code, configurations, data or
+results. P2 remains strictly frozen (bit-for-bit identical).
+
+- **Paper v5** (`paper/`, FR/EN — scientifically identical). Changes from v4:
+  - the nominal-model vs real-plant distinction is stated explicitly, with
+    the sentence: « The 205.8 s value is derived from the nominal monitor
+    model and should not be interpreted as the physical time-to-violation of
+    every Monte Carlo plant realization. »;
+  - the compile-time wall formulation is tightened: « Under the declared
+    nominal monitor model, action bounds and constraint set, compile-time
+    validation rejects configurations beyond the identified arming-delay
+    boundary. » — still not a general physical impossibility;
+  - the sensitivity analysis now reports **all three metrics** (violations,
+    fallback, delivery) per r_plant subpopulation: in the most constraining
+    decile (τ_arming = 190 s, r_plant 1.73–1.88), arm A violates 14/30 runs
+    while B keeps zero observed violation with 21.6 % fallback and 81.9 %
+    delivery, against 24.3 % / 73.3 % for D and worse for every C threshold
+    (up to 99.6 % / 0.4 %). B dominates exactly where r_plant > 1;
+  - the decision **not** to launch a retuned P3.2 campaign is substantiated:
+    selecting margins, plant bounds or a scenario after the fact to force a
+    B transition would fabricate the desired outcome; the frozen H4
+    criterion stands (P3.1 inconclusive for H4) and any new campaign
+    requires a new pre-registered protocol;
+  - defect no. 8 (`dt_s`) is clarified: P3.1 imports the same frozen
+    campaign module as P2.3 (`ram_p2/campagne_p2.py`, unmodified — the
+    bit-for-bit non-regression rests on this identity), so the defect covers
+    P3 executions identically; `dt_s` = 5.0 s = `DT` in `config_p3_1.json`
+    as in every frozen configuration — zero numerical impact, documented,
+    not fixed.
+- **READMEs** (EN/FR, `ram_p3/README.md`, `paper/README.md`) carry the same
+  corrections, definitions and numbers as the paper.
+- No campaign re-run, no scenario retuned, no data modified. The sensitivity
+  JSON (`ram_p3/resultats_sensibilite_r.json`) already contained the
+  per-subpopulation fallback/delivery metrics; only the reporting is new.
+
 ## [v1.2] — 2026-09-09
 
 Scope-correction release — no change to code, configurations, data or results.

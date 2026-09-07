@@ -1,24 +1,32 @@
 # paper/ — preprints
 
-## Status: v4 current
+## Status: v5 current
 
-The current version of the paper is **version 4** (September 2026). Changes
-from v3: the 205.8 s τ_violation is explicitly tied to the monitor's **nominal
-model** (C_BATT = 10 Ah, I_BASE = 0.5 A, u = 3 A, margin 0.02); a new
-retrospective sensitivity analysis covers the Monte Carlo plants' physical
-τ_violation (100.9–185.6 s; r_plant exceeds 1 for part of the runs — result
-unchanged); the compile-time wall's scope is conditioned on the declared
-nominal model and action bounds (not a general physical impossibility); the
-historical r labels (400 s reference) are distinguished from the **corrected
-r_nominal**; and an eighth defect (configuration `dt_s` ignored by the
-campaign layer, zero numerical impact, P2 code kept intact) is documented in
-Section 6:
+The current version of the paper is **version 5** (September 2026). Changes
+from v4: the nominal-model vs real-plant distinction is stated explicitly
+(« the 205.8 s value is derived from the nominal monitor model and should not
+be interpreted as the physical time-to-violation of every Monte Carlo plant
+realization »); the compile-time wall formulation is tightened onto the
+declared nominal model, action bounds and constraint set; the sensitivity
+analysis now reports all three metrics (violations, fallback, delivery) per
+r_plant subpopulation — B dominates even in the most constraining decile
+(r_plant up to 1.88: 21.6 % fallback / 81.9 % delivery for B, against
+24.3 % / 73.3 % for D and worse for every C threshold) — and the decision
+**not** to launch a retuned P3.2 campaign is substantiated (choosing margins,
+bounds or a scenario after the fact to force a B transition would fabricate
+the desired outcome; any new campaign requires a new pre-registered
+protocol); defect no. 8 (`dt_s`) is clarified as covering P3.1 identically,
+P3.1 importing the same frozen campaign module as P2.3. No data,
+configuration or campaign modified:
 
-- `QUAND_L_ENVELOPE_SUFFIT_v4_FR.pdf` — version 4, français (originale)
-- `WHEN_THE_ENVELOPE_SUFFICES_v4_EN.pdf` — version 4, English (translation)
+- `QUAND_L_ENVELOPE_SUFFIT_v5_FR.pdf` — version 5, français (originale)
+- `WHEN_THE_ENVELOPE_SUFFICES_v5_EN.pdf` — version 5, English (translation)
 
-Version 3 (`*_v3_*.pdf`) is kept for the record; version 2
-(`*_v2_*_superseded.pdf`) carries a SUPERSEDED banner on page 1.
+Version 4 (`*_v4_*.pdf`) is kept for the record: nominal vs plant
+τ_violation (100.9–185.6 s), corrected r_nominal vs historical labels,
+conditional wall, eighth defect documented. Version 3 (`*_v3_*.pdf`) is kept
+for the record; version 2 (`*_v2_*_superseded.pdf`) carries a SUPERSEDED
+banner on page 1.
 
 The **v2** PDFs predate the September 2026 code correction and the
 post-correction re-run. All qualitative conclusions are unchanged;
@@ -52,5 +60,5 @@ with [`figures/faire_figures.py`](../figures/faire_figures.py).
 
 Archived at Zenodo (concept DOI, always resolves to the latest version):
 [10.5281/zenodo.22552147](https://doi.org/10.5281/zenodo.22552147).
-Full correction protocol: [CHANGELOG.md](../CHANGELOG.md), entries v1.0-p3.1
-and v1.1.
+Full correction protocol: [CHANGELOG.md](../CHANGELOG.md), entries v1.0-p3.1,
+v1.1, v1.2 and v1.3.

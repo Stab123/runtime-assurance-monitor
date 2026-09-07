@@ -5,7 +5,7 @@
 §7 du papier conditionne l'utilité du durcissement (H4) à un régime où
 l'autorité du repli est marginale devant le temps-avant-violation :
 r = τ_armement / τ_violation proche de 1. Deux τ_violation sont à
-distinguer (papier v4, §5.4) : le **τ_violation nominal**, mesuré sur le
+distinguer (papier v5, §5.4) : le **τ_violation nominal**, mesuré sur le
 modèle nominal du moniteur (C_BATT = 10 Ah, I_BASE = 0,5 A, u = 3 A,
 marge 0,02, éclipse) — 205,8 s —, qui fixe l'échelle du **r_nominal**
 (0,58 en P2, τ = 120 s) ; et le **τ_violation,plant** de chaque plante
@@ -70,10 +70,36 @@ Résultats dans `resultats_sensibilite_r.json` :
 - le bras B reste à **zéro violation observée** dans toutes les
   sous-populations (r < 1, r ≈ 1, r > 1), y compris le décile des
   r_plant les plus élevés (où le bras A viole dans 14 runs/30) ;
+- dans ce décile le plus contraignant (τ = 190 s, r_plant 1,73–1,88),
+  B domine sur les **trois métriques** : 0 violation observée, 21,6 %
+  de repli, 81,9 % de livraison — contre 24,3 % / 73,3 % pour D et
+  pire pour chaque seuil de C (jusqu'à 99,6 % / 0,4 % au seuil le
+  plus strict ; A : 0 % de repli, 100 % de livraison, mais 14/30 runs
+  avec violation) ;
 - l'ordre des coûts B < D < C est inchangé partout.
+
+Conséquence : B restant à zéro violation observée là où le
+durcissement avait sa meilleure chance physique, **aucune campagne
+P3.2 ré-ajustée n'est scientifiquement justifiée** — choisir après
+coup marges, bornes ou scénario pour forcer une transition de B
+fabriquerait le résultat souhaité. Toute nouvelle campagne exigerait
+un protocole préenregistré nouveau, motivé indépendamment des
+présents résultats. P3.1 reste non concluante pour H4 au titre du
+critère figé.
 
 Exécution : `python3 ram_p3/analyse_sensibilite_r.py` (régénère
 `resultats_sensibilite_r.json`).
+
+## Note dt_s (défaut n° 8)
+
+`executer_p3_1.py` importe la couche campagne de `ram_p2/campagne_p2.py`
+**sans modification** — la non-régression bit à bit de P3.1 contre P2.3
+repose sur cette identité. Le défaut n° 8 (lecture de la constante `DT`
+au lieu du `dt_s` déclaré) couvre donc les exécutions P3 à l'identique.
+Impact numérique **nul** : `dt_s` = 5,0 s = `DT` dans `config_p3_1.json`
+comme dans toutes les configurations figées. Conformément à la règle
+« P2 figé », le module partagé n'est pas modifié : le défaut est
+documenté, non corrigé.
 
 ## Fichiers
 
