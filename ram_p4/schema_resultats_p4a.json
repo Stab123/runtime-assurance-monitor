@@ -1,0 +1,48 @@
+{
+  "schema": "resultats_p4a — v1.0 (pré-enregistré)",
+  "fichier": {
+    "meta": {
+      "campagne": "string — ex. P4a-confirmatory-v1",
+      "mode": "principal | reseed | dtctrl | pilote",
+      "statut": "CONFIRMATOIRE (principal) | CONTROLE (autres)",
+      "timestamp": "ISO-8601 UTC",
+      "hash_code": "SHA-256 des fichiers ram_p4/*.py (ajouté à l'exécution)",
+      "hash_config": "SHA-256 de config_p4a.json (ajouté à l'exécution)",
+      "commit_git": "SHA du commit de gel (ajouté à l'exécution)",
+      "versions": "Python/numpy/scipy/statsmodels (ajoutées à l'exécution)"
+    },
+    "runs": [
+      {
+        "run_id": "string — {mode}_b{biais:+}.2f_bloc{bloc_id:03d}",
+        "mode": "string",
+        "biais": "number — niveau de biais SoC signé",
+        "bloc_id": "integer — indice du point de design",
+        "params_plante": {
+          "C_BATT_AH": "number", "I_SUN": "number", "I_BASE": "number",
+          "soc0": "number", "H": "number (fixe)", "C_TH": "number (fixe)",
+          "temp0": "number (fixe)"
+        },
+        "graine_bruit": "integer — seed(label, bloc_id)",
+        "temoin_bloc": "SHA-256(paramètres, graine bruit) — témoin CRN",
+        "temoin_bruit": "number — bruit pur au cycle 1000 (indépendant de l'état)",
+        "cycles": "integer",
+        "Y": "0 | 1 — endpoint primaire (≥1 violation vraie du seuil brut)",
+        "violations_cycles": "integer",
+        "t_premiere_violation_s": "number | null",
+        "marge_min": "number — min(SoC_vrai − 0.35) sur le run",
+        "replis": "integer",
+        "taux_repli": "number",
+        "livraison": "number ∈ [0;1]",
+        "err_est_soc_moyenne": "number — erreur d'estimation réalisée",
+        "err_est_soc_max": "number",
+        "n_saturation": "integer — activations du clamp [0;1] du biais",
+        "duree_calcul_s": "number"
+      }
+    ]
+  },
+  "regles": [
+    "les données brutes ne sont jamais remplacées silencieusement",
+    "tout run exclu (invariant §14 du préenregistrement) reste dans le fichier avec log d'audit",
+    "les runs PILOT sont en quarantaine : jamais intégrés ni analysés pour la décision"
+  ]
+}
