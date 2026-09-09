@@ -1,6 +1,6 @@
 {
  "version_campagne": "P4a-confirmatory-v1",
- "statut": "PRE-ENREGISTRE \u2014 fig\u00e9 au commit de gel, avant toute ex\u00e9cution confirmatoire",
+ "statut": "PRE-ENREGISTRE \u2014 gel initial 6fd4c2280bebfba919e569fe182239863ba88d25 + amendement d'audit pre-data ; toujours avant toute ex\u00e9cution confirmatoire",
  "baseline": {
   "commit_v1_4_1": "2d4ce6a2cecc52778a2f5ebf649e2a128c6a8138",
   "doi": "10.5281/zenodo.22681860"
@@ -25,7 +25,7 @@
  ],
  "convention_signe": "b > 0 : l'estimation surestime le SoC vrai ; b < 0 : sous-estimation",
  "n_runs_par_niveau": 500,
- "n_total_max": 6700,
+ "n_total_max": 7300,
  "extensions": {
   "reseed": {
    "blocs_debut": 0,
@@ -38,8 +38,9 @@
     0.05
    ],
    "blocs_debut": 0,
-   "blocs_fin_exclue": 200,
-   "label": "DTCTRL"
+   "blocs_fin_exclue": 500,
+   "label": "NOISE",
+   "commentaire": "amendement pre-data : MEMES 500 blocs et MEMES graines NOISE que le principal \u2014 seul DT change (5 \u2192 2.5 s) ; classifications directement comparables (N identique), effet du DT isol\u00e9 de tout effet plante/bruit"
   }
  },
  "duree_s": 13500.0,
@@ -3577,5 +3578,6 @@
    "I_BASE": 0.2139200047766766,
    "soc0": 0.44102298392636274
   }
- ]
+ ],
+ "endpoint_primaire": "Y d\u00e9pend UNIQUEMENT de SoC_vrai < 0.35 ; d\u00e9passements thermiques enregistr\u00e9s s\u00e9par\u00e9ment comme diagnostic, jamais dans Y (amendement pre-data)"
 }

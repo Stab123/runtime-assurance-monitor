@@ -30,6 +30,7 @@ LARGEUR_MAX_IC_BSTAR = 0.02
 ALPHA_TENDANCE = 0.05
 ALPHA_BONFERRONI = 0.05 / 9
 SEUIL_EXCLUSION = 0.02  # >2 % de runs invalides -> niveau INCONCLUSIVE
+PROP_MIN_BOOT_DEFINI = 0.95  # A exige b* défini dans >= 95 % des répliques
 
 
 def wilson(x: int, n: int) -> tuple[float, float]:
@@ -119,9 +120,13 @@ def par_niveau(runs: list[dict]) -> dict:
     return out
 
 
-def test_tendance(groupes: dict) -> tuple[float, float]:
+def test_tendance(groupes: dict) -> tuple[float | None, float | None]:
     """Regression logistique p ~ b (niveaux >= 0), SE cluster-robust par bloc.
-    Retourne (pente, p unilaterale H1: pente > 0)."""
+    Retourne (pente, p unilaterale H1: pente > 0).
+    REGLE PRE-ENREGISTREE : si tous les Y des niveaux positifs sont identiques,
+    la pente est NON ESTIMABLE (separation complete) -> (None, None) ; aucun
+    test de tendance n'est interprete. Cela n'empeche pas la voie B si ses
+    autres criteres sont satisfaits."""
     import numpy as np
     import statsmodels.api as sm
     X, y, g = [], [], []
@@ -130,6 +135,8 @@ def test_tendance(groupes: dict) -> tuple[float, float]:
             X.append([1.0, b])
             y.append(r["Y"])
             g.append(r["bloc_id"])
+    if len(set(y)) <= 1:
+        return None, None
     m = sm.GLM(np.array(y), np.array(X), family=sm.families.Binomial()).fit(
         cov_type="cluster", cov_kwds={"groups": np.array(g)})
     pente = float(m.params[1])
@@ -172,7 +179,9 @@ def homogeneite(g_main: dict, g_re: dict) -> dict:
         x2, n2 = sum(r["Y"] for r in runs_r), len(runs_r)
         p = (x1 + x2) / (n1 + n2)
         if p in (0.0, 1.0):
-            res[b] = {"p_value": 1.0 if x1 == x2 else 0.0, "discordant": x1 != x2}
+            # p = 0 exige x1 = x2 = 0 ; p = 1 exige deux taux de 100 % :
+            # dans les deux cas les proportions sont IDENTIQUES — concordant.
+            res[b] = {"p_value": 1.0, "discordant": False}
             continue
         z = (x1 / n1 - x2 / n2) / math.sqrt(p * (1 - p) * (1 / n1 + 1 / n2))
         pv = 2 * (1 - norm.cdf(abs(z)))
@@ -235,19 +244,25 @@ def main():
     discordance_determinante = any(
         h["discordant"] for b, h in hom.items()
         if cls.get(b) == "F" or n_F == 0)
-    direction_rompue = pente_r is not None and pente > 0 and pente_r <= 0
+    direction_rompue = (pente_r is not None and pente is not None
+                        and pente > 0 and pente_r <= 0)
+    # pente NON ESTIMABLE (tous Y identiques) -> tendance_signif = False ;
+    # n'empeche ni B ni D, seulement A et la voie « monotone ».
+    tendance_signif = (p_tendance is not None
+                       and p_tendance < ALPHA_TENDANCE)
 
     if discordance_determinante or direction_rompue:
         verdict = "D"
     elif dt_concordant is False:
         verdict = "E"
-    elif n_S >= 1 and n_F >= 1 and p_tendance < ALPHA_TENDANCE and \
+    elif n_S >= 1 and n_F >= 1 and tendance_signif and \
             bs is not None and largeur is not None and \
-            largeur <= LARGEUR_MAX_IC_BSTAR:
+            largeur <= LARGEUR_MAX_IC_BSTAR and \
+            prop_def >= PROP_MIN_BOOT_DEFINI:
         verdict = "A"
     elif n_F == 0 and all(c == "S" for c in pos.values()):
         verdict = "B"
-    elif n_F >= 1 and not (p_tendance < ALPHA_TENDANCE):
+    elif n_F >= 1 and not tendance_signif:
         verdict = "C"
     else:
         verdict = "D"

@@ -12,10 +12,17 @@ Chaine d'injection exacte :
            -> ESTIMATEUR (algorithme fige, non modifie)
            -> MONITEUR (enveloppe seule : k_sigma = 0, seuil d'incertitude infini)
 
-Implementation : le biais est additif et commute avec le bruit ; passer
-x_mes = [clamp(x_vrai[0] + b), x_vrai[1]] a l'estimateur fige (qui ajoute nu
-lui-meme) produit exactement z' = z + b. clamp = saturation [0;1] sur le SoC
-biaise (comptee par run : n_saturation ; quasi-inerte dans D_physique).
+Implementation exacte (amendement pre-data, commit d'audit) : la sous-classe
+EstimateurEPSBiaisee forme explicitement z = x_vrai + nu (2 tirages gauss par
+cycle, meme ordre — CRN preserve), puis z' = (clip(z_SoC + b, 0, 1), z_temp),
+et applique ensuite l'arithmetique de mise a jour de l'estimateur fige,
+reprise a l'identique. Equivalence bit a bit avec l'estimateur fige verifiee
+a b = 0, clamp inerte (controle mecanique pre-commit). n_saturation compte
+les activations du clamp.
+
+Endpoint primaire : Y depend UNIQUEMENT de SoC_vrai < seuil_soc. Les
+depassements thermiques sont enregistres separement (diagnostic), jamais
+dans Y (amendement pre-data).
 
 CRN : pour un bloc j donne, memes parametres de plante et meme graine de bruit
 sur les 9 niveaux de biais. Temoin par run : SHA-256(parametres, graine bruit)
@@ -56,6 +63,47 @@ PARAMS_THERMIQUES_FIXES = {"H": 1.5e-3, "C_TH": 5e-4, "temp0": 20.0}
 CYCLE_TEMOIN = 1000
 
 
+class EstimateurEPSBiaisee(EstimateurEPS):
+    """Estimateur fige + injection exacte du pre-enregistrement §6.
+
+    z = x_vrai + nu est forme explicitement (2 tirages gauss par cycle, dans
+    le meme ordre que l'estimateur fige — le temoin CRN bruit_dernier reste
+    le bruit pur, comparable entre niveaux). Puis z' = (clip(z_SoC + b, 0, 1),
+    z_temp). L'arithmetique de mise a jour (prediction, innovation, alpha,
+    EWMA variance/biais, sigma) est reprise a l'identique de la classe figee.
+    """
+
+    def __init__(self, *args, biais_soc: float = 0.0, **kw):
+        super().__init__(*args, **kw)
+        self._biais_inj = biais_soc
+        self.n_saturation = 0
+
+    def maj(self, x_vrai, u_applique, rng, facteur_bruit: float):
+        eps = [rng.gauss(0.0, self._bruit_std[i] * facteur_bruit)
+               for i in range(2)]
+        z = [x_vrai[i] + eps[i] for i in range(2)]
+        self.z_dernier = z
+        self.bruit_dernier = eps          # bruit pur — temoin CRN
+        # --- injection APRES le bruit : z' = clip(z + b) -------------------
+        zb0 = z[0] + self._biais_inj
+        if zb0 > 1.0 or zb0 < 0.0:
+            self.n_saturation += 1
+        z = [min(max(zb0, 0.0), 1.0), z[1]]
+        # --- arithmetique figee, inchangee ---------------------------------
+        if self.x is None:
+            self.x = list(z)
+            return list(self.x), list(self._bruit_std)
+        x_pred = list(self._m.pas(self.x, u_applique, self._dt))
+        innov = [z[i] - x_pred[i] for i in range(2)]
+        self.x = [x_pred[i] + self._alpha * innov[i] for i in range(2)]
+        b = self._beta
+        self._var = [(1 - b) * self._var[i] + b * innov[i] ** 2 for i in range(2)]
+        self._biais = [(1 - b) * self._biais[i] + b * innov[i] for i in range(2)]
+        sigma = [math.sqrt(self._var[i]) + abs(self._biais[i]) * self._horizon
+                 for i in range(2)]
+        return list(self.x), sigma
+
+
 def en_fenetre_payload(t: float, cfg: dict) -> bool:
     f = cfg["fenetre_payload"]
     return (t % PERIODE_ORBITE) >= f[0] and (t % PERIODE_ORBITE) < f[1] and \
@@ -75,18 +123,17 @@ def simuler_p4(biais_soc: float, params: dict, graine_bruit: int,
     moniteur = Moniteur(jeu, modele_mon, politique_repli_eps, dt,
                         TamponAnneau(cfg["capacite_tampon"]),
                         U_MIN, U_MAX, k_sigma=0.0)
-    estimateur = EstimateurEPS(modele_est, dt, cfg["bruit_std"],
-                               jeu.horizon_pas)
+    estimateur = EstimateurEPSBiaisee(modele_est, dt, cfg["bruit_std"],
+                                      jeu.horizon_pas, biais_soc=biais_soc)
 
     x_vrai = [params["soc0"], params["temp0"]]
     u_prec = 0.0
     n_cycles = int(cfg["duree_s"] / dt)
-    violations = replis = 0
+    violations = violations_temp = replis = 0
     e_demande = e_livree = 0.0
     marge_min = float("inf")
     t_premiere_violation = None
     err_somme = err_max = 0.0
-    n_saturation = 0
     temoin_bruit = None
     t = 0.0
     for k in range(n_cycles):
@@ -95,15 +142,9 @@ def simuler_p4(biais_soc: float, params: dict, graine_bruit: int,
         modele_mon.en_lumiere = lum
         modele_est.en_lumiere = lum
 
-        # --- BIAIS : z' = z + b sur le canal SoC, saturation [0;1] ---------
-        z_soc_biaise = x_vrai[0] + biais_soc
-        if z_soc_biaise > 1.0 or z_soc_biaise < 0.0:
-            n_saturation += 1
-        z_soc_biaise = min(max(z_soc_biaise, 0.0), 1.0)
-        x_mes = [z_soc_biaise, x_vrai[1]]
-
-        # facteur 1.0 : pas de fenetre de degradation en P4a
-        x_est, sig = estimateur.maj(x_mes, u_prec, rng, 1.0)
+        # facteur 1.0 : pas de fenetre de degradation en P4a. L'injection du
+        # biais a lieu DANS l'estimateur, apres formation de z = x_vrai + nu.
+        x_est, sig = estimateur.maj(x_vrai, u_prec, rng, 1.0)
         if k == CYCLE_TEMOIN:
             temoin_bruit = estimateur.bruit_dernier[0]   # bruit pur (CRN)
 
@@ -113,11 +154,14 @@ def simuler_p4(biais_soc: float, params: dict, graine_bruit: int,
         if r.verdict in (Verdict.REPLI, Verdict.INDETERMINE):
             replis += 1
 
-        # --- Metriques sur l'etat VRAI, seuils BRUTS (convention figee) ----
-        if x_vrai[0] < cfg["seuil_soc"] or x_vrai[1] > cfg["seuil_temp"]:
+        # --- Endpoint primaire : SoC VRAI contre seuil BRUT, uniquement ----
+        if x_vrai[0] < cfg["seuil_soc"]:
             violations += 1
             if t_premiere_violation is None:
                 t_premiere_violation = t
+        # Diagnostic thermique separe — n'entre JAMAIS dans Y (axe exclu).
+        if x_vrai[1] > cfg["seuil_temp"]:
+            violations_temp += 1
         marge_min = min(marge_min, x_vrai[0] - cfg["seuil_soc"])
         err = x_est[0] - x_vrai[0]
         err_somme += err
@@ -134,6 +178,7 @@ def simuler_p4(biais_soc: float, params: dict, graine_bruit: int,
         "cycles": n_cycles,
         "Y": 1 if violations > 0 else 0,
         "violations_cycles": violations,
+        "violations_temp_cycles_diagnostic": violations_temp,
         "t_premiere_violation_s": t_premiere_violation,
         "marge_min": marge_min,
         "replis": replis,
@@ -141,7 +186,7 @@ def simuler_p4(biais_soc: float, params: dict, graine_bruit: int,
         "livraison": e_livree / e_demande if e_demande > 0 else 1.0,
         "err_est_soc_moyenne": err_somme / n_cycles,
         "err_est_soc_max": err_max,
-        "n_saturation": n_saturation,
+        "n_saturation": estimateur.n_saturation,
         "temoin_bruit": temoin_bruit,
     }
 
@@ -152,8 +197,21 @@ def temoin_bloc(params: dict, graine_bruit: int) -> str:
     return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
 
-def executer(mode: str, cfg: dict, debut: int, fin: int) -> dict:
-    """Boucle de campagne. mode in {principal, reseed, dtctrl, pilote}."""
+def empreintes_code() -> dict:
+    out = {}
+    for f in sorted(RAM_P4.glob("*.py")):
+        out[f.name] = hashlib.sha256(f.read_bytes()).hexdigest()
+    return out
+
+
+def executer(mode: str, cfg: dict, debut: int, fin: int,
+             chemin_config: str, commit_sha: str) -> dict:
+    """Boucle de campagne. mode in {principal, reseed, dtctrl, pilote}.
+
+    DTCTRL (amendement pre-data) : MEMES 500 blocs et MEMES graines NOISE que
+    le principal pour les niveaux +0.02/+0.05 — seul DT change (5 -> 2.5 s) ;
+    la classification est donc directement comparable (N identique des deux
+    cotes), et l'effet du DT est isole de tout effet plante/bruit."""
     points = cfg["design_points"]
     niveaux = cfg["niveaux_biais"]
     if mode == "dtctrl":
@@ -162,7 +220,7 @@ def executer(mode: str, cfg: dict, debut: int, fin: int) -> dict:
     elif mode == "pilote":
         niveaux = [0.0, 0.10]
     label_bruit = {"principal": "NOISE", "reseed": "RESEED",
-                   "dtctrl": "DTCTRL", "pilote": "PILOT"}[mode]
+                   "dtctrl": "NOISE", "pilote": "PILOT"}[mode]
 
     runs = []
     for j in range(debut, min(fin, len(points))):
@@ -184,12 +242,24 @@ def executer(mode: str, cfg: dict, debut: int, fin: int) -> dict:
                 **res,
                 "duree_calcul_s": round(time.time() - t0, 3),
             })
+    import platform
+    versions = {"python": platform.python_version()}
+    for mod in ("numpy", "scipy", "statsmodels"):
+        try:
+            versions[mod] = __import__(mod).__version__
+        except Exception:
+            versions[mod] = None
     return {
         "meta": {
             "campagne": cfg["version_campagne"],
             "mode": mode,
             "statut": "CONFIRMATOIRE" if mode == "principal" else "CONTROLE",
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "hash_code": empreintes_code(),
+            "hash_config": hashlib.sha256(
+                open(chemin_config, "rb").read()).hexdigest(),
+            "commit_git": commit_sha,
+            "versions": versions,
         },
         "runs": runs,
     }
@@ -202,8 +272,11 @@ if __name__ == "__main__":
     ap.add_argument("--fin", type=int, default=500)
     ap.add_argument("--config", default=str(RAM_P4 / "config_p4a.json"))
     ap.add_argument("--sortie", default=None)
+    ap.add_argument("--commit-sha", required=True,
+                    help="SHA du HEAD Git au moment de l'execution (traced)")
     a = ap.parse_args()
     cfg = json.load(open(a.config))
     sortie = a.sortie or str(RAM_P4 / f"resultats_p4a_{a.mode}.json")
-    json.dump(executer(a.mode, cfg, a.debut, a.fin), open(sortie, "w"))
+    json.dump(executer(a.mode, cfg, a.debut, a.fin, a.config, a.commit_sha),
+              open(sortie, "w"))
     print(f"ecrit : {sortie}")

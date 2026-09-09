@@ -23,6 +23,9 @@ identiques (blocs CRN) ; (iv) insensibilité au DT.
 
 Y = 1 si SoC_vrai(t) < 0.35 à au moins un cycle du run, 0 sinon (seuil brut,
 niveau run, cycles non poolés). p_μ(b) = P_μD(Y=1 | b).
+**Y dépend uniquement du canal SoC** : un dépassement du seuil thermique est
+enregistré séparément comme diagnostic, et n'entre jamais dans Y (axe
+thermique exclu de P4a). *(amendement d'audit pré-data)*
 
 ## 3. Mesure expérimentale μ_D
 
@@ -75,10 +78,14 @@ PLANTE → MESURE z = x_vrai + ν (iid, échelle équivalente instrumentale :
 SoC/cycle) → **BIAIS : z′ = (z_SoC + b, z_temp)** → ESTIMATEUR (algorithme
 figé, non modifié) → MONITEUR (enveloppe seule : k_sigma = 0, seuil
 d'incertitude infini). b constant pendant tout le run, actif dès t = 0, unité
-SoC, saturation [0 ; 1] sur z′_SoC (comptée par run ; quasi-inerte dans
-D_physique). Canal température non affecté. Implémentation : le biais étant
-additif, il commute avec le bruit ; passer x_mes = (clamp(x_vrai[0] + b),
-x_vrai[1]) à l'estimateur figé produit exactement z′ = z + b. Alternatives
+SoC. Canal température non affecté. **Implémentation exacte (amendement
+d'audit pré-data)** : la sous-classe `EstimateurEPSBiaisee` forme
+explicitement z = x_vrai + ν (2 tirages gauss par cycle, même ordre que
+l'estimateur figé — CRN préservé), puis z′ = (clip(z_SoC + b, 0, 1), z_temp),
+et applique ensuite l'arithmétique de mise à jour de l'estimateur figé,
+reprise à l'identique ; l'équivalence bit à bit avec l'estimateur figé à
+b = 0, clamp inerte, est vérifiée mécaniquement avant le commit. Les
+activations du clamp sont comptées par run (n_saturation). Alternatives
 (biais sur l'état de l'estimateur, biais sur la capacité estimée) :
 extensions P4a.2, hors P4a.
 
@@ -108,8 +115,11 @@ p = 0.10 (≥ 0.82 à p = 0.08).
 N = 500 runs/niveau × 9 niveaux = **4500** (voir `analysis_plan_p4a.md` :
 Wilson, puissances, simulation Bernoulli à hypothèses déclarées). Extensions
 préenregistrées : +1800 runs RESEED (blocs 0–199, 9 niveaux, famille RESEED) ;
-+400 runs DTCTRL (niveaux +0.02/+0.05, blocs 0–199, DT = 2.5 s).
-**N total maximal = 6700.** Aucun ajustement après observation.
++1000 runs DTCTRL *(amendement d'audit pré-data)* : niveaux +0.02/+0.05,
+**mêmes 500 blocs et mêmes graines NOISE que le principal** — seul DT change
+(5 → 2.5 s), donc classifications directement comparables (N identique des
+deux côtés) et effet du DT isolé de tout effet plante/bruit.
+**N total maximal = 7300.** Aucun ajustement après observation.
 
 ## 10. CRN
 
@@ -126,6 +136,10 @@ des témoins entre niveaux d'un même bloc.
   standards cluster-robust par bloc de nuisance, test unilatéral β > 0,
   α = 0.05. L'ajustement isotonique est descriptif ; la monotonie n'est pas
   « prouvée » par le modèle qui l'impose (diagnostic : comptage d'inversions).
+  *(amendement d'audit pré-data)* **si tous les Y des niveaux positifs sont
+  identiques, la pente logistique est NON ESTIMABLE (séparation complète) ;
+  aucun test de tendance n'est interprété — cela n'empêche pas la voie B si
+  ses autres critères sont satisfaits.** Même traitement pour RESEED.
 - **Frontière** : l'ajustement isotonique (PAVA, non décroissant) porte sur les
   niveaux {0 ; +0.01 ; +0.02 ; +0.05 ; +0.10}.
   **b\* = plus petite valeur positive b telle que p_iso(b) ≥ εF**, avec cas
@@ -139,11 +153,15 @@ des témoins entre niveaux d'un même bloc.
   niveau), mêmes règles de plateau à chaque réplique ; largeur calculée sur les
   répliques où b\* est défini (proportion rapportée). **Largeur maximale
   acceptée : 0.02** ; dépassement → INCONCLUSIF sur la localisation.
+  *(amendement d'audit pré-data)* **A exige de plus que b\* soit défini dans
+  ≥ 95 % des 2000 répliques bootstrap ; sinon D — INCONCLUSIF sur la
+  localisation.**
 
 ## 12. Conclusions globales (automatiques)
 
 - **A — FRONTIÈRE SUPPORTÉE** : ≥ 1 S, ≥ 1 F, tendance significative, b\*
-  localisé, IC(b\*) ≤ 0.02, RESEED concordant, contrôle DT concordant.
+  localisé, IC(b\*) ≤ 0.02, b\* défini dans ≥ 95 % des répliques bootstrap,
+  RESEED concordant, contrôle DT concordant.
 - **B — FRONTIÈRE NON TROUVÉE DANS D** : aucune région F, précision suffisante.
   Formulation imposée : « aucune frontière n'a été identifiée dans le domaine
   confirmatoire testé à la résolution statistique préenregistrée ».
@@ -195,8 +213,11 @@ remplacées silencieusement.
   conclusion globale (tout niveau F ; tout niveau si la conclusion est B), ou
   violation de (b) → conclusion globale D (cause rapportée). Cette règle
   n'invalide aucune donnée : elle classe la force de la conclusion.
-- **DTCTRL** : niveaux +0.02/+0.05 × 200 blocs à DT = 2.5 s ; flip de
-  classification → issue E candidate.
+- **DTCTRL** *(amendement d'audit pré-data)* : niveaux +0.02/+0.05 × les
+  **mêmes 500 blocs et mêmes graines NOISE que le principal**, à DT = 2.5 s ;
+  flip de classification → issue E candidate. La comparaison porte sur des N
+  identiques (500 contre 500) : aucun nouveau seuil statistique n'est
+  introduit, et l'effet du DT est isolé (plante et bruit identiques).
 - **Pilote exploratoire** (≤ 100 runs, b ∈ {0 ; +0.10}, seeds PILOT) :
   vérifications automatiques de plomberie uniquement (complétion, témoins CRN,
   hashes), résultats en quarantaine, jamais intégrés ni analysés pour la

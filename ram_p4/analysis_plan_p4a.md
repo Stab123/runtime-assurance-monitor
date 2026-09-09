@@ -58,11 +58,24 @@ E du protocole ; la largeur cible IC(b\*) ≤ 0.02 est atteinte avec marge.
 |---|---|
 | Principal (9 niveaux × 500 blocs) | 4500 |
 | RESEED (9 niveaux × 200 blocs) | 1800 |
-| DTCTRL (2 niveaux × 200 blocs, DT = 2.5 s) | 400 |
-| **Total maximal** | **6700** |
+| DTCTRL (2 niveaux × 500 blocs, DT = 2.5 s) — amendement pré-data | 1000 |
+| **Total maximal** | **7300** |
 
-Mesure de charge (code P2 figé, b = 0, exploratoire) : ≈ 0.53 s/run →
-≈ 60 min de calcul. Aucun ajustement de N après observation.
+Mesure de charge (code P2 figé, b = 0, exploratoire) : ≈ 0.53 s/run à
+DT = 5 s (≈ 1.06 s à DT = 2.5 s) → ≈ 90 min de calcul. Aucun ajustement de
+N après observation.
+
+**DTCTRL (amendement pré-data)** : mêmes 500 blocs et mêmes graines NOISE que
+le principal ; seul DT change. Les classifications (N = 500 des deux côtés)
+sont directement comparables — une discordance ne peut plus être un artefact
+de résolution (0/200 → T aurait faussement contredit 0/500 → S).
+
+**Cas non estimable (amendement pré-data)** : si tous les Y des niveaux
+positifs sont identiques, la pente logistique est NON ESTIMABLE ; aucun test
+de tendance n'est interprété, sans bloquer la voie B. Même traitement RESEED.
+
+**Localisation (amendement pré-data)** : A exige b\* défini dans ≥ 95 % des
+2000 répliques bootstrap, en plus de la largeur d'IC ≤ 0.02.
 
 ## 5. Analyse (script unique `analyse_p4a.py`)
 
