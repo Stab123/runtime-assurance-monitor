@@ -1,0 +1,63 @@
+# OCV(SoC) cellule Panasonic NCR18650B — donnees sourcees, aucune simulation
+# Source : Dubarry et al., HNEI, rapport de caracterisation NCR18650B, Figure 6 (cellule 103)
+# Mesure : moyenne charge/decharge C/25 (quasi-OCV), temperature ambiante
+# Numerisation : rendu PDF 200 dpi (page index 9), pixels dominants bleus (B-R>50, B>120),
+#   boite d'axe x[389,1366]px=SOC[0,100]%, y[1051.5,1472.5]px=V[4.2,2.6]V,
+#   mediane du faisceau dans fenetre +/-3px, pas 2% SOC
+# Precision : +/-10 mV sauf SOC<2% : segment quasi-vertical (chute finale C/25),
+#   valeur centrale retenue, incertitude locale +/-0.1 V ; zone hors condition
+#   initiale (soc0 >= 0.40) mais potentiellement atteignable dynamiquement
+# Interpolation : lineaire entre points
+# Date : 2026-09-10
+soc_pct,ocv_v
+0,2.834
+2,3.162
+4,3.282
+6,3.316
+8,3.332
+10,3.349
+12,3.370
+14,3.400
+16,3.427
+18,3.451
+20,3.476
+22,3.499
+24,3.514
+26,3.529
+28,3.543
+30,3.556
+32,3.567
+34,3.579
+36,3.588
+38,3.598
+40,3.609
+42,3.620
+44,3.632
+46,3.643
+48,3.658
+50,3.676
+52,3.693
+54,3.715
+56,3.734
+58,3.757
+60,3.776
+62,3.795
+64,3.814
+66,3.833
+68,3.848
+70,3.864
+72,3.883
+74,3.898
+76,3.913
+78,3.932
+80,3.951
+82,3.970
+84,3.993
+86,4.016
+88,4.042
+90,4.061
+92,4.084
+94,4.103
+96,4.122
+98,4.145
+100,4.179

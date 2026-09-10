@@ -1,0 +1,33 @@
+# Parametres Thevenin ordre 1 (Rs, Rp, Cp) cellule NMC 18650 3,5 Ah NEUVE, 23 C — donnees sourcees, aucune simulation
+# Source : Thingvad et al. (DTU), Fig. 6A (Rs), Fig. 7A (Rp @20min), Fig. 8A (Cp),
+#   set A (4 cellules neuves), test C : decharge CC 1C par pas de 0,3 Ah, relaxation 20 min
+# Definitions (source) : Rs = chute ohmique immediate ; Rp-Cp = polarisation transitoire ;
+#   tau = Rp*Cp (table corrigee : 86-338 s ; tau/900s = 0.10-0.38)
+# CORRECTION v0.5 (audit pre-data) : calibrations y des Fig. 7A et 8A de la v0.3
+#   erronees -> Rp et Cp re-extraits. Erreur objective demontree par gridlines,
+#   labels d'axes et axe solide ; correction documentee dans P4B_PHASE0_PHYSICAL_BASIS.md
+# Numerisation : rendu PDF 200 dpi (page index 5), pixels dominants bleus, fenetre +/-3px,
+#   valeur = p35 du faisceau (mediane fournie pour transparence)
+#   Fig.6A : x SOC[0..100]=221+58.0px/10% (gridlines verifiees) ; y(140mOhm)=1173, y(20mOhm)=1350 (axe solide)
+#   Fig.7A : x SOC[0..90]=940+58.67px/10% ; y(0mOhm)=443 (axe solide), y(80mOhm)=263 (gridlines 20mOhm/45px)
+#   Fig.8A : x SOC[0..100]=931+6.15px/% (gridlines) ; y(0kF)=1245, y(20kF)=1095 (sous-grille 15px/2kF)
+#   legende Fig.8A exclue (x 1030-1400, y 1070-1110)
+# Precision : Rs/Rp +/-3 mOhm ; Cp +/-1.0 kF ; recouvrement marqueurs SOC=10% signale
+# Rp ET Cp non mesures a SOC=100% : NaN ; regle d'extension gelee : clamp Rp(90)/Cp(90)
+#   (Rp : justifie par la source DTU "Rp is stable for SOC above 25%" ;
+#    Cp : regle methodologique de cloture de frontiere, NON tiree de la source ;
+#    aucun trend invente dans les deux cas)
+# rtot_p35 = rs_p35 + rp_p35 : asymptote quasi-stationnaire (t >> tau) UNIQUEMENT,
+#   JAMAIS une chute instantanee (modele retenu = Thevenin ordre 1 explicite)
+soc_pct,rs_median_mohm,rs_p35_mohm,rp_median_mohm,rp_p35_mohm,cp_median_kf,cp_p35_kf,rtot_p35_mohm
+0,41.6,42.9,65.8,66.6,4.0,4.0,109.5
+10,42.2,43.1,38.7,40.9,6.0,6.2,84.0
+20,39.9,40.9,27.1,28.0,6.7,7.1,68.9
+30,37.5,38.9,22.7,23.9,3.6,3.9,62.8
+40,37.5,38.2,27.6,28.4,5.5,5.8,66.6
+50,38.2,38.9,25.3,26.7,4.3,4.5,65.6
+60,37.5,38.2,20.9,21.3,8.5,8.8,59.5
+70,36.9,38.2,23.1,24.0,13.5,14.1,62.2
+80,38.2,39.6,25.8,26.7,5.6,5.9,66.3
+90,42.9,44.3,19.1,20.0,4.1,4.3,64.3
+100,53.7,55.7,NaN,NaN,NaN,NaN,NaN
