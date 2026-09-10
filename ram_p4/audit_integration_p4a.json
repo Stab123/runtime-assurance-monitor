@@ -1,0 +1,121 @@
+{
+ "audit": "intégrité mécanique P4a — pré-livraison, aucune statistique de Y calculée",
+ "date_utc": "2026-09-10T11:02:46Z",
+ "commit_gel": "6cc002e965727f32cebc537194e7424b1fcc8922",
+ "hash_config": "e8e8fd32c3b8be7cf69bbb723154f645ade3b1d006013a77ccdd59b40d46feb5",
+ "hash_code": {
+  "analyse_p4a.py": "d89c566e8eb41b864c960248fe58a9fc32f5f6b6400cc1530d586fa6a6b3be66",
+  "campagne_p4a.py": "a571bf35f97268d97db44943dc864b34c6b80af384bd1051256fbdb7b0222144",
+  "generer_design.py": "f6d354a33292a887c8be8264802944d59f5a75309ba52218ecf9c72ba2090963",
+  "graines_p4.py": "cbb7b53b916ea09703edac7213af7d451a8146081b7b722784b9702a26269ed3"
+ },
+ "versions_execution": {
+  "python": "3.12.12",
+  "numpy": "2.2.5",
+  "scipy": "1.16.2",
+  "statsmodels": "0.14.5"
+ },
+ "verifications": {
+  "total_7300": {
+   "ok": true,
+   "detail": "7300"
+  },
+  "doublons": {
+   "ok": true,
+   "detail": "0"
+  },
+  "comptes_4500_1800_1000": {
+   "ok": true,
+   "detail": "{'principal': 4500, 'reseed': 1800, 'dtctrl': 1000}"
+  },
+  "plan_exact": {
+   "ok": true,
+   "detail": "manquants=0 en_trop=0"
+  },
+  "principal_9x500": {
+   "ok": true,
+   "detail": "9 niveaux"
+  },
+  "reseed_9x200": {
+   "ok": true,
+   "detail": "9 niveaux"
+  },
+  "dtctrl_2x500": {
+   "ok": true,
+   "detail": "[0.02, 0.05]"
+  },
+  "graines_recalculees": {
+   "ok": true,
+   "detail": "ecarts=0"
+  },
+  "temoin_bloc_recalcule": {
+   "ok": true,
+   "detail": "ecarts=0"
+  },
+  "crn_principal": {
+   "ok": true,
+   "detail": "9 niveaux / meme bruit par bloc"
+  },
+  "crn_reseed": {
+   "ok": true,
+   "detail": "idem"
+  },
+  "crn_dtctrl": {
+   "ok": true,
+   "detail": "idem"
+  },
+  "reseed_famille_distincte": {
+   "ok": true,
+   "detail": "RESEED != NOISE sur 200 blocs"
+  },
+  "dtctrl_identique_sauf_dt": {
+   "ok": true,
+   "detail": "params+graine+temoins egaux"
+  },
+  "cycles_2700_5400": {
+   "ok": true,
+   "detail": "dt 5s -> 2700, dt 2.5s -> 5400"
+  },
+  "bloc_id_sequence": {
+   "ok": true,
+   "detail": "0..499"
+  },
+  "params_egal_config": {
+   "ok": true,
+   "detail": "4 facteurs tires du design"
+  },
+  "schema_cles_types": {
+   "ok": true,
+   "detail": "ecarts=0 (champ diagnostic thermique inclus)"
+  },
+  "exclusions": {
+   "ok": true,
+   "detail": "0 run exclu — journal vide, 7300/7300 presents"
+  },
+  "code_identique_commit_gel": {
+   "ok": true,
+   "detail": "4/4 fichiers ram_p4/*.py + config_p4a.json bit à bit identiques au commit 6cc002e9 (vérifié via API GitHub)"
+  },
+  "note_schema": {
+   "ok": true,
+   "detail": "les runs portent 21 clés ; le schéma gelé en liste 20 — le champ violations_temp_cycles_diagnostic (amendement pré-data, Y SoC-seul + diagnostic thermique séparé) n'y est pas listé ; écart documentaire connu, sans impact données"
+  }
+ },
+ "fichiers_livres": {
+  "principal": {
+   "fichier": "/mnt/agents/output/resultats_p4a_principal.json",
+   "n_runs": 4500,
+   "sha256": "ebd6ccf0d3dea71cde4921551405f2c0128230ca3aa173d1895f877284f1586a"
+  },
+  "reseed": {
+   "fichier": "/mnt/agents/output/resultats_p4a_reseed.json",
+   "n_runs": 1800,
+   "sha256": "be377f9b0befc244b7946af2af7ee0f7db3ccf98c8499a27e7682d0fad81282e"
+  },
+  "dtctrl": {
+   "fichier": "/mnt/agents/output/resultats_p4a_dtctrl.json",
+   "n_runs": 1000,
+   "sha256": "3e27973e82adc68064fc705a418a3e2157193acba4097a7cf33a4827a8271f06"
+  }
+ }
+}
