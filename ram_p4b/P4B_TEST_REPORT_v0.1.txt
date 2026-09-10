@@ -1,0 +1,222 @@
+RAPPORT DE TESTS P4b — SUITE SYNTHÉTIQUE (aucun résultat scientifique)
+Date UTC : 2026-09-10T20:27:04Z
+Python : Python 3.12.12
+Commande : python3 -m unittest discover -s tests -p 'test_*.py' -v
+Périmètre : 9 fichiers de tests, cas SYNTHÉTIQUES/JOUETS uniquement — aucun bloc du design gelé, aucune graine P4b, aucune exécution de la plante sur le scénario gelé 13 500 s.
+
+test_equivalence_bornes_seuils_exhaustive (test_analyse_p4b.TestClassification.test_equivalence_bornes_seuils_exhaustive)
+Les deux méthodes (bornes §5 / seuils entiers §6) coïncident ... ok
+test_seuils_entiers (test_analyse_p4b.TestClassification.test_seuils_entiers) ... ok
+test_seuils_entiers_refusent_autre_n (test_analyse_p4b.TestClassification.test_seuils_entiers_refusent_autre_n) ... ok
+test_fraction_sur_runs_valides (test_analyse_p4b.TestFractionFlag.test_fraction_sur_runs_valides) ... ok
+test_frontiere_intervalle (test_analyse_p4b.TestMonotonie.test_frontiere_intervalle) ... ok
+test_inversion_dure (test_analyse_p4b.TestMonotonie.test_inversion_dure) ... ok
+test_low_resolution_strict (test_analyse_p4b.TestMonotonie.test_low_resolution_strict)
+LOW RESOLUTION ssi largeur > 0.250 STRICT (§10) : 0.250 exact ... ok
+test_cas_A_a_J (test_analyse_p4b.TestVerdicts.test_cas_A_a_J)
+Couverture des cas du mandat (§12). ... ok
+test_exhaustivite_partition (test_analyse_p4b.TestVerdicts.test_exhaustivite_partition)
+Les cas V1–V7 partitionnent l'espace des labels : les 3^9 ... ok
+test_labels_incomplets_refuses (test_analyse_p4b.TestVerdicts.test_labels_incomplets_refuses) ... ok
+test_v0_invalide_technique (test_analyse_p4b.TestVerdicts.test_v0_invalide_technique) ... ok
+test_v0_prioritaire_sur_tout (test_analyse_p4b.TestVerdicts.test_v0_prioritaire_sur_tout) ... ok
+test_v0b_garde_fou_strict (test_analyse_p4b.TestVerdicts.test_v0b_garde_fou_strict)
+Fraction > 25 % STRICT (§9) : 25.000 % exact ne déclenche PAS. ... ok
+test_v1_tout_suffisant (test_analyse_p4b.TestVerdicts.test_v1_tout_suffisant) ... ok
+test_v2_baseline_insuffisant (test_analyse_p4b.TestVerdicts.test_v2_baseline_insuffisant) ... ok
+test_v2_prioritaire_sur_inversion (test_analyse_p4b.TestVerdicts.test_v2_prioritaire_sur_inversion)
+Cas J du §12 : V2 ∧ inversion dure → V2, inversion documentée. ... ok
+test_v3_inversion (test_analyse_p4b.TestVerdicts.test_v3_inversion) ... ok
+test_v4_low_resolution (test_analyse_p4b.TestVerdicts.test_v4_low_resolution) ... ok
+test_v4_transition (test_analyse_p4b.TestVerdicts.test_v4_transition) ... ok
+test_v5_borne_superieure (test_analyse_p4b.TestVerdicts.test_v5_borne_superieure) ... ok
+test_v6_borne_inferieure (test_analyse_p4b.TestVerdicts.test_v6_borne_inferieure) ... ok
+test_v7_inconclusif (test_analyse_p4b.TestVerdicts.test_v7_inconclusif) ... ok
+test_bornes_dans_0_1 (test_analyse_p4b.TestWilson.test_bornes_dans_0_1) ... ok
+test_valeurs_documentees (test_analyse_p4b.TestWilson.test_valeurs_documentees)
+Valeurs du §6 : Wilson99.44(34/5500) ≈ [0.0039 ; 0.0099] ; ... ok
+test_z_gele (test_analyse_p4b.TestWilson.test_z_gele) ... ok
+test_aucune_regeneration_design (test_campagne_toy_p4b.TestCampagneToy.test_aucune_regeneration_design)
+La campagne LIT le design gelé ; la graine PLANT n'est jamais ... ok
+test_campagne_arretee_sur_run_invalide (test_campagne_toy_p4b.TestCampagneToy.test_campagne_arretee_sur_run_invalide)
+§12 V0 : « campagne arrêtée, cause documentée » — la boucle ... ok
+test_coherence_descripteurs (test_campagne_toy_p4b.TestCampagneToy.test_coherence_descripteurs) ... ok
+test_crn_temoin_identique_entre_niveaux (test_campagne_toy_p4b.TestCampagneToy.test_crn_temoin_identique_entre_niveaux) ... ok
+test_determinisme_bit_a_bit (test_campagne_toy_p4b.TestCampagneToy.test_determinisme_bit_a_bit) ... ok
+test_drapeau_hors_domaine (test_campagne_toy_p4b.TestCampagneToy.test_drapeau_hors_domaine)
+Charge forte jouet : SoC > 1 → drapeau, premier instant, durée ; ... ok
+test_endpoint_inegalite_stricte (test_campagne_toy_p4b.TestCampagneToy.test_endpoint_inegalite_stricte)
+Y = 1{V_min < 5.0} : l'égalité exacte n'est PAS une violation. ... ok
+test_endpoint_toutes_phases (test_campagne_toy_p4b.TestCampagneToy.test_endpoint_toutes_phases)
+V_min est pris sur TOUTES les phases, y compris charge : le ... ok
+test_enregistrement_complet_conforme_schema (test_campagne_toy_p4b.TestCampagneToy.test_enregistrement_complet_conforme_schema) ... ok
+test_enregistrement_invalide_conforme_schema (test_campagne_toy_p4b.TestCampagneToy.test_enregistrement_invalide_conforme_schema) ... ok
+test_graine_bruit_change_le_run (test_campagne_toy_p4b.TestCampagneToy.test_graine_bruit_change_le_run) ... ok
+test_grille_rho_exacte (test_campagne_toy_p4b.TestCampagneToy.test_grille_rho_exacte) ... ok
+test_nan_detecte_invalide (test_campagne_toy_p4b.TestCampagneToy.test_nan_detecte_invalide)
+NaN dans l'état → INVALID_TECHNIQUE (via plante dégradée jouet). ... ok
+test_repli_du_moniteur_applique (test_campagne_toy_p4b.TestCampagneToy.test_repli_du_moniteur_applique)
+Cas jouet avec soc0 proche du seuil : le moniteur B doit ... ok
+test_run_interrompu_invalide (test_campagne_toy_p4b.TestCampagneToy.test_run_interrompu_invalide)
+Exception en cours de run → INVALID_TECHNIQUE, Y = null. ... ok
+test_sans_drapeau_champs_coherents (test_campagne_toy_p4b.TestCampagneToy.test_sans_drapeau_champs_coherents) ... ok
+test_sans_intervention_livraison_complete (test_campagne_toy_p4b.TestCampagneToy.test_sans_intervention_livraison_complete) ... ok
+test_soc_invariant_en_rho (test_campagne_toy_p4b.TestCampagneToy.test_soc_invariant_en_rho)
+Conséquence structurelle §7 : SoC identique aux 9 niveaux (CRN). ... ok
+test_conforme (test_controles_p4b.TestDtctrl.test_conforme) ... ok
+test_difference_sans_effet (test_controles_p4b.TestDtctrl.test_difference_sans_effet) ... ok
+test_divergent_change_verdict (test_controles_p4b.TestDtctrl.test_divergent_change_verdict) ... ok
+test_cardinaux_differents (test_controles_p4b.TestRerun.test_cardinaux_differents) ... ok
+test_cross_plateforme_tolerance (test_controles_p4b.TestRerun.test_cross_plateforme_tolerance) ... ok
+test_divergence_un_ulp (test_controles_p4b.TestRerun.test_divergence_un_ulp)
+Même plateforme : un seul ulp d'écart sur V_min = divergence. ... ok
+test_identique_bit_a_bit (test_controles_p4b.TestRerun.test_identique_bit_a_bit) ... ok
+test_y_identique_obligatoire_meme_cross_plateforme (test_controles_p4b.TestRerun.test_y_identique_obligatoire_meme_cross_plateforme) ... ok
+test_bloc_apparie (test_controles_p4b.TestTemoinsCRN.test_bloc_apparie) ... ok
+test_temoin_absent_signale (test_controles_p4b.TestTemoinsCRN.test_temoin_absent_signale) ... ok
+test_temoin_divergent_detecte (test_controles_p4b.TestTemoinsCRN.test_temoin_divergent_detecte) ... ok
+test_constantes_du_protocole (test_gel_p4b.TestGel.test_constantes_du_protocole) ... ok
+test_execution_refusee_sans_go (test_gel_p4b.TestGel.test_execution_refusee_sans_go)
+Le CLI refuse toute exécution sur le design gelé sans ... ok
+test_fichiers_gelles_inchanges (test_gel_p4b.TestGel.test_fichiers_gelles_inchanges) ... ok
+test_grilles_coherentes_entre_modules (test_gel_p4b.TestGel.test_grilles_coherentes_entre_modules) ... ok
+test_modules_historiques_inchanges (test_gel_p4b.TestGel.test_modules_historiques_inchanges) ... ok
+test_scenario_charge_depuis_config_gelee (test_gel_p4b.TestGel.test_scenario_charge_depuis_config_gelee)
+Le scénario est lu depuis ram_p4/config_p4a.json gelé — valeurs ... ok
+test_bornes_bloc_id (test_graines_p4b.TestGraines.test_bornes_bloc_id) ... ok
+test_graine_noise_par_bloc (test_graines_p4b.TestGraines.test_graine_noise_par_bloc) ... ok
+test_labels_autorises (test_graines_p4b.TestGraines.test_labels_autorises) ... ok
+test_refus_label_inconnu (test_graines_p4b.TestGraines.test_refus_label_inconnu) ... ok
+test_source_unique_module_gele (test_graines_p4b.TestGraines.test_source_unique_module_gele)
+graines_p4b ré-exporte la fonction du vérificateur GELÉ — aucune ... ok
+test_valeur_de_reference_publique (test_graines_p4b.TestGraines.test_valeur_de_reference_publique)
+Valeur de référence calculée à la main sur la règle gelée ... ok
+test_constantes_gelees (test_modele_p4b.TestModele.test_constantes_gelees) ... ok
+test_est_fini (test_modele_p4b.TestModele.test_est_fini) ... ok
+test_etat_soc_jamais_sature (test_modele_p4b.TestModele.test_etat_soc_jamais_sature)
+La plante laisse SoC sortir de [0 ; 1] (S6) — seules les tables ... ok
+test_hors_domaine_flag (test_modele_p4b.TestModele.test_hors_domaine_flag) ... ok
+test_i_batt_signe (test_modele_p4b.TestModele.test_i_batt_signe) ... ok
+test_i_cell_partage_courant (test_modele_p4b.TestModele.test_i_cell_partage_courant) ... ok
+test_rho_ne_change_pas_soc (test_modele_p4b.TestModele.test_rho_ne_change_pas_soc)
+Invariant structurel §7 : la trajectoire SoC ne dépend pas de rho. ... ok
+test_rho_scale_rs_rp_pas_cp (test_modele_p4b.TestModele.test_rho_scale_rs_rp_pas_cp)
+rho multiplie Rs et Rp ; Cp n'est PAS scalé. ... ok
+test_u_exec_utilise_dans_v_pack (test_modele_p4b.TestModele.test_u_exec_utilise_dans_v_pack)
+Le courant EFFECTIVEMENT appliqué (u_exec après moniteur) est ... ok
+test_v_pack_formule (test_modele_p4b.TestModele.test_v_pack_formule) ... ok
+test_vp_init_positif_eclipse_prerun (test_modele_p4b.TestModele.test_vp_init_positif_eclipse_prerun)
+L'éclipse pré-run décharge (u=0) : Vp(t0) > 0 (chute resistive). ... ok
+test_vp_init_regle_gelee (test_modele_p4b.TestModele.test_vp_init_regle_gelee)
+Vp(t0) = rho · Rp(SoC0) · I_BASE · C_cell / C_BATT. ... ok
+test_vp_jamais_reinitialise_entree_payload (test_modele_p4b.TestModele.test_vp_jamais_reinitialise_entree_payload)
+Pas de discontinuité de Vp à l'entrée de la fenêtre payload ... ok
+test_vp_relaxation_en_charge (test_modele_p4b.TestModele.test_vp_relaxation_en_charge)
+En charge nette (I_cell < 0), Vp décroît vers son asymptote ... ok
+test_champ_imprevu (test_schemas_p4b.TestSchema.test_champ_imprevu) ... ok
+test_champ_manquant (test_schemas_p4b.TestSchema.test_champ_manquant) ... ok
+test_coherence_drapeau (test_schemas_p4b.TestSchema.test_coherence_drapeau) ... ok
+test_invalide_sans_raison (test_schemas_p4b.TestSchema.test_invalide_sans_raison) ... ok
+test_substitution_y_interdite (test_schemas_p4b.TestSchema.test_substitution_y_interdite)
+Run invalide avec Y non null = violation de la tolérance zéro. ... ok
+test_tous_les_champs_du_mandat_presents (test_schemas_p4b.TestSchema.test_tous_les_champs_du_mandat_presents)
+Champs exigés par le mandat : bloc_id, rho, C_BATT_AH, I_SUN, ... ok
+test_type_invalide (test_schemas_p4b.TestSchema.test_type_invalide) ... ok
+test_valide (test_schemas_p4b.TestSchema.test_valide) ... ok
+test_annotation_verdict_non_transition (test_sensibilites_p4b.TestDegradationSeule.test_annotation_verdict_non_transition) ... ok
+test_jamais_de_promotion_vers_transition (test_sensibilites_p4b.TestDegradationSeule.test_jamais_de_promotion_vers_transition)
+Un verdict autre ne devient JAMAIS TRANSITION DETECTED sous ... ok
+test_robuste_si_deux_variantes_confirment (test_sensibilites_p4b.TestDegradationSeule.test_robuste_si_deux_variantes_confirment) ... ok
+test_transition_declassee (test_sensibilites_p4b.TestDegradationSeule.test_transition_declassee)
+V4 + variante sans frontière → FRONTIER NOT LOCALIZED ... ok
+test_transition_deplacee_declassee (test_sensibilites_p4b.TestDegradationSeule.test_transition_deplacee_declassee)
+Frontière déplacée sous la variante → déclassement aussi. ... ok
+test_variante_confirmante (test_sensibilites_p4b.TestDegradationSeule.test_variante_confirmante) ... ok
+test_variante_invalide_n_invalide_pas_le_principal (test_sensibilites_p4b.TestDegradationSeule.test_variante_invalide_n_invalide_pas_le_principal)
+Run invalide dans une campagne de sensibilité : annotation ... ok
+test_drapeaux_ne_changent_rien_si_vide (test_sensibilites_p4b.TestSensibiliteDrapeaux.test_drapeaux_ne_changent_rien_si_vide) ... ok
+test_x_flag_borne (test_sensibilites_p4b.TestSensibiliteDrapeaux.test_x_flag_borne) ... ok
+test_x_prime (test_sensibilites_p4b.TestSensibiliteDrapeaux.test_x_prime)
+x'_j = x_j − x_j^(flag) — reclassification sur comptages ... ok
+test_clamp_entree_tables_pas_etat (test_tables_p4b.TestTables.test_clamp_entree_tables_pas_etat)
+Clamp de la VALEUR D'ENTRÉE ; l'état SoC n'est jamais saturé. ... ok
+test_clamp_rp_cp_090 (test_tables_p4b.TestTables.test_clamp_rp_cp_090)
+Extension > 90 % GELÉE : Rp(SoC>0.90) = Rp(0.90), idem Cp — ... ok
+test_interpolation_lineaire_milieu (test_tables_p4b.TestTables.test_interpolation_lineaire_milieu) ... ok
+test_interpolation_n_extrapole_jamais (test_tables_p4b.TestTables.test_interpolation_n_extrapole_jamais) ... ok
+test_monotonie_ocv (test_tables_p4b.TestTables.test_monotonie_ocv) ... ok
+test_noeuds_ocv_exacts (test_tables_p4b.TestTables.test_noeuds_ocv_exacts) ... ok
+test_noeuds_rint_p35 (test_tables_p4b.TestTables.test_noeuds_rint_p35) ... ok
+test_point_100_rint_inaccessible (test_tables_p4b.TestTables.test_point_100_rint_inaccessible)
+Rp/Cp à SoC = 100 % (NaN dans la table gelée) ne sont jamais ... ok
+test_sha256_verifies_au_chargement (test_tables_p4b.TestTables.test_sha256_verifies_au_chargement) ... ok
+test_table_modifiee_refusee (test_tables_p4b.TestTables.test_table_modifiee_refusee)
+Une table modifiée d'un octet doit faire échouer le chargement. ... ok
+test_variante_ocv_memoire_seule (test_tables_p4b.TestTables.test_variante_ocv_memoire_seule)
+§13 : ±0.1 V aux points SoC {0.00 ; 0.02} UNIQUEMENT, copie en ... ok
+
+----------------------------------------------------------------------
+Ran 109 tests in 4.964s
+
+OK
+
+=== VÉRIFICATEUR D'IMPLÉMENTATION ===
+========================================================================
+VÉRIFICATEUR D'IMPLÉMENTATION P4b — pré-exécution, aucun résultat
+========================================================================
+
+V-1. Intégrité des fichiers gelés (freeze 45e509ee9874)
+  [OK ] ram_p4b/P4B_PHASE0_PHYSICAL_BASIS_v0.6.md
+  [OK ] ram_p4b/P4B_PHASE0_FINAL_AUDIT_v0.6.md
+  [OK ] ram_p4b/P4B_PREREGISTRATION_v0.1.md
+  [OK ] ram_p4b/P4B_PREREGISTRATION_AUDIT_v0.1.md
+  [OK ] ram_p4b/P4B_PREREGISTRATION_FINAL_AUDIT_v0.2.md
+  [OK ] ram_p4b/P4B_PHASE0_PHYSICAL_BASIS.md
+  [OK ] ram_p4b/config_p4b_design.json
+  [OK ] ram_p4b/verifier_design_p4b.py
+  [OK ] ram_p4b/data/ocv_soc_ncr18650b_hnei.csv
+  [OK ] ram_p4b/data/rint_soc_nmc_dtu.csv
+  [OK ] ram_p0/moniteur.py
+  [OK ] ram_p0/demo_eps.py
+  [OK ] ram_p0/contraintes.py
+  [OK ] ram_p0/filtre.py
+  [OK ] ram_p0/trace.py
+  [OK ] ram_p2/campagne_p2.py
+  [OK ] ram_p2/chemins.py
+  [OK ] ram_p4/config_p4a.json
+
+V-2. Constantes du protocole
+  [OK ] grille ρ = 9 niveaux, pas 0.125
+  [OK ] N = 5 500
+  [OK ] z = 2.7729212946086634
+  [OK ] εS = 0.01, εF = 0.05
+  [OK ] seuils entiers 34 / 320
+  [OK ] garde-fou drapeaux 25 % strict
+  [OK ] LOW RESOLUTION > 0.250 strict
+
+V-3. Équivalence bornes Wilson §5 ⟷ seuils entiers §6 (exhaustif, x = 0..5500)
+  [OK ] équivalence sur 5 501 comptages
+
+V-4. Exhaustivité V1–V7 sur les 3^9 = 19 683 labels synthétiques
+  [OK ] 19 683 combinaisons → exactement un verdict V1–V7
+
+V-5. Tables physiques
+  [OK ] chargement avec SHA256 gelés
+  [OK ] variante OCV en mémoire (originale intacte)
+
+V-6. Design gelé (lecture seule — aucun bloc exécuté)
+  [OK ] 5 500 points, SHA256 gelé
+  [OK ] bloc_id = 0..5499 sans trou
+
+V-7. Dérivation des graines
+  [OK ] source unique (module gelé)
+  [OK ] labels restreints à PLANT/NOISE
+
+V-8. Provenance
+  [OK ] commit de freeze dans le code
+  [OK ] tag de freeze dans le code
+  [OK ] parent du freeze
+
+========================================================================
+VERDICT : TOUS LES CONTRÔLES MÉCANIQUES PASSENT
+(aucun run scientifique exécuté — implémentation seule)
